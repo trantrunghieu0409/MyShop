@@ -24,5 +24,35 @@ namespace ProjectMyShop
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dashboardButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void productButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void orderButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void statButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void configButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
