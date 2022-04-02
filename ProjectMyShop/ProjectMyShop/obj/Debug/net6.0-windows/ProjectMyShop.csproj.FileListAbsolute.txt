@@ -28,3 +28,8 @@ D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Assets\Images\background.jpg
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Assets\Images\logo.png
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop_Content.g.cs
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\Dashboard.g.cs
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\Dashboard.baml
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.g.cs
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.baml
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs

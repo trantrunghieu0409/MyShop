@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMyShop.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,19 +26,24 @@ namespace ProjectMyShop
             InitializeComponent();
         }
 
+        Dashboard dashboard;
+        ManageProduct manageProductPage;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            dashboard = new Dashboard();
+            pageNavigation.NavigationService.Navigate(dashboard);
+            manageProductPage = new ManageProduct();
         }
 
         private void dashboardButton_Click(object sender, RoutedEventArgs e)
         {
-
+            pageNavigation.NavigationService.Navigate(dashboard);
         }
 
         private void productButton_Click(object sender, RoutedEventArgs e)
         {
-
+            pageNavigation.NavigationService.Navigate(manageProductPage);
         }
 
         private void orderButton_Click(object sender, RoutedEventArgs e)
