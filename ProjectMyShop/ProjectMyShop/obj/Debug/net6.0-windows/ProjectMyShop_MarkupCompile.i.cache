@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\
 ProjectMyShop
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\App.xaml
-51240218855
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\App.xaml
+658732753
 2-1366022511
-16136387025
-197-957990137
-MainWindow.xaml;Pages\Dashboard.xaml;Pages\ManageProduct.xaml;Resources\ColorResources.xaml;Resources\ImageResources.xaml;
+17210474658
+199-1319900145
+MainWindow.xaml;Pages\Dashboard.xaml;Pages\ManageProduct.xaml;Pages\Statistics.xaml;Resources\ColorResources.xaml;Resources\ImageResources.xaml;
 
-True
+False
 

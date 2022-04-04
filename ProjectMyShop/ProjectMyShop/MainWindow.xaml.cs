@@ -53,7 +53,8 @@ namespace ProjectMyShop
 
         private void statButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Statistics statistics = new Statistics();
+            pageNavigation.NavigationService.Navigate(statistics);
         }
 
         private void configButton_Click(object sender, RoutedEventArgs e)
