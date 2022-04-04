@@ -10,6 +10,9 @@
     <Compile Update="Pages\Dashboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\EditPhoneScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ManageProduct.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,6 +22,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\Dashboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EditPhoneScreen.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ManageProduct.xaml">

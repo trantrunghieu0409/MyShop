@@ -32,7 +32,40 @@ namespace ProjectMyShop.Pages
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            string search_text = searchTextBox.Text;
+            if(search_text.Length > 0)
+            {
+                _currentPage = 1;
+                _vm.SelectedPhones.Clear();
+                BindingList<Phone> phones = new BindingList<Phone>();
+                foreach(Phone phone in _vm.Phones)
+                {
+                    if(phone.PhoneName.ToLower().Contains(search_text))
+                    {
+                        phones.Add(phone);
+                    }
+                }
+                _currentPage = 1;
 
+                _vm.SelectedPhones = new BindingList<Phone>(phones
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage).ToList());
+
+                _totalItems = phones.Count;
+                _totalPages = phones.Count / _rowsPerPage +
+                (phones.Count % _rowsPerPage == 0 ? 0 : 1);
+
+                currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+                if(_totalPages == 1)
+                {
+                    nextButton.IsEnabled = false;
+                }
+                phonesListView.ItemsSource = _vm.SelectedPhones;
+            }
+            else
+            {
+                loadPhones();
+            }
         }
         ViewModel _vm = new ViewModel();
         List<Category> _categories = null;
@@ -43,6 +76,94 @@ namespace ProjectMyShop.Pages
         int i = 0;
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void filterRangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        void loadPhones()
+        {
+            i = categoriesListView.SelectedIndex;
+            previousButton.IsEnabled = false;
+            nextButton.IsEnabled = true;
+            if(i < 0)
+            {
+                i = 0;
+            }
+
+            _currentPage = 1;
+
+            _vm.Phones = _categories[i].Phones;
+            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage).ToList());
+
+            _totalItems = _vm.Phones.Count;
+            _totalPages = _vm.Phones.Count / _rowsPerPage +
+                (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+
+            phonesListView.ItemsSource = _vm.SelectedPhones;
+           
+        }
+
+        private void categoriesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            loadPhones();
+        }
+
+        private void editMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void previousButton_Click(object sender, RoutedEventArgs e)
+        {
+            nextButton.IsEnabled = true;
+            _currentPage--;
+            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList());
+
+            // ép cập nhật giao diện
+            phonesListView.ItemsSource = _vm.SelectedPhones;
+            currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+            if (_currentPage - 1 < 1)
+            {
+                previousButton.IsEnabled = false;
+            }
+        }
+
+        private void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            previousButton.IsEnabled = true;
+            _currentPage++;
+            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
+                    .Skip((_currentPage - 1) * _rowsPerPage)
+                    .Take(_rowsPerPage)
+                    .ToList());
+
+            // ép cập nhật giao diện
+            phonesListView.ItemsSource = _vm.SelectedPhones;
+            currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+
+            if (_currentPage + 1 > _totalPages)
+            {
+                nextButton.IsEnabled = false;
+            }
+        }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             _categories = new List<Category>();
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -101,84 +222,7 @@ namespace ProjectMyShop.Pages
                     _categories.Add(cat);
                 }
                 categoriesListView.ItemsSource = _categories;
-
-            }
-        }
-
-        private void filterRangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void categoriesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            i = categoriesListView.SelectedIndex;
-            previousButton.IsEnabled = false;
-            nextButton.IsEnabled = true;
-
-            if (i >= 0)
-            {
-                _currentPage = 1;
-
-                _vm.Phones = _categories[i].Phones;
-                _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
-                    .Skip((_currentPage - 1) * _rowsPerPage)
-                    .Take(_rowsPerPage).ToList());
-
-                _totalItems = _vm.Phones.Count;
-                _totalPages = _vm.Phones.Count / _rowsPerPage +
-                    (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
-
-                currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
-
-                phonesListView.ItemsSource = _vm.SelectedPhones;
-            }
-        }
-
-        private void editMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void deleteMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void previousButton_Click(object sender, RoutedEventArgs e)
-        {
-            nextButton.IsEnabled = true;
-            _currentPage--;
-            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
-                .Skip((_currentPage - 1) * _rowsPerPage)
-                .Take(_rowsPerPage)
-                .ToList());
-
-            // ép cập nhật giao diện
-            phonesListView.ItemsSource = _vm.SelectedPhones;
-            currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
-            if (_currentPage - 1 < 1)
-            {
-                previousButton.IsEnabled = false;
-            }
-        }
-
-        private void nextButton_Click(object sender, RoutedEventArgs e)
-        {
-            previousButton.IsEnabled = true;
-            _currentPage++;
-            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
-                    .Skip((_currentPage - 1) * _rowsPerPage)
-                    .Take(_rowsPerPage)
-                    .ToList());
-
-            // ép cập nhật giao diện
-            phonesListView.ItemsSource = _vm.SelectedPhones;
-            currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
-
-            if (_currentPage + 1 > _totalPages)
-            {
-                nextButton.IsEnabled = false;
+                loadPhones();
             }
         }
     }

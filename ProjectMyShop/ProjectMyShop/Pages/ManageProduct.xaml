@@ -31,9 +31,9 @@
               Grid.Row="0">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="760*"/>
+                <ColumnDefinition Width="660*"/>
                 <ColumnDefinition Width="177*"/>
-                <ColumnDefinition Width="105*"/>
+                <ColumnDefinition Width="145*"/>
             </Grid.ColumnDefinitions>
             <!-- Search box-->
             <materialDesign:ColorZone Mode="Custom"
@@ -79,6 +79,14 @@
                     </Grid>
                 </materialDesign:Card>
             </materialDesign:ColorZone>
+            <Button x:Name="ImportButton" Click="ImportButton_Click" Width="70" Height="30" Padding="0"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Grid.Column="2">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Gear"/>
+                    <TextBlock Text="Import"/>
+                </StackPanel>
+            </Button>
             <!-- Filter combo box-->
             <materialDesign:ColorZone Mode="Custom"
                                       Margin="0, 0, 0, 0"
@@ -91,6 +99,7 @@
                                       Opacity="0.5" 
                                       RenderingBias="Performance" />
                 </materialDesign:ColorZone.Effect>
+                
 
                 <materialDesign:Card Name="sortBoxContainer"
                                  Width="155"
