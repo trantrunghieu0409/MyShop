@@ -33,3 +33,4 @@ D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.g.cs
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.baml
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Aspose.Cells.dll

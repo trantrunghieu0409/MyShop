@@ -121,11 +121,12 @@
                                 <TextBlock x:Name="r1" Foreground="Black" Text="2000-3000"/>
                             </ComboBoxItem>
                         </ComboBox>
+
                     </StackPanel>
                 </materialDesign:Card>
             </materialDesign:ColorZone>
         </Grid>
-        <ListView x:Name="categoriesListView" Grid.Row="1" Grid.Column="1">
+        <ListView x:Name="categoriesListView" Grid.Row="1" Grid.Column="1" SelectionChanged="categoriesListView_SelectionChanged" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
@@ -133,12 +134,52 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="5 0 5 0">
                         <Image Width="50" Height="50" Source="{Binding Avatar, Converter={StaticResource absoluteConverter}}"/>
-                        <TextBlock Text="{Binding CatName}"/>
+                        <TextBlock Text="{Binding CatName}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <ListView Name="phonesListView" Grid.Row="2" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.Resources>
+                <ContextMenu x:Key="phoneContextMenu">
+                    <MenuItem Header="Delete" Click="deleteMenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Edit" Click="editMenuItem_Click"/>
+                </ContextMenu>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}" >
+                    <Setter Property="ContextMenu" Value="{StaticResource phoneContextMenu}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Width="200" Orientation="Vertical">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="0, 0, 5, 0" Width="50" Height="50" Source="{Binding Avatar, Converter={StaticResource absoluteConverter}}"/>
+                        <TextBlock Text="{Binding PhoneName}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Manufacturer}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding SoldPrice, Converter={StaticResource currencyConverter}}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">
+            <Button x:Name="previousButton" Width="80" Height="35" Content="&lt;" Click="previousButton_Click" IsEnabled="False" />
+            <TextBlock Name="currentPagingTextBlock" Width="80" Text="0" TextAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="nextButton" Width="80" Height="35" Content="&gt;" Click="nextButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

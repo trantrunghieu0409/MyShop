@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "ProjectMyShop/1.0.0": {
         "dependencies": {
-          "MaterialDesignThemes": "4.4.0"
+          "MaterialDesignThemes": "4.4.0",
+          "Aspose.Cells": "8.1.1.0"
         },
         "runtime": {
           "ProjectMyShop.dll": {}
@@ -30,6 +31,14 @@
           "lib/netcoreapp3.1/MaterialDesignThemes.Wpf.dll": {
             "assemblyVersion": "4.4.0.0",
             "fileVersion": "4.4.0.0"
+          }
+        }
+      },
+      "Aspose.Cells/8.1.1.0": {
+        "runtime": {
+          "Aspose.Cells.dll": {
+            "assemblyVersion": "8.1.1.0",
+            "fileVersion": "8.1.1.0"
           }
         }
       }
@@ -54,6 +63,11 @@
       "sha512": "sha512-VdO8WvCYB6A6cDd181HLVgORn2IeNDMTlGxf2x91S1xsK6JYY3L1+WYxrkLJm4XEuvI0mY0biLM8MS6go+PQcw==",
       "path": "materialdesignthemes/4.4.0",
       "hashPath": "materialdesignthemes.4.4.0.nupkg.sha512"
+    },
+    "Aspose.Cells/8.1.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

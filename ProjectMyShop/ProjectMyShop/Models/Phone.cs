@@ -13,10 +13,10 @@ namespace ProjectMyShop.Models
         public string Manufacturer { get; set; }
         public int Stock { get; set; }
         public string Description { get; set; }
-        public double BoughtPrice { get; set; }
-        public double SoldPrice { get; set; }
+        public int BoughtPrice { get; set; }
+        public int SoldPrice { get; set; }
         public Category Category { get; set; }
-        public DateOnly UploadDate { get; set; }
+        public string UploadDate { get; set; }
         public string Avatar { get; set; }
 
     }

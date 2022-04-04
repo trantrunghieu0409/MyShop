@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ProjectMyShop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900"
+        Title="MainWindow" Height="600" Width="1100"
         Loaded="Window_Loaded">
     <Grid x:Name="layoutContainer">
         <Grid.ColumnDefinitions>
