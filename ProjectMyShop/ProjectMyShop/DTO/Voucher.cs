@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMyShop.Models
+namespace ProjectMyShop.DTO
 {
-    internal class Voucher
+    public class Voucher
     {
         public int ID { get; set; }
         public DateOnly StartDate { get; set; }

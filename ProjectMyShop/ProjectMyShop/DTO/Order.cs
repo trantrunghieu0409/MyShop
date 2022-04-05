@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMyShop.Models
+namespace ProjectMyShop.DTO
 {
-    internal class Order
+    public class Order
     {
         public int ID { get; set; }
         public string CustomerName { get; set; }

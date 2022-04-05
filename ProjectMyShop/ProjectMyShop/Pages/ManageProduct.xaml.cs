@@ -1,6 +1,6 @@
 ﻿using Aspose.Cells;
 using Microsoft.Win32;
-using ProjectMyShop.Models;
+using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +38,7 @@ namespace ProjectMyShop.Pages
                 _currentPage = 1;
                 _vm.SelectedPhones.Clear();
                 BindingList<Phone> phones = new BindingList<Phone>();
-                foreach(Phone phone in _vm.Phones)
+                foreach (Phone phone in _vm.Phones)
                 {
                     if(phone.PhoneName.ToLower().Contains(search_text))
                     {
@@ -68,7 +68,7 @@ namespace ProjectMyShop.Pages
             }
         }
         ViewModel _vm = new ViewModel();
-        List<Category> _categories = null;
+        List<Category>? _categories = null;
         int _totalItems = 0;
         int _currentPage = 1;
         int _totalPages = 0;

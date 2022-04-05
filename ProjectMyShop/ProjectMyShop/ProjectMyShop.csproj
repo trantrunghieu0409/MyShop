@@ -24,12 +24,17 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Aspose.Cells">
       <HintPath>C:\dll\Aspose.Cells.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BusinessLayer\" />
   </ItemGroup>
 
 </Project>

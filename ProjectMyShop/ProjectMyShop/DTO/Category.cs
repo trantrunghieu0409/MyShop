@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMyShop.Models
+namespace ProjectMyShop.DTO
 {
-    internal class Category
+    public class Category
     {
         public int ID { get; set; }
         public string CatName { get; set; }
-        public BindingList<Phone> Phones { get; set; }
+        public BindingList<Phone>? Phones { get; set; }
     }
 }

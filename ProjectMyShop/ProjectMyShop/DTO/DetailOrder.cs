@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMyShop.Models
+namespace ProjectMyShop.DTO
 {
-    internal class DetailOrder
+    public class DetailOrder
     {
         public Order Order { get; set; }
         public Phone Phone { get; set; }
