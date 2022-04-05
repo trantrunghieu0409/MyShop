@@ -33,6 +33,7 @@ namespace ProjectMyShop
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             login = new Login();
+            login.Owner = this;
             if (login.ShowDialog() == true)
             {
                 // go to main view

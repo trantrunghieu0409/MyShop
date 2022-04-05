@@ -27,14 +27,17 @@ namespace ProjectMyShop.Pages
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
             String username = TextBoxEmail.Text;
-            String password = PasswordBox.ToString();
+            String password = PasswordBox.Password;
             if (username.Equals("admin") && password.Equals("admin"))
             {
-                MessageBox.Show("Login Successful");
+                MessageBox.Show("Login Successful", "Login", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
-                Close();
+               
             }
-            DialogResult = true;
+            else
+            {
+                MessageBox.Show("Wrong username or password", "Login", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
