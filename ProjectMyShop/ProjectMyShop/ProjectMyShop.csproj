@@ -26,10 +26,4 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Aspose.Cells">
-      <HintPath>..\..\..\Aspose.Cells.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
