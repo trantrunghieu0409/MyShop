@@ -32,11 +32,11 @@ namespace ProjectMyShop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var login = new Login();
+            login = new Login();
             if (login.ShowDialog() == true)
             {
                 // go to main view
-                this.Show();
+              
 
                 dashboard = new Dashboard();
                 pageNavigation.NavigationService.Navigate(dashboard);
