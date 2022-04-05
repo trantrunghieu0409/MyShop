@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Assets\Images\background.jpg" />
     <None Remove="Assets\Images\logo.png" />
+    <None Remove="Pages\home.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,10 @@
     <Reference Include="Aspose.Cells">
       <HintPath>C:\dll\Aspose.Cells.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pages\home.png" />
   </ItemGroup>
 
 </Project>

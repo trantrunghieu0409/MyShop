@@ -28,12 +28,26 @@ namespace ProjectMyShop
 
         Dashboard dashboard;
         ManageProduct manageProductPage;
+        Login login;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dashboard = new Dashboard();
-            pageNavigation.NavigationService.Navigate(dashboard);
-            manageProductPage = new ManageProduct();
+            this.Hide();
+            var login = new Login();
+            if (login.ShowDialog() == true)
+            {
+                // go to main view
+                this.Show();
+
+                dashboard = new Dashboard();
+                pageNavigation.NavigationService.Navigate(dashboard);
+                manageProductPage = new ManageProduct();
+            }
+            else
+            {
+                // quit
+                this.Close();
+            }
         }
 
         private void dashboardButton_Click(object sender, RoutedEventArgs e)
