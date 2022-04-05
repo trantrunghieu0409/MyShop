@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "9lho/kzEYJgKkMPeX5SWNaYPVJpM6lAGY9LD+TDZTN7sjvOzli1VgvDOljf2nuIVUfl6u0Aq3Kfgt2UQB6xhVA==",
+  "dgSpecHash": "mh3i858C8+QK3xwdxwP2C1gx7MQNrD3o8w9NHpi+/3KTxbauKo8P1xMIz3ueJyee9Jq52Xn9eAPeaAxZcgC55Q==",
   "success": true,
-  "projectFilePath": "D:\\2021-2022 Semester II\\Windows Programming\\MyShop\\ProjectMyShop\\ProjectMyShop\\ProjectMyShop.csproj",
+  "projectFilePath": "D:\\Year3\\Windows\\Project\\Project1\\MyShop\\ProjectMyShop\\ProjectMyShop\\ProjectMyShop.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512"
+    "C:\\Users\\ASUS\\.nuget\\packages\\fody\\6.5.1\\fody.6.5.1.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\propertychanged.fody\\3.4.0\\propertychanged.fody.3.4.0.nupkg.sha512"
   ],
   "logs": []
 }

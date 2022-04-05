@@ -48,10 +48,6 @@
             "MaterialDesignThemes": {
               "target": "Package",
               "version": "[4.4.0, )"
-            },
-            "PropertyChanged.Fody": {
-              "target": "Package",
-              "version": "[3.4.0, )"
             }
           },
           "imports": [

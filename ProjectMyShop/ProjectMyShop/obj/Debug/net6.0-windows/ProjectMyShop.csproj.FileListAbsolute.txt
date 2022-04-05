@@ -36,3 +36,17 @@ D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Aspose.Cells.dll
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\EditPhoneScreen.g.cs
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\EditPhoneScreen.baml
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.csproj.AssemblyReference.cache
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Resources\ColorResources.baml
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\Dashboard.g.cs
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\EditPhoneScreen.g.cs
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.g.cs
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\App.g.cs
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop_Content.g.cs
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop_MarkupCompile.cache
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop_MarkupCompile.lref
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.dll
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\refint\ProjectMyShop.dll
+D:\Year3\Windows\Project\Project1\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.pdb
