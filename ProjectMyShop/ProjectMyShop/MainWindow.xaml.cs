@@ -32,7 +32,6 @@ namespace ProjectMyShop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Hide();
             var login = new Login();
             if (login.ShowDialog() == true)
             {

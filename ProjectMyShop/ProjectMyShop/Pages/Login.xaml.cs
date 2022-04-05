@@ -30,7 +30,9 @@ namespace ProjectMyShop.Pages
             String password = PasswordBox.ToString();
             if (username.Equals("admin") && password.Equals("admin"))
             {
+                MessageBox.Show("Login Successful");
                 DialogResult = true;
+                Close();
             }
             DialogResult = true;
         }
