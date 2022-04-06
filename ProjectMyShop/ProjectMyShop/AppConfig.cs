@@ -18,6 +18,8 @@ namespace ProjectMyShop
         public static string Password = "Password";
         public static string Entropy = "Entropy";
 
+        public static string ShutdownMode = "ShutdownMode";
+
         public static string? GetValue(string key)
         {
             string? value = ConfigurationManager
@@ -45,6 +47,7 @@ namespace ProjectMyShop
             string? database = AppConfig.GetValue(AppConfig.Database);
             string? username = AppConfig.GetValue(AppConfig.Username);
             string? password = AppConfig.GetValue(AppConfig.Password);
+            string? shutdownMode = AppConfig.GetValue(AppConfig.ShutdownMode);
 
             builder.DataSource = $"{server}\\{instance}";
             builder.InitialCatalog = database;
@@ -55,7 +58,7 @@ namespace ProjectMyShop
             return result;
         }
 
-        static String getPassword()
+        public static String GetPassword()
         {
             var cypherText = AppConfig.GetValue(AppConfig.Password);
             var cypherTextInBytes = Convert.FromBase64String(cypherText!);
@@ -70,7 +73,7 @@ namespace ProjectMyShop
             return password;
         }
 
-        static void setPassword(String password)
+        public static void SetPassword(String password)
         {
 
             var passwordInBytes = Encoding.UTF8.GetBytes(password);
