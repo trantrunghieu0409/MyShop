@@ -37,7 +37,7 @@ namespace ProjectMyShop
             configFile.Save(ConfigurationSaveMode.Minimal);
         }
 
-        public static string? ConnectionString()
+        public static string? ConnectionString(string Username, string Password)
         {
             string? result = "";
 
@@ -51,7 +51,9 @@ namespace ProjectMyShop
 
             builder.DataSource = $"{server}\\{instance}";
             builder.InitialCatalog = database;
-            builder.IntegratedSecurity = true;
+            builder.UserID = Username;
+            builder.Password = Password;   
+           // builder.IntegratedSecurity = true;
             builder.ConnectTimeout = 3; // s
 
             result = builder.ToString();
@@ -73,9 +75,8 @@ namespace ProjectMyShop
             return password;
         }
 
-        public static void SetPassword(String password)
+        public static void SetPassword(string password)
         {
-
             var passwordInBytes = Encoding.UTF8.GetBytes(password);
 
             var entropy = new byte[20];
@@ -92,5 +93,6 @@ namespace ProjectMyShop
             AppConfig.SetValue(AppConfig.Password, cypherTextBase64);
             AppConfig.SetValue(AppConfig.Entropy, entropyBase64);
         }
+
     }
 }

@@ -30,22 +30,8 @@ namespace ProjectMyShop.Pages
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            /*
-            string? connectionString = AppConfig.ConnectionString();
-            var dao = new SqlDataAccess(connectionString!);
-
-            if (dao.CanConnect())
-            {
-                dao.Connect();
-
-            }
-            else
-            {
-                MessageBox.Show("Cannot connect to db");
-            }
-            */
-            string? username = "admin";
-            string password = "admin";
+            string username = "username";
+            string password = "password";
 
             bool canGetAccount = false;
             try
@@ -54,7 +40,7 @@ namespace ProjectMyShop.Pages
                 password = AppConfig.GetPassword();
                 canGetAccount = true;
             }
-            catch { }   
+            catch { System.Diagnostics.Debug.WriteLine("First time running - Cannot read username/password"); }   
 
             if (canGetAccount)
             {
@@ -73,18 +59,25 @@ namespace ProjectMyShop.Pages
 
             if (account.Username != null && password != null)
             {
+
+                // save username & password to config file for later sign in
                 AppConfig.SetValue(AppConfig.Username, account.Username);
                 AppConfig.SetPassword(password);
 
 
-                if (account.Username.Equals("admin", StringComparison.Ordinal) && password.Equals("admin"))
+                // validate account
+                string? connectionString = AppConfig.ConnectionString(account.Username, password);
+                var dao = new SqlDataAccess(connectionString!);
+
+                if (dao.CanConnect())
                 {
                     DialogResult = true;
-
                 }
                 else
                 {
                     MessageBox.Show("Wrong username or password", "Login", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    System.Diagnostics.Debug.WriteLine("Cannot connect to db");
                 }
             }
             else
