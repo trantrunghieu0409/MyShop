@@ -47,9 +47,9 @@ namespace ProjectMyShop.Pages
                 }
                 _currentPage = 1;
 
-                _vm.SelectedPhones = new BindingList<Phone>(phones
+                _vm.SelectedPhones = phones
                 .Skip((_currentPage - 1) * _rowsPerPage)
-                .Take(_rowsPerPage).ToList());
+                .Take(_rowsPerPage).ToList();
 
                 _totalItems = phones.Count;
                 _totalPages = phones.Count / _rowsPerPage +
@@ -97,9 +97,9 @@ namespace ProjectMyShop.Pages
             _currentPage = 1;
 
             _vm.Phones = _categories[i].Phones;
-            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
+            _vm.SelectedPhones = _vm.Phones
                 .Skip((_currentPage - 1) * _rowsPerPage)
-                .Take(_rowsPerPage).ToList());
+                .Take(_rowsPerPage).ToList();
 
             _totalItems = _vm.Phones.Count;
             _totalPages = _vm.Phones.Count / _rowsPerPage +
@@ -118,7 +118,20 @@ namespace ProjectMyShop.Pages
 
         private void editMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            var p = (Phone)phonesListView.SelectedItem;
+            var screen = new EditPhoneScreen(p);
+            var result = screen.ShowDialog();
+            if (result == true)
+            {
+                var info = screen.EditedPhone;
+                p.PhoneName = info.PhoneName;
+                p.Manufacturer = info.Manufacturer;
+                p.SoldPrice = info.SoldPrice;
+                p.BoughtPrice = info.BoughtPrice;
+                p.Description = info.Description;
+                p.Avatar = info.Avatar;
+                loadPhones();
+            }
         }
 
         private void deleteMenuItem_Click(object sender, RoutedEventArgs e)
@@ -130,10 +143,10 @@ namespace ProjectMyShop.Pages
         {
             nextButton.IsEnabled = true;
             _currentPage--;
-            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
+            _vm.SelectedPhones = _vm.Phones
                 .Skip((_currentPage - 1) * _rowsPerPage)
                 .Take(_rowsPerPage)
-                .ToList());
+                .ToList();
 
             // ép cập nhật giao diện
             phonesListView.ItemsSource = _vm.SelectedPhones;
@@ -148,10 +161,10 @@ namespace ProjectMyShop.Pages
         {
             previousButton.IsEnabled = true;
             _currentPage++;
-            _vm.SelectedPhones = new BindingList<Phone>(_vm.Phones
+            _vm.SelectedPhones = _vm.Phones
                     .Skip((_currentPage - 1) * _rowsPerPage)
                     .Take(_rowsPerPage)
-                    .ToList());
+                    .ToList();
 
             // ép cập nhật giao diện
             phonesListView.ItemsSource = _vm.SelectedPhones;
@@ -223,6 +236,26 @@ namespace ProjectMyShop.Pages
                 }
                 categoriesListView.ItemsSource = _categories;
                 loadPhones();
+            }
+        }
+
+        private void AddMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var screen = new AddPhoneScreen(_categories!);
+            var result = screen.ShowDialog();
+            if (result == true)
+            {
+                var newPhone = screen.newPhone;
+                Debug.WriteLine(newPhone.PhoneName);
+                var catIndex = screen.catIndex;
+                if(catIndex >= 0)
+                {
+                    _categories[catIndex].Phones.Add(newPhone);
+                    foreach (var phone in _categories[catIndex].Phones)
+                        Debug.WriteLine(phone.PhoneName);
+                   
+                    loadPhones();
+                }
             }
         }
     }

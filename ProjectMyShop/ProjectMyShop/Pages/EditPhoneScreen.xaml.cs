@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using ProjectMyShop.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,33 @@ namespace ProjectMyShop.Pages
     /// </summary>
     public partial class EditPhoneScreen : Window
     {
-        public EditPhoneScreen()
+        public Phone EditedPhone { get; set; }
+        public EditPhoneScreen(Phone p)
         {
             InitializeComponent();
+            EditedPhone = (Phone)p.Clone();
+            this.DataContext = EditedPhone;
+        }
+
+        private void editButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+        public static readonly List<string> ImageExtensions = new List<string> { ".JPG", ".JPE", ".BMP", ".GIF", ".PNG" };
+
+        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            var screen = new OpenFileDialog();
+            screen.Filter = "Image Files|*.jpg;*.jpeg;*.png;...";
+            if (screen.ShowDialog() == true)
+            {
+                EditedPhone.Avatar = screen.FileName;
+            }
         }
     }
 }

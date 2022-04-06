@@ -11,7 +11,7 @@ namespace ProjectMyShop
     internal class ViewModel : INotifyPropertyChanged
     {
         public BindingList<Phone> Phones { get; set; } = new BindingList<Phone>();
-        public BindingList<Phone> SelectedPhones { get; set; } = new BindingList<Phone>();
+        public List<Phone> SelectedPhones { get; set; } = new List<Phone>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
     }

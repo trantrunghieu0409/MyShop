@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectMyShop.DTO
 {
-    public class Phone
+    public class Phone: ICloneable
     {
         public int ID { get; set; }
         public string PhoneName { get; set; }
@@ -19,5 +19,9 @@ namespace ProjectMyShop.DTO
         public string UploadDate { get; set; }
         public string Avatar { get; set; }
 
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }
