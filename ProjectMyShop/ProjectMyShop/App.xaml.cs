@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 
 namespace ProjectMyShop
 {
@@ -13,5 +14,8 @@ namespace ProjectMyShop
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+        }
     }
 }

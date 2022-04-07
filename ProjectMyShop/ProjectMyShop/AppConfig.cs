@@ -18,7 +18,7 @@ namespace ProjectMyShop
         public static string Password = "Password";
         public static string Entropy = "Entropy";
 
-        public static string ShutdownMode = "ShutdownMode";
+        public static string LastWindow = "LastWindow";
 
         public static string? GetValue(string key)
         {
@@ -47,7 +47,7 @@ namespace ProjectMyShop
             string? database = AppConfig.GetValue(AppConfig.Database);
             string? username = AppConfig.GetValue(AppConfig.Username);
             string? password = AppConfig.GetValue(AppConfig.Password);
-            string? shutdownMode = AppConfig.GetValue(AppConfig.ShutdownMode);
+            string? lastWindow = AppConfig.GetValue(AppConfig.LastWindow);
 
             builder.DataSource = $"{server}\\{instance}";
             builder.InitialCatalog = database;
@@ -93,6 +93,7 @@ namespace ProjectMyShop
             AppConfig.SetValue(AppConfig.Password, cypherTextBase64);
             AppConfig.SetValue(AppConfig.Entropy, entropyBase64);
         }
+
 
     }
 }

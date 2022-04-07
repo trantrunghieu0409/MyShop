@@ -36,8 +36,6 @@ namespace ProjectMyShop
             login.Owner = this;
             if (login.ShowDialog() == true)
             {
-                // go to main view
-
                 dashboard = new Dashboard();
                 pageNavigation.NavigationService.Navigate(dashboard);
                 manageProductPage = new ManageProduct();
