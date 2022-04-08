@@ -10,8 +10,6 @@ namespace ProjectMyShop.DAO
 {
     internal class PhoneDAO : SqlDataAccess
     {
-        public PhoneDAO() : base() {}
-
         public int getTotalPhone()
         {
             var sql = "select count(*) as total from Phone";

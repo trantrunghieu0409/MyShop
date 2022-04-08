@@ -12,8 +12,6 @@ namespace ProjectMyShop.DAO
 {
     internal class CategoryDAO : SqlDataAccess
     {
-        public CategoryDAO() : base() {}
-
         public Category GetCategoryById(int id)
         {
             var sql = "select * from Category where category_id=@CatId";

@@ -77,9 +77,10 @@
         <!--Content page-->
         <Frame Name="pageNavigation" 
                NavigationUIVisibility="Hidden"
+       
                Grid.Column="2"
                Grid.RowSpan="2"
-               Grid.Row="1">
+               Grid.Row="1" Margin="0,0,10,10">
 
         </Frame>
     </Grid>

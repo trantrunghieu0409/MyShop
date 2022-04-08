@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectMyShop.BUS;
+using ProjectMyShop.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +19,38 @@ namespace ProjectMyShop.Views
     /// <summary>
     /// Interaction logic for ManageOrder.xaml
     /// </summary>
-    public partial class ManageOrder : Window
+    public partial class ManageOrder : Page
     {
+        private List<Order> _listOrders;
+        private OrderBUS _orderBUS;
+
         public ManageOrder()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _orderBUS = new OrderBUS();
+
+            _listOrders = _orderBUS.GetAllOrders();
+
+            OrderDataGrid.ItemsSource = _listOrders;
+        }
+
+        private void AddMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

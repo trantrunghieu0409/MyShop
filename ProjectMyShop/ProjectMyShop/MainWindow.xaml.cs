@@ -28,6 +28,7 @@ namespace ProjectMyShop
 
         Dashboard dashboard;
         ManageProduct manageProductPage;
+        ManageOrder _manageOrderPage;
         Login login;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -37,8 +38,10 @@ namespace ProjectMyShop
             if (login.ShowDialog() == true)
             {
                 dashboard = new Dashboard();
-                pageNavigation.NavigationService.Navigate(dashboard);
                 manageProductPage = new ManageProduct();
+                _manageOrderPage = new ManageOrder();
+
+                pageNavigation.NavigationService.Navigate(dashboard);
             }
             else
             {
@@ -59,7 +62,7 @@ namespace ProjectMyShop
 
         private void orderButton_Click(object sender, RoutedEventArgs e)
         {
-
+            pageNavigation.NavigationService.Navigate(_manageOrderPage);
         }
 
         private void statButton_Click(object sender, RoutedEventArgs e)

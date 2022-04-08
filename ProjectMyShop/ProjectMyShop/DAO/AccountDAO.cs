@@ -10,8 +10,5 @@ namespace ProjectMyShop.DAO
 {
      public class AccountDAO : SqlDataAccess
     {
-        public AccountDAO() : base()
-        {
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ProjectMyShop.DAO;
+using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,13 @@ namespace ProjectMyShop.BUS
             {
                 _categoryDAO.Connect();
             }
+        }
+
+        public Category GetCategoryById(int id)
+        {
+            Category result = _categoryDAO.GetCategoryById(id);
+
+            return result;
         }
     }
 }

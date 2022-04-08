@@ -10,10 +10,10 @@ namespace ProjectMyShop.DTO
     {
         public int ID { get; set; }
         public string CustomerName { get; set; }
-        public DateOnly OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public int Status { get; set; }
         public string Address { get; set; }
         public int OrderMethod { get; set; }
-        Voucher Voucher { get; set; }
+        Voucher? VoucherID { get; set; }
     }
 }
