@@ -45,22 +45,24 @@ namespace ProjectMyShop.Pages
                         phones.Add(phone);
                     }
                 }
-                _currentPage = 1;
 
                 _vm.SelectedPhones = phones
                 .Skip((_currentPage - 1) * _rowsPerPage)
                 .Take(_rowsPerPage).ToList();
 
-                _totalItems = phones.Count;
-                _totalPages = phones.Count / _rowsPerPage +
-                (phones.Count % _rowsPerPage == 0 ? 0 : 1);
-
-                currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
-                if(_totalPages == 1)
+                if(_vm.SelectedPhones.Count > 0)
+                {
+                    _currentPage = 1;
+                    _totalItems = phones.Count;
+                    _totalPages = phones.Count / _rowsPerPage +
+                    (phones.Count % _rowsPerPage == 0 ? 0 : 1);
+                    phonesListView.ItemsSource = _vm.SelectedPhones;
+                    currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+                }
+                if(_totalPages <= 1)
                 {
                     nextButton.IsEnabled = false;
                 }
-                phonesListView.ItemsSource = _vm.SelectedPhones;
             }
             else
             {
@@ -77,7 +79,10 @@ namespace ProjectMyShop.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            previousButton.IsEnabled = false;
+            nextButton.IsEnabled = false;
+            _currentPage = 0;
+            _totalPages = 0;
         }
 
         private void filterRangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,13 +92,16 @@ namespace ProjectMyShop.Pages
         void loadPhones()
         {
             i = categoriesListView.SelectedIndex;
-            previousButton.IsEnabled = false;
-            nextButton.IsEnabled = true;
             if(i < 0)
             {
                 i = 0;
             }
 
+
+            if(_categories == null)
+            {
+                return;
+            }
             _currentPage = 1;
 
             _vm.Phones = _categories[i].Phones;
@@ -106,6 +114,11 @@ namespace ProjectMyShop.Pages
                 (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
 
             currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+
+            if(_totalPages > 1)
+            {
+                nextButton.IsEnabled = true;
+            }
 
             phonesListView.ItemsSource = _vm.SelectedPhones;
            
@@ -130,13 +143,48 @@ namespace ProjectMyShop.Pages
                 p.BoughtPrice = info.BoughtPrice;
                 p.Description = info.Description;
                 p.Avatar = info.Avatar;
-                loadPhones();
+
+                _vm.Phones = _categories[i].Phones;
+                _vm.SelectedPhones = _vm.Phones
+                    .Skip((_currentPage - 1) * _rowsPerPage)
+                    .Take(_rowsPerPage).ToList();
+
+                phonesListView.ItemsSource = _vm.SelectedPhones;
             }
         }
 
         private void deleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            var p = (Phone)phonesListView.SelectedItem;
+            var result = MessageBox.Show($"Bạn thật sự muốn xóa điện thoại {p.PhoneName} - {p.Manufacturer}?",
+                "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (MessageBoxResult.Yes == result)
+            {
+                //_phones.Remove(p);
+                _vm.Phones.Remove(p);
+                _categories[i].Phones.Remove(p);
+                //_vm.SelectedPhones.Remove(p);
 
+                _vm.SelectedPhones = _vm.Phones
+                    .Skip((_currentPage - 1) * _rowsPerPage)
+                    .Take(_rowsPerPage).ToList();
+
+
+
+
+                // Tính toán lại thông số phân trang
+                _totalItems = _vm.Phones.Count;
+                _totalPages = _vm.Phones.Count / _rowsPerPage +
+                    (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
+
+                currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+                if (_currentPage + 1 > _totalPages)
+                {
+                    nextButton.IsEnabled = false;
+                }
+
+                phonesListView.ItemsSource = _vm.SelectedPhones;
+            }
         }
 
         private void previousButton_Click(object sender, RoutedEventArgs e)

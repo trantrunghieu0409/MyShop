@@ -43,6 +43,8 @@ namespace ProjectMyShop.Pages
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
+            // Check validity
+
             DialogResult = true;
         }
 

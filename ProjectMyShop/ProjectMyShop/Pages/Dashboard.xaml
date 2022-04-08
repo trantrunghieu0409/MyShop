@@ -42,7 +42,7 @@
                     <!-- binding -->
 
                     <TextBlock x:Name="SumPhones" 
-                                Text="{Binding Count}"
+                                Text="{Binding totalPhone}"
                                    Foreground="White"
                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
 
@@ -74,7 +74,7 @@
                     <!-- binding -->
 
                     <TextBlock x:Name="SumWeekOrders" 
-                                Text="{Binding Count}"
+                                Text="{Binding weekOrder}"
                                    Foreground="White"
                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
 
@@ -108,7 +108,7 @@
                     <!-- binding -->
 
                     <TextBlock x:Name="SumMonthOrders" 
-                                Text="{Binding Count}"
+                                Text="{Binding monthOrder}"
                                    Foreground="White"
                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
 

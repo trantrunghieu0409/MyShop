@@ -16,6 +16,10 @@ namespace ProjectMyShop.BUS
         public Business(SqlDataAccess dao)
         {
             _dao = dao;
+            if (_dao.CanConnect())
+            {
+                _dao.Connect();
+            }
         }
 
         public Category GetCategoryById(int id)
@@ -23,6 +27,10 @@ namespace ProjectMyShop.BUS
             Category result = _dao.GetCategoryById(id);
 
             return result;
+        }
+        public int GetTotalPhone()
+        {
+            return _dao.getTotalPhone();
         }
     }
 }

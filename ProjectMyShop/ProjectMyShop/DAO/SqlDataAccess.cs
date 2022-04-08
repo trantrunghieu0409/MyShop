@@ -68,5 +68,16 @@ namespace ProjectMyShop.DAO
 
             return result;
         }
+        public int getTotalPhone()
+        {
+            var sql = "select count(*) as total from Phone";
+            var command = new SqlCommand(sql, _connection);
+            var reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                return (int)reader["total"];
+            }
+            return 0;
+        }
     }
 }
