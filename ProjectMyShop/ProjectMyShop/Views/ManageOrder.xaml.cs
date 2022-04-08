@@ -38,17 +38,27 @@ namespace ProjectMyShop.Views
             OrderDataGrid.ItemsSource = _listOrders;
         }
 
-        private void AddMenuItem_Click(object sender, RoutedEventArgs e)
+        private void OrderDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void UpdateMenuItem_Click(object sender, RoutedEventArgs e)
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

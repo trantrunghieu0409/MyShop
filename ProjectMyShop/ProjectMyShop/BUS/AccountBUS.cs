@@ -23,6 +23,8 @@ namespace ProjectMyShop.BUS
             AppConfig.SetValue(AppConfig.Username, username);
             AppConfig.SetPassword(password);
 
+            _accountDAO.ResetConnection();
+
             return _accountDAO.CanConnect();
         }
     }

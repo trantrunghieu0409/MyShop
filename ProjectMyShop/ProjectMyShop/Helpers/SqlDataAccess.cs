@@ -13,10 +13,15 @@ namespace ProjectMyShop.Helpers
     public class SqlDataAccess
     {
         protected SqlConnection _connection;
-        public SqlDataAccess()
+        private string? username;
+        private string password;
+
+        public SqlDataAccess() => ResetConnection();
+
+        public void ResetConnection()
         {
-            string? username = AppConfig.GetValue(AppConfig.Username);
-            string password = AppConfig.GetPassword();
+            username = AppConfig.GetValue(AppConfig.Username);
+            password = AppConfig.GetPassword();
 
             string? connectionString = AppConfig.ConnectionString(username, password);
             _connection = new SqlConnection(connectionString);

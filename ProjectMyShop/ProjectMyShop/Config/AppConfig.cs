@@ -22,6 +22,8 @@ namespace ProjectMyShop.Config
 
         public static string? GetValue(string key)
         {
+            ConfigurationManager.RefreshSection("appSettings");
+
             string? value = ConfigurationManager
                 .AppSettings[key];
             return value;

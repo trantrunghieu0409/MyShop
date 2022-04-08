@@ -15,5 +15,6 @@ namespace ProjectMyShop.DTO
         public string Address { get; set; }
         public int OrderMethod { get; set; }
         Voucher? VoucherID { get; set; }
+
     }
 }
