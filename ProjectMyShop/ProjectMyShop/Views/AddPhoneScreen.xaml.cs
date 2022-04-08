@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ProjectMyShop.Pages
+namespace ProjectMyShop.Views
 {
     /// <summary>
     /// Interaction logic for AddPhoneScreen.xaml

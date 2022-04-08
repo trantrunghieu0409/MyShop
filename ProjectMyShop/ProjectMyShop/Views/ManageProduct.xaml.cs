@@ -1,6 +1,7 @@
 ﻿using Aspose.Cells;
 using Microsoft.Win32;
 using ProjectMyShop.DTO;
+using ProjectMyShop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectMyShop.Pages
+namespace ProjectMyShop.Views
 {
     /// <summary>
     /// Interaction logic for ManageProduct.xaml
@@ -69,7 +70,7 @@ namespace ProjectMyShop.Pages
                 loadPhones();
             }
         }
-        ViewModel _vm = new ViewModel();
+        PhoneViewModel _vm = new PhoneViewModel();
         List<Category>? _categories = null;
         int _totalItems = 0;
         int _currentPage = 1;

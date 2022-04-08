@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMyShop
+namespace ProjectMyShop.ViewModels
 {
-    internal class ViewModel : INotifyPropertyChanged
+    internal class PhoneViewModel : INotifyPropertyChanged
     {
         public BindingList<Phone> Phones { get; set; } = new BindingList<Phone>();
         public List<Phone> SelectedPhones { get; set; } = new List<Phone>();

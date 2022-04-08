@@ -1,4 +1,6 @@
-﻿using ProjectMyShop.DAO;
+﻿using ProjectMyShop.BUS;
+using ProjectMyShop.Config;
+using ProjectMyShop.DAO;
 using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ProjectMyShop.Pages
+namespace ProjectMyShop.Views
 {
     /// <summary>
     /// Interaction logic for Login.xaml
@@ -22,7 +24,10 @@ namespace ProjectMyShop.Pages
     public partial class Login : Window
     {
 
-        Account account = new Account();
+        AccountBUS _accountBUS = new AccountBUS();
+
+        private string _username;
+        private string _password;
 
         public Login()
         {
@@ -30,53 +35,43 @@ namespace ProjectMyShop.Pages
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            string username = "username";
-            string password = "password";
+            _username = "username";
+            _password = "password";
 
             bool canGetAccount = false;
             try
             {
-                username = AppConfig.GetValue(key: AppConfig.Username);
-                password = AppConfig.GetPassword();
+                _username = AppConfig.GetValue(key: AppConfig.Username);
+                _password = AppConfig.GetPassword();
                 canGetAccount = true;
             }
             catch { System.Diagnostics.Debug.WriteLine("First time running - Cannot read username/password"); }   
 
             if (canGetAccount)
             {
-                account.Username = username;
-                PasswordBox.Password = password;
+                TextBoxEmail.Text = _username;
+                PasswordBox.Password = _password;
             }
 
-            DataContext = account;
         }
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            account.Username = TextBoxEmail.Text;
-            string password = PasswordBox.Password;
+            _username = TextBoxEmail.Text;
+            _password = PasswordBox.Password;
 
 
-            if (account.Username != null && password != null)
+            if (_username != null && _password != null)
             {
-
-                // save username & password to config file for later sign in
-                AppConfig.SetValue(AppConfig.Username, account.Username);
-                AppConfig.SetPassword(password);
-
-
+                
                 // validate account
-                string? connectionString = AppConfig.ConnectionString(account.Username, password);
-                var dao = new SqlDataAccess(connectionString!);
-
-                if (dao.CanConnect())
+                if (_accountBUS.validate(_username, _password))
                 {
                     DialogResult = true;
                 }
                 else
                 {
                     MessageBox.Show("Wrong username or password", "Login", MessageBoxButton.OK, MessageBoxImage.Warning);
-
                     System.Diagnostics.Debug.WriteLine("Cannot connect to db");
                 }
             }

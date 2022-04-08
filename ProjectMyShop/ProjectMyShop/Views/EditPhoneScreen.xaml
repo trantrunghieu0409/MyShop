@@ -1,0 +1,55 @@
+﻿<Window x:Class="ProjectMyShop.Views.EditPhoneScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectMyShop.Views" xmlns:local1="clr-namespace:ProjectMyShop.Converter"
+        mc:Ignorable="d"
+        Title="EditPhoneScreen" Height="450" Width="800">
+    <Window.Resources>
+        <local1:CurrencyConverter x:Key="currencyConverter"/>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource ImageButtonStyle}" Click="ImageButton_Click" Width="100" Height="100" Grid.Column="1" Grid.ColumnSpan="2">
+            <Image x:Name="avatar" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Avatar}" />
+        </Button>
+        <TextBlock Text="Phone's name" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Manufacturer" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Bought price" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Sold price" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Description" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox x:Name="phoneNameBox" Text="{Binding PhoneName}" Grid.Column="2" Grid.Row="1" />
+        <TextBox x:Name="manufacturerBox" Text="{Binding Manufacturer}" Grid.Column="2" Grid.Row="2"/>
+        <TextBox x:Name="boughtpriceBox" Text="{Binding BoughtPrice}" Grid.Column="2" Grid.Row="3"/>
+        <TextBox x:Name="soldpriceBox" Text="{Binding SoldPrice}" Grid.Column="2" Grid.Row="4"/>
+        <TextBox x:Name="descriptionBox" Text="{Binding Description}" Grid.Column="2" Grid.Row="5"/>
+        <StackPanel Height="40" Orientation="Horizontal" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button x:Name="editButton" Click="editButton_Click" Content="Edit" Width="120" HorizontalAlignment="Center" Margin="0 0 20 0"/>
+            <Button x:Name="cancelButton" Click="cancelButton_Click" Content="Cancel" Width="120" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMyShop
+namespace ProjectMyShop.Config
 {
     internal class AppConfig
     {

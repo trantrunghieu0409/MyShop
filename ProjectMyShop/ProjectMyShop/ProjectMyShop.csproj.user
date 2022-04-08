@@ -7,19 +7,22 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\AddPhoneScreen.xaml.cs">
+    <Compile Update="Views\AddPhoneScreen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\Dashboard.xaml.cs">
+    <Compile Update="Views\Dashboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\EditPhoneScreen.xaml.cs">
+    <Compile Update="Views\EditPhoneScreen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\Login.xaml.cs">
+    <Compile Update="Views\Login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\ManageProduct.xaml.cs">
+    <Compile Update="Views\ManageOrder.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManageProduct.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -27,19 +30,22 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\AddPhoneScreen.xaml">
+    <Page Update="Views\AddPhoneScreen.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\Dashboard.xaml">
+    <Page Update="Views\Dashboard.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\EditPhoneScreen.xaml">
+    <Page Update="Views\EditPhoneScreen.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\Login.xaml">
+    <Page Update="Views\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\ManageProduct.xaml">
+    <Page Update="Views\ManageOrder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManageProduct.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\ColorResources.xaml">

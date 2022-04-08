@@ -1,0 +1,50 @@
+﻿<Window x:Class="ProjectMyShop.Views.AddPhoneScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectMyShop.Views"
+        mc:Ignorable="d"
+        Title="AddPhoneScreen" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <ComboBox Name="categoryCombobox" Width="100" Height="35" SelectionChanged="categoryCombobox_SelectionChanged" Grid.Column="1" Grid.ColumnSpan="2">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding CatName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Text="Avatar" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Phone's name" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Manufacturer" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Bought price" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Sold price" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Description" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button x:Name="chooseImageButton" Click="chooseImageButton_Click" Content="Choose image" Width="130" Height="30" Grid.Column="2" Grid.Row="1"/>
+        <TextBox Text="{Binding PhoneName}" x:Name="phoneNameBox" Grid.Column="2" Grid.Row="2" />
+        <TextBox Text="{Binding Manufacturer}" x:Name="manufacturerBox" Grid.Column="2" Grid.Row="3"/>
+        <TextBox Text="{Binding BoughtPrice}" x:Name="boughtpriceBox" Grid.Column="2" Grid.Row="4"/>
+        <TextBox Text="{Binding SoldPrice}" x:Name="soldpriceBox" Grid.Column="2" Grid.Row="5"/>
+        <TextBox Text="{Binding Description}" x:Name="descriptionBox" Grid.Column="2" Grid.Row="6"/>
+        <StackPanel Height="40" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="cancelButton" Click="cancelButton_Click" Content="Cancel" Width="120" Margin="0 0 20 0"/>
+            <Button x:Name="addButton" Click="addButton_Click" Content="Add phone" Width="120" Margin="20 0 0 0"/>
+        </StackPanel>
+    </Grid>
+</Window>

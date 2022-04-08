@@ -1,4 +1,4 @@
-﻿using ProjectMyShop.Pages;
+﻿using ProjectMyShop.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
