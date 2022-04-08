@@ -16,7 +16,7 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Import" x:Name="ImportButton" Click="ImportButton_Click">
+            <MenuItem Header="Import" x:Name="ImportButton" Click="ImportButton_Click" >
                 <MenuItem.Icon>
                     <materialDesign:PackIcon Kind="Gear"/>
                 </MenuItem.Icon>
@@ -79,7 +79,7 @@
                                 materialDesign:RippleAssist.Feedback="{DynamicResource MyPurpleGradient}"
                                 Width="40"
                                 Height="40">
-                                <materialDesign:PackIcon Kind="Search" Width="25" Height="25"/>
+                                <materialDesign:PackIcon Kind="Search" Width="25" Height="25" Foreground="Black"/>
                             </Button>
                             <TextBox Name="searchTextBox"
                                  TextChanged="searchTextBox_TextChanged"
@@ -92,7 +92,7 @@
                         </Grid>
                     </materialDesign:Card>
                 </materialDesign:ColorZone>
-                
+
                 <!-- Filter combo box-->
                 <materialDesign:ColorZone Mode="Custom"
                                       Margin="0, 0, 0, 0"
@@ -203,5 +203,5 @@
         </Grid>
     </DockPanel>
 
-    
+
 </Page>
