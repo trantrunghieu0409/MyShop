@@ -44,7 +44,39 @@ namespace ProjectMyShop.DAO
                 if (CustomerName != "")
                     result.Add(order);
             }
+            reader.Close();
+            return result;
+        }
+        public int GetOrderByWeek()
+        {
+            string sql = "select count(*) as week from Orders where datediff(day, OrderDate, GETDATE()) < 7";
+            var command = new SqlCommand(sql, _connection);
 
+            var reader = command.ExecuteReader();
+
+            int result = 0;
+
+            if (reader.Read())
+            {
+                result = (int)reader["week"];
+            }
+            reader.Close();
+            return result;
+        }
+        public int GetOrderByMonth()
+        {
+            string sql = "select count(*) as month from Orders where datediff(day, OrderDate, GETDATE()) < 30";
+            var command = new SqlCommand(sql, _connection);
+
+            var reader = command.ExecuteReader();
+
+            int result = 0;
+
+            if (reader.Read())
+            {
+                result = (int)reader["month"];
+            }
+            reader.Close();
             return result;
         }
     }

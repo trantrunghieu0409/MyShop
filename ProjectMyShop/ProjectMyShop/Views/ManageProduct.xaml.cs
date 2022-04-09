@@ -307,5 +307,10 @@ namespace ProjectMyShop.Views
                 }
             }
         }
+
+        private void FilterButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

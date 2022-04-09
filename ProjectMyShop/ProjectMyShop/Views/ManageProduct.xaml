@@ -15,18 +15,33 @@
     </Page.Resources>
 
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Import" x:Name="ImportButton" Click="ImportButton_Click" >
-                <MenuItem.Icon>
-                    <materialDesign:PackIcon Kind="Gear"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Add" Name="AddButton" Click="AddMenuItem_Click">
-                <MenuItem.Icon>
-                    <materialDesign:PackIcon Kind="AddCircle"/>
-                </MenuItem.Icon>
-            </MenuItem>
-        </Menu>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <Button x:Name="ImportButton"
+                    Click="ImportButton_Click"
+                    Margin="0 0 10 0"
+                    Background="DeepPink"
+                    materialDesign:ButtonAssist.CornerRadius="5">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Gear"/>
+                        <TextBlock Margin="5 0" Text="Import"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Name="AddButton"
+                    Click="AddMenuItem_Click"
+                    Margin="0 0 10 0"
+                    Background="DeepPink"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AddCircle"/>
+                        <TextBlock Text="Add" Margin="5 0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
         <Grid Name="mainContainer">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
@@ -34,7 +49,7 @@
                 <ColumnDefinition Width="40*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="60*"/>
+                <RowDefinition Height="90*"/>
                 <RowDefinition Height="75*"/>
                 <RowDefinition Height="555*"/>
                 <RowDefinition Height="58*"/>
@@ -61,7 +76,7 @@
                                       RenderingBias="Performance" />
                     </materialDesign:ColorZone.Effect>
                     <materialDesign:Card Name="searchBoxContainer"
-                                 Width="480"
+                                 Width="380"
                                  Height="45"
                                  UniformCornerRadius="23"
                                  materialDesign:ShadowAssist.ShadowDepth="Depth0"
@@ -108,35 +123,22 @@
 
 
                     <materialDesign:Card Name="sortBoxContainer"
-                                 Width="155"
                                  Height="45"
                                  UniformCornerRadius="23"
                                  materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                 Grid.Column="0">
-                        <StackPanel Name="sortContentCard"
-                                Orientation="Horizontal"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
+                                 Grid.Column="0" Margin="0,0,-110,0">
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="From" VerticalAlignment="Center" FontWeight="Bold" Foreground="MediumPurple" Margin="10,0"/>
+                            <TextBox Width="45" Height="30" Padding="0 6 0 0" Text="0" Foreground="Black" HorizontalAlignment="Center"/>
+                            <TextBlock Text="To" VerticalAlignment="Center" FontWeight="Bold" Foreground="MediumPurple" Margin="10,0"/>
+                            <TextBox Width="45" Height="30" Padding="0 6 0 0" Text="0" Foreground="Black" HorizontalAlignment="Center"/>
 
-                            <TextBlock Name="titleSortTextBlock"
-                                   VerticalAlignment="Center"
-                                   FontSize="15"
-                                   Foreground="{DynamicResource MyBlack}"
-                                   Text="Sort: "/>
-
-                            <ComboBox Name="filterRangeComboBox"
-                                  SelectedIndex="0"
-                                  SelectionChanged="filterRangeComboBox_SelectionChanged"
-                                  Height="30"
-                                  Background="LightGray"
-                                  Margin="4, 1, 0, 0"
-                                  OverridesDefaultStyle="True"
-                                  >
-                                <ComboBoxItem Name="range1">
-                                    <TextBlock x:Name="r1" Foreground="Black" Text="2000-3000"/>
-                                </ComboBoxItem>
-                            </ComboBox>
-
+                            <Button Name="FilterButton" Click="FilterButton_Click" Margin="5 0 0 0"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Filter"/>
+                                </Button.Content>
+                            </Button>
                         </StackPanel>
                     </materialDesign:Card>
                 </materialDesign:ColorZone>

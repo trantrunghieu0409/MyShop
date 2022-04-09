@@ -1,4 +1,5 @@
 ﻿using ProjectMyShop.DAO;
+using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,10 @@ namespace ProjectMyShop.BUS
         public int GetTotalPhone()
         {
             return _phoneDAO.getTotalPhone();
+        }
+        public List<Phone> Top5OutStock()
+        {
+            return _phoneDAO.GetTop5OutStock();
         }
     }
 }
