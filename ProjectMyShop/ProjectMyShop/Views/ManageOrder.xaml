@@ -80,7 +80,8 @@
                       RowHeaderWidth="100" SelectionChanged="OrderDataGrid_SelectionChanged_1" HorizontalAlignment="Stretch" 
                       CanUserResizeColumns="False" 
                       materialDesign:DataGridAssist.CornerRadius="20"
-                      VerticalScrollBarVisibility="Auto"  AllowDrop="True" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Gray">
+                      VerticalScrollBarVisibility="Auto"  AllowDrop="True" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Gray"
+                      EnableRowVirtualization="True">
                 
                 
                 <DataGrid.Columns >
@@ -190,7 +191,6 @@
                         </Style.Setters>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                <materialDesign:DataGridAssist.CornerRadius="5"/>
             </DataGrid>
 
             <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0,20">

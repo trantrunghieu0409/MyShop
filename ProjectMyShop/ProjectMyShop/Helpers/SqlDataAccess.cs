@@ -20,11 +20,21 @@ namespace ProjectMyShop.Helpers
 
         public void ResetConnection()
         {
-            username = AppConfig.GetValue(AppConfig.Username);
-            password = AppConfig.GetPassword();
+            try
+            {
+                username = AppConfig.GetValue(AppConfig.Username);
+                password = AppConfig.GetPassword();
 
-            string? connectionString = AppConfig.ConnectionString(username, password);
-            _connection = new SqlConnection(connectionString);
+                string? connectionString = AppConfig.ConnectionString(username, password);
+                _connection = new SqlConnection(connectionString);
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message); 
+            }
+
+
         }
 
         /// <summary>
