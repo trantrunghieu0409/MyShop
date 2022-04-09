@@ -29,6 +29,7 @@ namespace ProjectMyShop
         Dashboard dashboard;
         ManageProduct manageProductPage;
         ManageOrder _manageOrderPage;
+        Statistics statisticsPage;
         Login login;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -67,7 +68,8 @@ namespace ProjectMyShop
 
         private void statButton_Click(object sender, RoutedEventArgs e)
         {
-
+            statisticsPage = new Statistics();
+            pageNavigation.NavigationService.Navigate(statisticsPage);
         }
 
         private void configButton_Click(object sender, RoutedEventArgs e)

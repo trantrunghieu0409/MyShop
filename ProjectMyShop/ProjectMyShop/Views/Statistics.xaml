@@ -156,39 +156,78 @@
             Margin="25, 20, 25, 0"
             materialDesign:ShadowAssist.ShadowDepth="Depth0">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="10*"/>
-                </Grid.RowDefinitions>
+            <TabControl Name="chartTabControl">
+                <TabItem Header="Revenue">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
 
-                <TextBlock Text="Revenue"
+                        <TextBlock Text="Revenue"
                                Foreground="{DynamicResource MyLightBrown}"
                                FontFamily="{DynamicResource GilroySemiBold}"/>
 
-                <lvc:CartesianChart Name="revenueByMonthChart"
+                        <lvc:CartesianChart Name="revenueChart"
                                         Grid.Row="1">
 
-                    <lvc:CartesianChart.Series>
-                        <lvc:ColumnSeries Title="Maria" Values="3" />
-                        <lvc:ColumnSeries Title="Maria" Values="4" />
-                        <lvc:ColumnSeries Title="Maria" Values="5" />
-                        <lvc:ColumnSeries Title="Maria" Values="6" />
-                    </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.Series>
+                                <lvc:ColumnSeries Title="Maria" Values="3" />
+                                <lvc:ColumnSeries Title="Maria" Values="4" />
+                                <lvc:ColumnSeries Title="Maria" Values="5" />
+                                <lvc:ColumnSeries Title="Maria" Values="6" />
+                            </lvc:CartesianChart.Series>
 
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:Axis Name="revenueByMonthChartAxisX" Title="Month" Labels="{Binding Labels}">
-                            <lvc:Axis.Separator>
-                                <lvc:Separator Step="1"/>
-                            </lvc:Axis.Separator>
-                        </lvc:Axis>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Name="revenueChartAxisX" Title="Month" Labels="{Binding Labels}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
 
-                    </lvc:CartesianChart.AxisX >
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Revenue"></lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-            </Grid>
+                            </lvc:CartesianChart.AxisX >
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Revenue"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Profit">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Revenue"
+                               Foreground="{DynamicResource MyLightBrown}"
+                               FontFamily="{DynamicResource GilroySemiBold}"/>
+
+                        <lvc:CartesianChart Name="profitChart"
+                                        Grid.Row="1">
+
+                            <lvc:CartesianChart.Series>
+                                <lvc:ColumnSeries Title="Maria" Values="3" />
+                                <lvc:ColumnSeries Title="Maria" Values="4" />
+                                <lvc:ColumnSeries Title="Maria" Values="5" />
+                                <lvc:ColumnSeries Title="Maria" Values="6" />
+                            </lvc:CartesianChart.Series>
+
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Name="profitChartAxisX" Title="Month" Labels="{Binding Labels}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+
+                            </lvc:CartesianChart.AxisX >
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Revenue"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </materialDesign:Card>
     </Grid>
 </Page>

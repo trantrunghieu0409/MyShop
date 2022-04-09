@@ -55,7 +55,7 @@ namespace ProjectMyShop.Config
             builder.InitialCatalog = database;
             builder.UserID = Username;
             builder.Password = Password;   
-           // builder.IntegratedSecurity = true;
+            builder.IntegratedSecurity = true;
             builder.ConnectTimeout = 3; // s
 
             result = builder.ToString();
