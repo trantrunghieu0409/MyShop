@@ -18,9 +18,9 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <materialDesign:Card
                 Name="currentTotalPhone"
@@ -121,5 +121,104 @@
             </Grid>
 
         </materialDesign:Card>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
+            <TextBlock Text="Top 5 phone (nearly) out of stock" FontSize="20" Background="MediumPurple" Foreground="White"/>
+            <DataGrid Grid.Row="0" x:Name="PhoneDataGrid" 
+                    AutoGenerateColumns="False" ColumnHeaderHeight="30" HeadersVisibility="Column" 
+                    RowHeaderWidth="100" SelectionChanged="PhoneDataGrid_SelectionChanged" 
+                    CanUserResizeColumns="False" 
+                    materialDesign:DataGridAssist.CornerRadius="20"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    VerticalScrollBarVisibility="Auto"  AllowDrop="True"  GridLinesVisibility="None" HorizontalGridLinesBrush="Gray" SelectionMode="Single">
+
+
+
+                <DataGrid.Columns >
+                    <DataGridTemplateColumn Header="  #ID" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding ID}" Margin="5,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="       Phone Name" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding PhoneName}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="     Manufacturer"
+                                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Manufacturer}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="        Sold price"
+                                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding SoldPrice}" Margin="5,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="         Stock"
+                                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="10,0" Text="{Binding Stock}" Foreground="White" FontWeight="DemiBold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="        #">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <materialDesign:Badged>
+                                        <Button x:Name="AddButton" Click="AddStockButton_Click" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}">
+                                            <Button.Content>
+                                                <materialDesign:PackIcon Kind="AddBox"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </materialDesign:Badged>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style>
+                        <Style.Setters>
+                            <Setter Property="TextBlock.FontWeight" Value="Normal"></Setter>
+                        </Style.Setters>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style>
+                        <Style.Setters>
+                            <Setter Property="Panel.Background" Value="Black"/>
+                            <Setter Property="TextBlock.Foreground" Value="White"/>
+                            <Setter Property="TextBlock.Padding" Value="10,0"/>
+                            <Setter Property="TextBlock.Height" Value="30"/>
+                            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                        </Style.Setters>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Page>

@@ -39,5 +39,13 @@ namespace ProjectMyShop.BUS
                 default: return OrderBUS.StatusProgess;
             }
         }
+        public int GetOrderByWeek()
+        {
+            return _orderDAO.GetOrderByWeek();
+        }
+        public int GetOrderByMonth()
+        {
+            return _orderDAO.GetOrderByMonth();
+        }
     }
 }
