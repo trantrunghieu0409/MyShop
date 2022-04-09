@@ -43,10 +43,10 @@ namespace ProjectMyShop.DAO
                 if (CustomerName != "")
                     result.Add(order);
             }
+
             reader.Close();
             return result;
         }
-
         private void AddDetailOrder(DetailOrder detail)
         {
             var sql = "insert into DetailOrder(OrderID, PhoneID, Quantity) " +

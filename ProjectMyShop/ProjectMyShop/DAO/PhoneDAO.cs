@@ -1,11 +1,11 @@
-﻿using ProjectMyShop.DTO;
-using ProjectMyShop.Helpers;
+﻿using ProjectMyShop.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectMyShop.DTO;
 
 namespace ProjectMyShop.DAO
 {
@@ -16,6 +16,7 @@ namespace ProjectMyShop.DAO
             var sql = "select count(*) as total from Phone";
             var command = new SqlCommand(sql, _connection);
             var reader = command.ExecuteReader();
+
             int result = 0;
             if (reader.Read())
             {
@@ -37,7 +38,9 @@ namespace ProjectMyShop.DAO
                 var ID = (int)reader["ID"];
                 var PhoneName = (String)reader["PhoneName"];
                 var Manufacturer = (String)reader["Manufacturer"];
-                var SoldPrice = (int)reader["SoldPrice"];
+
+                var SoldPrice = (int)(decimal)reader["SoldPrice"];
+                //var SoldPrice = (int)reader["SoldPrice"];
                 var Stock = (int)reader["Stock"];
 
                 Phone phone = new Phone()
@@ -48,7 +51,7 @@ namespace ProjectMyShop.DAO
                     SoldPrice = SoldPrice,
                     Stock = Stock,
                 };
-                if(phone.PhoneName != "")
+                if (phone.PhoneName != "")
                     list.Add(phone);
             }
             reader.Close();
