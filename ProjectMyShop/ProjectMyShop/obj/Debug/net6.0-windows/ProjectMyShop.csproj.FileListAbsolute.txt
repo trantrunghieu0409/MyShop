@@ -34,3 +34,43 @@ D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.baml
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Aspose.Cells.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Assets\Images\background.jpg
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Assets\Images\logo.png
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\ProjectMyShop.exe
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\ProjectMyShop.deps.json
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\ProjectMyShop.runtimeconfig.json
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\ProjectMyShop.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\ProjectMyShop.pdb
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\LiveCharts.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\LiveCharts.Wpf.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\MaterialDesignColors.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\MaterialDesignThemes.Wpf.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\bin\Debug\net6.0-windows\Aspose.Cells.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.csproj.AssemblyReference.cache
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Resources\ColorResources.baml
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\Dashboard.g.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.g.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\Statistics.g.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop_Content.g.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop_MarkupCompile.cache
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop_MarkupCompile.lref
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\App.baml
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\Dashboard.baml
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\ManageProduct.baml
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Pages\Statistics.baml
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\Resources\ImageResources.baml
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.g.resources
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.AssemblyInfoInputs.cache
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.AssemblyInfo.cs
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.csproj.CoreCompileInputs.cache
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.csproj.CopyComplete
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\refint\ProjectMyShop.dll
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.pdb
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ProjectMyShop.genruntimeconfig.cache
+C:\Users\lequa\OneDrive\Documents\GitHub\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net6.0-windows\ref\ProjectMyShop.dll
