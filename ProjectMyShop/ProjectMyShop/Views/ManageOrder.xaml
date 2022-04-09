@@ -12,34 +12,7 @@
     <Page.Resources>
         <local1:StatusConverter x:Key="statusConverter"/>
         <local1:CurrencyConverter x:Key="currencyConverter"/>
-        <local1:NewRowIndicatorConverter x:Key="cnvNewRowIndicatorConverter" />
         
-        <Style TargetType="DataGridRowHeader" >
-            <Setter Property="Content"
-                    Value="{Binding Converter={StaticResource cnvNewRowIndicatorConverter}}" />
-            <Setter Property="Foreground" Value="RoyalBlue" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Height" Value="{Binding}" />
-
-            <Style.Triggers>
-                <Trigger Property="IsRowSelected" Value="True">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <Border BorderBrush="Black"
-                                        BorderThickness="0,1,0,1"
-                                        Margin="0,-1,0,0">
-                                    <DockPanel VerticalAlignment="Center" Background="Transparent">
-                                        <Path x:Name="arrow" StrokeThickness = "1" Fill= "RoyalBlue" Data= "M 5,13 L 10,8 L 5,3 L 5,13"/>
-                                    </DockPanel>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
     </Page.Resources>
 
         <materialDesign:Card Background="White" UniformCornerRadius="10" materialDesign:ShadowAssist.ShadowEdges="All" Padding="20">
@@ -116,12 +89,14 @@
                     materialDesign:DataGridAssist.CornerRadius="20"
                     BorderBrush="Gray"
                     BorderThickness="1"
-                    VerticalScrollBarVisibility="Auto"  AllowDrop="True"  GridLinesVisibility="None" HorizontalGridLinesBrush="Gray" SelectionMode="Single">
+                    VerticalScrollBarVisibility="Auto"  AllowDrop="True"  GridLinesVisibility="None" SelectionMode="Single">
 
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF0000"/>
+                    </DataGrid.Resources>
 
-
-                    <DataGrid.Columns >
-                        <DataGridTemplateColumn Header="  #ID" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="  #ID">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -130,7 +105,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="     Customer Name" IsReadOnly="True">
+                        <DataGridTemplateColumn Header="     Customer Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -139,8 +114,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="     Address"
-                                        IsReadOnly="True">
+                        <DataGridTemplateColumn Header="     Address">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -149,8 +123,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="    Order Date"
-                                        IsReadOnly="True">
+                        <DataGridTemplateColumn Header="    Order Date">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -160,8 +133,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="            Status"
-                                        IsReadOnly="True">
+                        <DataGridTemplateColumn Header="            Status">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
@@ -185,7 +157,7 @@
                                     <StackPanel>
                                         <materialDesign:Badged>
                                             <Button x:Name="DetailButton" Click="DetailButton_Click" 
-                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}">
+                                             Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}">
                                                 <Button.Content>
                                                     <materialDesign:PackIcon Kind="EyeSettings"/>
                                                 </Button.Content>
@@ -201,7 +173,7 @@
                                     <StackPanel>
                                         <materialDesign:Badged>
                                             <Button x:Name="SaveButton" Click="SaveButton_Click" 
-                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}">
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}">
                                                 <Button.Content>
                                                     <materialDesign:PackIcon Kind="ContentSave"/>
                                                 </Button.Content>

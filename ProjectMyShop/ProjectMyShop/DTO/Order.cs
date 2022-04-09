@@ -13,8 +13,7 @@ namespace ProjectMyShop.DTO
         public DateOnly OrderDate { get; set; }
         public int Status { get; set; }
         public string Address { get; set; }
-        public int OrderMethod { get; set; }
         Voucher? VoucherID { get; set; }
-
+        List<DetailOrder>? DetailOrderList { get; set; }
     }
 }

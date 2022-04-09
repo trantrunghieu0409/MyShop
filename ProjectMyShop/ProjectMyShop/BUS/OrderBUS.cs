@@ -20,7 +20,6 @@ namespace ProjectMyShop.BUS
                 _orderDAO.Connect();
             }
         }
-
         public List<Order> GetAllOrders()
         {
             return _orderDAO.GetAllOrders();
@@ -29,6 +28,14 @@ namespace ProjectMyShop.BUS
         public static string StatusOpen = "Open";
         public static string StatusClose = "Close";
         public static string StatusProgess = "Progress";
+
+        enum OrderStatus
+        {
+            Open = 0,
+            Close = 1,
+            Progess = 2
+        }
+
 
         public static string GetStatus(int status)
         {
@@ -39,13 +46,28 @@ namespace ProjectMyShop.BUS
                 default: return OrderBUS.StatusProgess;
             }
         }
-        public int GetOrderByWeek()
+
+        public void AddOrder(Order order)
         {
-            return _orderDAO.GetOrderByWeek();
+            _orderDAO.AddOrder(order);
+            order.ID = _orderDAO.GetLastestInsertID();
         }
-        public int GetOrderByMonth()
+
+        public void DeleteOrder(int orderID)
         {
-            return _orderDAO.GetOrderByMonth();
+            if (orderID > -1)
+            {
+                _orderDAO.DeleteOrder(orderID);
+            }
+        }
+
+        public int CountOrderByWeek()
+        {
+            return _orderDAO.CountOrderByWeek();
+        }
+        public int CountOrderByMonth()
+        {
+            return _orderDAO.CountOrderByMonth();
         }
     }
 }

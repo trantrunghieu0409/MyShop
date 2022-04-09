@@ -63,5 +63,9 @@ namespace ProjectMyShop.Helpers
             _connection.Open();
         }
 
+        public void Close()
+        {
+            _connection.Close();
+        }
     }
 }

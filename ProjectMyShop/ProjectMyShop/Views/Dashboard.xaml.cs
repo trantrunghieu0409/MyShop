@@ -26,8 +26,8 @@ namespace ProjectMyShop.Views
             var _phoneBUS = new PhoneBUS();
             var _orderBUS = new OrderBUS();
             totalPhone = _phoneBUS.GetTotalPhone();
-            weekOrder = _orderBUS.GetOrderByWeek();
-            monthOrder = _orderBUS.GetOrderByMonth();
+            weekOrder = _orderBUS.CountOrderByWeek();
+            monthOrder = _orderBUS.CountOrderByMonth();
             _phones = _phoneBUS.Top5OutStock();
 
             PhoneDataGrid.ItemsSource = _phones;
