@@ -35,6 +35,7 @@ namespace ProjectMyShop.DAO
                 };
             }
 
+            reader.Close();
             return result;
         }
     }

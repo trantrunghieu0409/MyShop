@@ -15,11 +15,14 @@ namespace ProjectMyShop.DAO
             var sql = "select count(*) as total from Phone";
             var command = new SqlCommand(sql, _connection);
             var reader = command.ExecuteReader();
+
+            int result = 0;
             if (reader.Read())
             {
-                return (int)reader["total"];
+                result = (int)reader["total"];
             }
-            return 0;
+            reader.Close();
+            return result;
         }
     }
 }

@@ -45,6 +45,7 @@ namespace ProjectMyShop.DAO
                     result.Add(order);
             }
 
+            reader.Close();
             return result;
         }
     }
