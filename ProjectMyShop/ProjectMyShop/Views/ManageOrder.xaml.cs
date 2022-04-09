@@ -60,6 +60,30 @@ namespace ProjectMyShop.Views
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            var index = OrderDataGrid.SelectedIndex;
+
+            if (index != - 1)
+            {
+                _listOrders.RemoveAt(index);
+            }
+            else
+            {
+                // do nothing
+            }
+        }
+
+        private void OrderDataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DetailButton_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

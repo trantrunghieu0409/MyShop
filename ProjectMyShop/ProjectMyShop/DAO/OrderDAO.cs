@@ -25,7 +25,7 @@ namespace ProjectMyShop.DAO
             {
                 var ID = (int)reader["ID"];    
                 var CustomerName = (String)reader["CustomerName"];
-                var OrderDate = DateTime.Parse(reader["OrderDate"].ToString()).Date;
+                var OrderDate = DateOnly.Parse(DateTime.Parse(reader["OrderDate"].ToString()).Date.ToShortDateString());
                 var Status = (System.Int16)reader["Status"];
                 var Address = (String)reader["Address"];
                 var OrderMethod = (System.Int16)reader["OrderMethod"];
@@ -41,7 +41,8 @@ namespace ProjectMyShop.DAO
                     Address = Address
                 };
 
-                result.Add(order);
+                if (CustomerName != "")
+                    result.Add(order);
             }
 
             return result;
