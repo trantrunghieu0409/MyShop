@@ -80,36 +80,44 @@ namespace ProjectMyShop.Views
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            int i = OrderDataGrid.SelectedIndex;
+            int index = OrderDataGrid.SelectedIndex;
+            if (index != -1)
+            {
+                Order order = _vm.SelectedOrders[index];
+                var screen = new ManageDetailOrder(order);
+                screen.Owner = this.Parent as Window;
+                var result = screen.ShowDialog();
 
-            if (i != -1)
-            {
-                Order order = new Order()
+
+                if (result == true)
                 {
-                    CustomerName = "Long Nguyen Van",
-                    Address = "Ha Noi",
-                    OrderDate = DateOnly.Parse("08/05/2022"),
-                    Status = Order.OrderStatusEnum.Close
-                };
-                _orderBUS.UpdateOrder(_vm.SelectedOrders[i].ID, order);
-                Reload();
+                    _orderBUS.UpdateOrder(_vm.SelectedOrders[index].ID, order);
+                    Reload();
+                }
+                else
+                {
+                    // Do nothing
+                }
             }
+            else
             {
-                // do nothing
+                // Do nothing
             }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order()
+            Order order = new Order();
+            var screen = new ManageDetailOrder(order);
+            if (screen.ShowDialog() == true)
             {
-                CustomerName = "Long",
-                Address = "HCM",
-                OrderDate = DateOnly.Parse("04/05/2022"),
-                Status = Order.OrderStatusEnum.Open
-            };
-            _orderBUS.AddOrder(order);
-            Reload();
+                _orderBUS.AddOrder(order);
+                Reload();
+            }
+            else
+            {
+                // do nothing
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -149,9 +157,37 @@ namespace ProjectMyShop.Views
 
         }
 
+        private TargetType GetParent<TargetType>(DependencyObject o) where TargetType : DependencyObject
+        {
+            if (o == null || o is TargetType) return (TargetType)o;
+            return GetParent<TargetType>(VisualTreeHelper.GetParent(o));
+        }
+
         private void DetailButton_Click(object sender, RoutedEventArgs e)
         {
+            var row = GetParent<DataGridRow>((Button)sender);
+            int index = OrderDataGrid.Items.IndexOf(row.Item);
+            if (index != -1)
+            {
+                Order order = _vm.SelectedOrders[index];
+                var screen = new ManageDetailOrder(order);
+                screen.Owner = this.Parent as Window;
+                var result = screen.ShowDialog();
 
+
+                if (result == true)
+                {
+                    _orderBUS.UpdateOrder(_vm.SelectedOrders[index].ID, order);
+                    Reload();
+                }
+                else
+                {
+                }
+            }
+            else
+            {
+                // Do nothing
+            }
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)

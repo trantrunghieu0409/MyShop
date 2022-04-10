@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace ProjectMyShop.DTO
 {
@@ -17,7 +18,7 @@ namespace ProjectMyShop.DTO
         public int SoldPrice { get; set; }
         public Category Category { get; set; }
         public string UploadDate { get; set; }
-        public string Avatar { get; set; }
+        public BitmapImage Avatar { get; set; }
 
         public object Clone()
         {

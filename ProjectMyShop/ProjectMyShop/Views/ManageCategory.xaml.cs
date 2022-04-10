@@ -26,9 +26,15 @@ namespace ProjectMyShop.Views
     /// </summary>
     public partial class ManageCategory : Page
     {
+
+        List<Category>? _categories = null;        
+        CategoryViewModel CategoryViewModel = new CategoryViewModel();
+
         public ManageCategory()
         {
             InitializeComponent();
+            
+            
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -48,10 +54,24 @@ namespace ProjectMyShop.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+                      
+            var catBUS = new CategoryBUS();            
+            _categories = catBUS.getCategoryList();
 
+            categoriesListView.ItemsSource = _categories;
         }
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteMenuItemClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void editMenuItemClick(object sender, RoutedEventArgs e)
         {
 
         }
@@ -60,5 +80,12 @@ namespace ProjectMyShop.Views
         {
 
         }
+
+        private void categoriesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+       
     }
 }

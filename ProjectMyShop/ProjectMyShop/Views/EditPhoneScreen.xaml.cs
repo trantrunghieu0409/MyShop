@@ -46,7 +46,7 @@ namespace ProjectMyShop.Views
             screen.Filter = "Image Files|*.jpg;*.jpeg;*.png;...";
             if (screen.ShowDialog() == true)
             {
-                EditedPhone.Avatar = screen.FileName;
+                EditedPhone.Avatar = new BitmapImage(new Uri(screen.FileName, UriKind.Absolute));
             }
         }
     }
