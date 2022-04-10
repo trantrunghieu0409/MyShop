@@ -92,7 +92,10 @@ namespace ProjectMyShop.Views
             {
                 category.Phones = new BindingList<Phone>(phoneBUS.getPhonesAccordingToSpecificCategory(category.ID));
             }
-            loadPhones();
+            if(_categories.Count > 0)
+            {
+                loadPhones();
+            }
         }
 
         private void filterRangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -274,7 +277,7 @@ namespace ProjectMyShop.Views
                         int stock = tab.Cells[$"G{row}"].IntValue;
                         string desc = tab.Cells[$"H{row}"].StringValue;
                         string uploaddate = tab.Cells[$"I{row}"].StringValue;
-                        string ava = tab.Cells[$"J{row}"].StringValue;
+                        string avaURL = tab.Cells[$"J{row}"].StringValue;
 
                         var p = new Phone()
                         {
@@ -285,7 +288,7 @@ namespace ProjectMyShop.Views
                             Stock = stock,
                             Description = desc,
                             UploadDate = uploaddate,
-                            Avatar = ava,
+                            Avatar = new BitmapImage(new Uri(avaURL, UriKind.Absolute)),
                             Category = cat,
                         };
                         cat.Phones.Add(p);

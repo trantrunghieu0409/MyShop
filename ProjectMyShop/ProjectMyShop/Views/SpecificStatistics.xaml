@@ -40,8 +40,7 @@
                 <ComboBox Name="statisticsCombobox" HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding statisticsFigureIndex}"
-                                
-                                
+                                VerticalContentAlignment="Center"
                                 Width="85">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -66,7 +65,19 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
 
-                <DatePicker Name="statisticsDatePicker" SelectedDate="{Binding selectedDate}" SelectedDateChanged="statisticsDatePicker_SelectedDateChanged"/>
+                <DatePicker Name="statisticsDatePicker" SelectedDate="{Binding selectedDate}" SelectedDateChanged="statisticsDatePicker_SelectedDateChanged">
+                    <DatePicker.CalendarStyle>
+                        <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="DeepPink" />
+                                <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Green" />
+                            </Style.Resources>
+                            <Style.Setters>
+                                <Setter Property="Background" Value="White"/>
+                            </Style.Setters>
+                        </Style>
+                    </DatePicker.CalendarStyle>
+                </DatePicker>
 
                 <!--
                 <ComboBox Name="yearCombobox"

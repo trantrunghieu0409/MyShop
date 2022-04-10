@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectMyShop.DTO;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace ProjectMyShop.DAO
 {
@@ -82,6 +85,7 @@ namespace ProjectMyShop.DAO
                 var SoldPrice = (int)(decimal)reader["SoldPrice"];
                 //var SoldPrice = (int)reader["SoldPrice"];
                 var Stock = (int)reader["Stock"];
+                var byteAvatar = (byte[])reader["Avatar"];
 
                 Phone phone = new Phone()
                 {
@@ -91,6 +95,18 @@ namespace ProjectMyShop.DAO
                     SoldPrice = SoldPrice,
                     Stock = Stock,
                 };
+                using (MemoryStream ms = new MemoryStream(byteAvatar))
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    image.Freeze();
+                    phone.Avatar = image;
+                }
                 if (phone.PhoneName != "")
                     list.Add(phone);
             }
@@ -101,8 +117,8 @@ namespace ProjectMyShop.DAO
         public void addPhone(Phone phone)
         {
             // ID Auto Increment
-            var sql = "insert into Phone(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Stock, UploadDate, Description, CatID) " +
-                "values (@PhoneName, @Manufacturer, @BoughtPrice, @SoldPrice, @Stock, @UploadDate, @Description, @CatID)"; //
+            var sql = "insert into Phone(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Stock, UploadDate, Description, CatID, Avatar) " +
+                "values (@PhoneName, @Manufacturer, @BoughtPrice, @SoldPrice, @Stock, @UploadDate, @Description, @CatID, @Avatar)"; //
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
@@ -112,7 +128,13 @@ namespace ProjectMyShop.DAO
             sqlCommand.Parameters.AddWithValue("@Stock", phone.Stock);
             sqlCommand.Parameters.AddWithValue("@UploadDate", phone.UploadDate);
             sqlCommand.Parameters.AddWithValue("@Description", phone.Description);
-           // sqlCommand.Parameters.AddWithValue("@Avatar", phone.Avatar);
+            var encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(phone.Avatar));
+            using (var stream = new MemoryStream())
+            {
+                encoder.Save(stream);
+                sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
+            }
             sqlCommand.Parameters.AddWithValue("@CatID", phone.Category.ID);
 
             try

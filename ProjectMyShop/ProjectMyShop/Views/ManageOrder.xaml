@@ -5,14 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:ProjectMyShop.Views" xmlns:local1="clr-namespace:ProjectMyShop.Converter"
-      xmlns:local2="clr-namespace:ProjectMyShop.DTO"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="650"
       Title="ManageOrder"
       Loaded="Page_Loaded">
     <Page.Resources>
         <local1:StatusConverter x:Key="statusConverter"/>
-        <local1:CurrencyConverter x:Key="currencyConverter"/>
     </Page.Resources>
 
     <materialDesign:Card Background="White" UniformCornerRadius="10" materialDesign:ShadowAssist.ShadowEdges="All" Padding="20,20,20,30">

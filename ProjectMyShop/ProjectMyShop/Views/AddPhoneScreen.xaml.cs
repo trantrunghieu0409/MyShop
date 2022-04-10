@@ -70,7 +70,7 @@ namespace ProjectMyShop.Views
             var screen = new OpenFileDialog();
             if(screen.ShowDialog() == true)
             {
-                newPhone.Avatar = screen.FileName;
+                newPhone.Avatar = new BitmapImage(new Uri(screen.FileName, UriKind.Absolute));
             }
         }
     }

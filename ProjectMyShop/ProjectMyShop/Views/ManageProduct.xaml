@@ -152,7 +152,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="5 0 5 0">
-                            <Image Width="50" Height="50" Source="{Binding Avatar, Converter={StaticResource absoluteConverter}}"/>
+                            <Image Width="50" Height="50" Source="{Binding Avatar}"/>
                             <TextBlock Text="{Binding CatName}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
