@@ -10,7 +10,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Statistics">
 
-    <Grid Name="MainContainer">
+    <Grid Name="StatisticsContainer">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -22,6 +22,35 @@
             <RowDefinition Height="175"/>
             <RowDefinition Height="175"/>
         </Grid.RowDefinitions>
+
+        <materialDesign:Card 
+            Width="130"
+            Height="45"
+            Margin="0, 0, 10, 0"
+            HorizontalAlignment="Left"
+            UniformCornerRadius="23"
+            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+            Grid.Column="0"
+            Grid.Row="0">
+            <StackPanel 
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+
+                <ComboBox Name="statisticsCombobox" HorizontalAlignment="Right"
+                                Height="30"
+                                SelectedIndex="{Binding statisticsFigureIndex}"
+                                
+                                SelectionChanged="statisticsCombobox_SelectionChanged"
+                                Width="85">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </materialDesign:Card>
 
         <materialDesign:Card 
             Width="130"
@@ -165,7 +194,7 @@
                         <DockPanel>
                             <ComboBox Name="revenueCombobox" HorizontalAlignment="Right"
                                 Height="30"
-                                SelectedIndex="{Binding figureValueIndex}"
+                                SelectedIndex="{Binding figureIndex}"
                                 
                                 SelectionChanged="revenueCombobox_SelectionChanged"
                                 Width="62">
@@ -196,9 +225,11 @@
                             </lvc:CartesianChart.AxisX >
                             -->
 
+                            <!--
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Revenue"></lvc:Axis>
+                                <lvc:Axis Title="Revenue" LabelFormatter="{Binding currencyLabelFormatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
+                            -->
                         </lvc:CartesianChart>
                     </Grid>
                 </TabItem>
@@ -212,7 +243,7 @@
                         <DockPanel>
                             <ComboBox Name="profitCombobox" HorizontalAlignment="Right"
                                 Height="30"
-                                SelectedIndex="{Binding figureValueProfitIndex}"
+                                SelectedIndex="{Binding profitFigureIndex}"
                                 
                                 SelectionChanged="profitCombobox_SelectionChanged"
                                 Width="62">
@@ -234,6 +265,7 @@
                                 <lvc:ColumnSeries Title="Maria" Values="6" />
                             </lvc:CartesianChart.Series>
 
+                            <!--
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Name="profitChartAxisX" Title="Month" Labels="{Binding Labels}">
                                     <lvc:Axis.Separator>
@@ -243,8 +275,9 @@
 
                             </lvc:CartesianChart.AxisX >
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Revenue"></lvc:Axis>
+                                <lvc:Axis Title="Profit"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
+                            -->
                         </lvc:CartesianChart>
                     </Grid>
                 </TabItem>

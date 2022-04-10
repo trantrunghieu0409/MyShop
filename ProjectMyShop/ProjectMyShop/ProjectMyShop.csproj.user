@@ -25,6 +25,9 @@
     <Compile Update="Views\ManageProduct.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SpecificStatistics.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Statistics.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +58,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\ImageResources.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SpecificStatistics.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Statistics.xaml">
