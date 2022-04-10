@@ -19,7 +19,9 @@
     <Compile Update="Views\Login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManageDetailOrder.xaml.cs">
+	<Compile Update="Views\ManageDetailOrder.xaml.cs">
+		<SubType>Code</SubType>
+	</Compile>
     <Compile Update="Views\ManageCategory.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -52,7 +54,9 @@
     <Page Update="Views\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManageDetailOrder.xaml">
+	<Page Update="Views\ManageDetailOrder.xaml">
+		<SubType>Designer</SubType>
+	</Page>
     <Page Update="Views\ManageCategory.xaml">
       <SubType>Designer</SubType>
     </Page>

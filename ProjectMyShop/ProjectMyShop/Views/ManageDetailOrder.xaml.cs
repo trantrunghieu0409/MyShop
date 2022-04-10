@@ -31,9 +31,12 @@ namespace ProjectMyShop.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (order.OrderDate.Equals(DateOnly.Parse(DateTime.MinValue.Date.ToShortDateString()))) 
+                order.OrderDate = DateOnly.Parse(DateTime.Now.Date.ToShortDateString());
             OrderDatePicker.SelectedDate = DateTime.Parse(order.OrderDate.ToString());
             StatusComboBox.ItemsSource = Order.GetAllStatusValues();
             DataContext = order;
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -48,7 +51,15 @@ namespace ProjectMyShop.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // date only cannot bound so have to do this 
+            if (OrderDatePicker.SelectedDate != null)
+                order.OrderDate = DateOnly.Parse(OrderDatePicker.SelectedDate.Value.Date.ToShortDateString());
             DialogResult=true;
+        }
+
+        private DateOnly ConvertDateTimeToDateOnly(DateTime dateTime)
+        {
+            return DateOnly.Parse(dateTime.Date.ToShortDateString());
         }
     }
 }

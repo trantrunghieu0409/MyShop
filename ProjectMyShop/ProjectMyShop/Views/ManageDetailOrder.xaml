@@ -20,8 +20,8 @@
             <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
                 <TextBlock Text="Detail Order" FontWeight="Normal" FontSize="16"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Order " FontWeight="DemiBold" Foreground="Gray" FontSize="12"/>
-                    <TextBlock x:Name="OrderIDText" Text="#1" FontWeight="DemiBold" Foreground="Gray" FontSize="12"/>
+                    <TextBlock Text="Order #" FontWeight="DemiBold" Foreground="Gray" FontSize="12"/>
+                    <TextBlock x:Name="OrderIDText" Text="{Binding ID}" FontWeight="DemiBold" Foreground="Gray" FontSize="12"/>
                 </StackPanel>
             
             </StackPanel>
