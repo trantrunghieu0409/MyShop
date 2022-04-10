@@ -149,9 +149,35 @@ namespace ProjectMyShop.Views
 
         }
 
+        private TargetType GetParent<TargetType>(DependencyObject o) where TargetType : DependencyObject
+        {
+            if (o == null || o is TargetType) return (TargetType)o;
+            return GetParent<TargetType>(VisualTreeHelper.GetParent(o));
+        }
+
         private void DetailButton_Click(object sender, RoutedEventArgs e)
         {
+            var row = GetParent<DataGridRow>((Button)sender);
+            int index = OrderDataGrid.Items.IndexOf(row.Item);
+            if (index != -1)
+            {
+                Order order = _vm.SelectedOrders[index];
+                var screen = new ManageDetailOrder(order);
+                screen.Owner = this.Parent as Window;
+                var result = screen.ShowDialog();
 
+
+                if (result == true)
+                {
+                }
+                else
+                {
+                }
+            }
+            else
+            {
+                // Do nothing
+            }
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
