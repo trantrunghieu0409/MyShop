@@ -40,6 +40,11 @@ namespace ProjectMyShop.BUS
             return _statisticsDAO.getDailyRevenue(src);
         }
 
+        public List<Tuple<string, decimal>> getWeeklyRevenue(DateTime src)
+        {
+            return _statisticsDAO.getWeeklyRevenue(src);
+        }
+
         public List<Tuple<string, decimal>> getMonthlyRevenue(DateTime src)
         {
             return _statisticsDAO.getMonthlyRevenue(src);
@@ -55,6 +60,11 @@ namespace ProjectMyShop.BUS
             return _statisticsDAO.getDailyProfit(src);
         }
 
+        public List<Tuple<string, decimal>> getWeeklyProfit(DateTime src)
+        {
+            return _statisticsDAO.getWeeklyProfit(src);
+        }
+
         public List<Tuple<string, decimal>> getMonthlyProfit(DateTime src)
         {
             return _statisticsDAO.getMonthlyProfit(src);
@@ -68,6 +78,11 @@ namespace ProjectMyShop.BUS
         public List<Tuple<string, int>> getDailyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, DateTime srcDate)
         {
             return _statisticsDAO.getDailyQuantityOfSpecificProduct(srcPhoneID, srcCategoryID, srcDate);
+        }
+
+        public List<Tuple<string, int>> getWeeklyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, DateTime srcDate)
+        {
+            return _statisticsDAO.getWeeklyQuantityOfSpecificProduct(srcPhoneID, srcCategoryID, srcDate);
         }
 
         public List<Tuple<string, int>> getMonthlyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, DateTime srcDate)

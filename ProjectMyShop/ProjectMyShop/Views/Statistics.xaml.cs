@@ -114,6 +114,42 @@ namespace ProjectMyShop.Views
                     break;
 
                 case 1:
+                    var weeklyRevenueResult = _statisticsBUS.getWeeklyRevenue(selectedDate);
+
+                    var weeklyRevenues = new ChartValues<double>();
+                    var weeks = new List<string>();
+
+                    foreach (var item in weeklyRevenueResult)
+                    {
+                        weeks.Add(item.Item1.ToString());
+                        weeklyRevenues.Add((double)item.Item2);
+                    }
+
+                    var weeklyRevenueCollection = new SeriesCollection()
+                    {
+                    new ColumnSeries
+                    {
+                        Title = "Revenue: ",
+                        Values = weeklyRevenues,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
+                    }
+                    };
+
+                    revenueChart.AxisX.Clear();
+                    revenueChart.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Week",
+                        Labels = weeks
+                    });
+
+                    revenueChart.AxisY.Clear();
+                    revenueChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Revenue",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
+                    });
+
+                    revenueChart.Series = weeklyRevenueCollection;
                     break;
 
                 case 2:
@@ -243,6 +279,44 @@ namespace ProjectMyShop.Views
                     break;
 
                 case 1:
+                    var weeklyProfitResult = _statisticsBUS.getWeeklyProfit(selectedDate);
+
+                    var weeklyProfits = new ChartValues<double>();
+                    var weeks = new List<string>();
+
+                    foreach (var item in weeklyProfitResult)
+                    {
+                        weeks.Add(item.Item1.ToString());
+                        weeklyProfits.Add((double)item.Item2);
+                    }
+
+                    var weeklyProfitCollection = new SeriesCollection()
+                    {
+                    new ColumnSeries
+                    {
+                        Title = "Profit: ",
+                        Values = weeklyProfits,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
+                    }
+                    };
+
+
+                    profitChart.AxisX.Clear();
+                    profitChart.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Week",
+                        Labels = weeks
+                    });
+
+                    profitChart.AxisY.Clear();
+                    profitChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Profit",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
+                    });
+
+                    profitChart.Series = weeklyProfitCollection;
+
                     break;
 
                 case 2:
@@ -261,7 +335,7 @@ namespace ProjectMyShop.Views
                     {
                     new ColumnSeries
                     {
-                        Title = "Revenue: ",
+                        Title = "Profit: ",
                         Values = monthlyProfits,
                         LabelPoint = point => String.Format(info, "{0:c}", point.Y)
                     }

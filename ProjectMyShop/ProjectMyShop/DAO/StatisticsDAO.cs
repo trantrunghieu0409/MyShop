@@ -106,6 +106,30 @@ namespace ProjectMyShop.DAO
             return resultList;
         }
 
+        public List<Tuple<string, decimal>> getWeeklyRevenue(DateTime src)
+        {
+            string sqlFormattedDate = src.ToString("yyyy");
+
+            var sql = "SELECT DATEPART(iso_week, o.OrderDate) AS Week, convert(varchar,cast(SUM(do.Quantity * p.SoldPrice) as money), 1) as Revenue FROM Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID WHERE DATEPART(year, o.OrderDate) = @SelectedYear GROUP BY DATEPART(iso_week, o.OrderDate) ORDER BY DATEPART(iso_week, o.OrderDate);";
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@SelectedYear";
+            sqlParameter.Value = sqlFormattedDate;
+
+            var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Tuple<string, decimal>>();
+            while (reader.Read())
+            {
+                var tuple = Tuple.Create((string)reader["Week"], (decimal)reader["Revenue"]);
+                resultList.Add(tuple);
+            }
+            reader.Close();
+            return resultList;
+        }
+
         public List<Tuple<string, decimal>> getMonthlyRevenue(DateTime src)
         {
             string sqlFormattedDate = src.ToString("yyyy");
@@ -173,6 +197,30 @@ namespace ProjectMyShop.DAO
             while (reader.Read())
             {
                 var tuple = Tuple.Create((string)reader["OrderDate"], (decimal)reader["Profit"]);
+                resultList.Add(tuple);
+            }
+            reader.Close();
+            return resultList;
+        }
+
+        public List<Tuple<string, decimal>> getWeeklyProfit(DateTime src)
+        {
+            string sqlFormattedDate = src.ToString("yyyy");
+
+            var sql = "SELECT DATEPART(iso_week, o.OrderDate) AS Week, convert(varchar,cast(SUM(do.Quantity * (p.SoldPrice - p.BoughtPrice)) as money), 1) as Profit FROM Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID WHERE DATEPART(year, o.OrderDate) = @SelectedYear GROUP BY DATEPART(iso_week, o.OrderDate) ORDER BY DATEPART(iso_week, o.OrderDate);";
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@SelectedYear";
+            sqlParameter.Value = sqlFormattedDate;
+
+            var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Tuple<string, decimal>>();
+            while (reader.Read())
+            {
+                var tuple = Tuple.Create((string)reader["Week"], (decimal)reader["Profit"]);
                 resultList.Add(tuple);
             }
             reader.Close();
@@ -257,6 +305,41 @@ namespace ProjectMyShop.DAO
             while (reader.Read())
             {
                 var tuple = Tuple.Create((string)reader["OrderDate"], (int)reader["Quantity"]);
+                resultList.Add(tuple);
+            }
+            reader.Close();
+            return resultList;
+        }
+
+        public List<Tuple<string, int>> getWeeklyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, DateTime src)
+        {
+            string sqlFormattedDate = src.ToString("yyyy");
+
+            var sql = "SELECT DATEPART(iso_week, o.OrderDate) AS Week, convert(varchar,cast(SUM(do.Quantity * (p.SoldPrice - p.BoughtPrice)) as money), 1) as Profit FROM Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID WHERE DATEPART(year, o.OrderDate) = @SelectedYear and p.ID = @PhoneID  and p.CatID = @CategoryID GROUP BY DATEPART(iso_week, o.OrderDate) ORDER BY DATEPART(iso_week, o.OrderDate);";
+            
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@SelectedYear";
+            sqlParameter.Value = sqlFormattedDate;
+            
+            var sqlParameter1 = new SqlParameter();
+            sqlParameter1.ParameterName = "@PhoneID";
+            sqlParameter1.Value = srcPhoneID;
+
+            var sqlParameter2 = new SqlParameter();
+            sqlParameter2.ParameterName = "@CategoryID";
+            sqlParameter2.Value = srcCategoryID;
+
+            var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
+            command.Parameters.Add(sqlParameter1);
+            command.Parameters.Add(sqlParameter2);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Tuple<string, int>>();
+            while (reader.Read())
+            {
+                var tuple = Tuple.Create((string)reader["Week"], (int)reader["Quantity"]);
                 resultList.Add(tuple);
             }
             reader.Close();

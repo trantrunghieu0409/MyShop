@@ -127,6 +127,45 @@ namespace ProjectMyShop.Views
                     }
                     break;
                 case 1:
+                    if (phones.Count() > 0 && categories.Count() > 0)
+                    {
+                        var weeklyProductResult = _statisticsBUS.getMonthlyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID, selectedDate);
+
+                        var weeklyQuantity = new ChartValues<int>();
+                        var weeks = new List<string>();
+
+                        foreach (var item in weeklyProductResult)
+                        {
+                            weeklyQuantity.Add((int)item.Item2);
+                            weeks.Add(item.Item1.ToString());
+                        }
+
+                        var weeklyQuantityCollection = new SeriesCollection()
+                        {
+                            new ColumnSeries
+                            {
+                                Title = "Quantity: ",
+                                Values = weeklyQuantity,
+                            }
+                        };
+
+                        productBarGraph.AxisX.Clear();
+                        productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Week",
+                            Labels = weeks
+                        });
+
+                        productBarGraph.AxisY.Clear();
+                        productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Quantity",
+                            LabelFormatter = x => x.ToString("N0")
+
+                        });
+
+                        productBarGraph.Series = weeklyQuantityCollection;
+                    }
                     break;
                 case 2:
                     if (phones.Count() > 0 && categories.Count() > 0)
