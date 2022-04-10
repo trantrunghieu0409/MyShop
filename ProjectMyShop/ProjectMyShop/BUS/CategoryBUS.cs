@@ -28,5 +28,10 @@ namespace ProjectMyShop.BUS
 
             return result;
         }
+
+        public List<Category> getCategoryList()
+        {
+            return _categoryDAO.getCategoryList();
+        }
     }
 }

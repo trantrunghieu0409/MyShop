@@ -14,7 +14,7 @@ namespace ProjectMyShop.DAO
         {
             string sqlFormattedDate = src.ToString("yyyy-MM-dd");
 
-            var sql = "select convert(varchar,cast(SUM(do.Quantity * p.SoldPrice) as money), 1) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate < @SelectedDate;";
+            var sql = "select convert(varchar,cast(SUM(do.Quantity * p.SoldPrice) as money), 1) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate <= @SelectedDate;";
             var sqlParameter = new SqlParameter();
             sqlParameter.ParameterName = "@SelectedDate";
             sqlParameter.Value = sqlFormattedDate;
@@ -37,7 +37,7 @@ namespace ProjectMyShop.DAO
         {
             string sqlFormattedDate = src.ToString("yyyy-MM-dd");
 
-            var sql = "select convert(varchar,cast(SUM(do.Quantity *(p.SoldPrice - p.BoughtPrice)) as money), 1) as Profit from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate < @SelectedDate;";
+            var sql = "select convert(varchar,cast(SUM(do.Quantity *(p.SoldPrice - p.BoughtPrice)) as money), 1) as Profit from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate <= @SelectedDate;";
             var sqlParameter = new SqlParameter();
             sqlParameter.ParameterName = "@SelectedDate";
             sqlParameter.Value = sqlFormattedDate;
@@ -60,7 +60,7 @@ namespace ProjectMyShop.DAO
         {
             string sqlFormattedDate = src.ToString("yyyy-MM-dd");
 
-            var sql = "select COUNT(ID) as Orders from Orders where OrderDate < @SelectedDate;";
+            var sql = "select COUNT(ID) as Orders from Orders where OrderDate <= @SelectedDate;";
             var sqlParameter = new SqlParameter();
             sqlParameter.ParameterName = "@SelectedDate";
             sqlParameter.Value = sqlFormattedDate;
@@ -84,7 +84,7 @@ namespace ProjectMyShop.DAO
             string sqlFormattedDate = src.ToString("yyyy-MM-dd");
 
             //var sql = "select convert(varchar, o.OrderDate) as OrderDate, convert(varchar,cast(SUM(do.Quantity * p.SoldPrice) as money), 1) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate < @SelectedDate group by o.OrderDate order by o.OrderDate asc;";
-            var sql = "select convert(varchar, o.OrderDate) as OrderDate, cast(SUM(do.Quantity * p.SoldPrice) AS decimal(13,4)) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate < @SelectedDate group by o.OrderDate order by o.OrderDate asc;";
+            var sql = "select convert(varchar, o.OrderDate) as OrderDate, cast(SUM(do.Quantity * p.SoldPrice) AS decimal(13,4)) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate <= @SelectedDate group by o.OrderDate order by o.OrderDate asc;";
             var sqlParameter = new SqlParameter();
             sqlParameter.ParameterName = "@SelectedDate";
             sqlParameter.Value = sqlFormattedDate;
@@ -157,7 +157,7 @@ namespace ProjectMyShop.DAO
         {
             string sqlFormattedDate = src.ToString("yyyy-MM-dd");
 
-            var sql = "select convert(varchar, o.OrderDate) as OrderDate, cast(SUM(do.Quantity * (p.SoldPrice - p.BoughtPrice)) AS decimal(13,4)) as Profit from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate < @SelectedDate group by o.OrderDate order by o.OrderDate asc;";
+            var sql = "select convert(varchar, o.OrderDate) as OrderDate, cast(SUM(do.Quantity * (p.SoldPrice - p.BoughtPrice)) AS decimal(13,4)) as Profit from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate <= @SelectedDate group by o.OrderDate order by o.OrderDate asc;";
             var sqlParameter = new SqlParameter();
             sqlParameter.ParameterName = "@SelectedDate";
             sqlParameter.Value = sqlFormattedDate;
@@ -226,33 +226,23 @@ namespace ProjectMyShop.DAO
             return resultList;
         }
 
-        //public Tuple<List<string>, List<string>> getDailyRevenue(DateTime src)
-        //{
-        //    string sqlFormattedDate = src.ToString("yyyy-MM-dd");
+        public List<Tuple<string, decimal>> getDailyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, int srcDate)
+        {
+            var sql = "select o.OrderDate as OrderDate, SUM(do.Quantity) as Quantity from Phone p left join DetailOrder do on p.ID = do.PhoneID join Orders o on do.OrderID = o.ID where p.ID = @PhoneID  and p.CatID = @CategoryID and o.OrderDate <= @SelectedDate";
 
-        //    var sql = "select convert(varchar, o.OrderDate) as OrderDate, convert(varchar, cast(SUM(do.Quantity) as money), 1) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate < @SelectedDate group by o.OrderDate order by o.OrderDate asc;";
-        //    var sqlParameter = new SqlParameter();
-        //    sqlParameter.ParameterName = "@SelectedDate";
-        //    sqlParameter.Value = sqlFormattedDate;
+            var command = new SqlCommand(sql, _connection);
 
-        //    var command = new SqlCommand(sql, _connection);
-        //    command.Parameters.Add(sqlParameter);
+            var reader = command.ExecuteReader();
 
-        //    var reader = command.ExecuteReader();
+            var resultList = new List<Tuple<string, decimal>>();
+            while (reader.Read())
+            {
+                var tuple = Tuple.Create((string)reader["OrderYear"], (decimal)reader["Profit"]);
+                resultList.Add(tuple);
+            }
+            reader.Close();
+            return resultList;
+        }
 
-        //    List<string> dateList = new List<string>();
-        //    List<string> revenueList = new List<string>();
-
-
-        //    if (reader.Read())
-        //    {
-        //        dateList.Add((string)reader["OrderDate"]);
-        //        revenueList.Add((string)reader["Revenue"]);
-
-        //    }
-        //    reader.Close();
-        //    var mergedList = Tuple.Create(dateList, revenueList);
-        //    return mergedList;
-        //}
     }
 }

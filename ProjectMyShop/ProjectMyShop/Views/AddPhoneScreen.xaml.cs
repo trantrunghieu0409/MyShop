@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using ProjectMyShop.DTO;
+using ProjectMyShop.BUS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace ProjectMyShop.Views
     {
         public Phone newPhone { get; set; }
         public int catIndex { get; set; } = -1;
+        private PhoneBUS _phoneBus;
+
         public AddPhoneScreen(List<Category> category)
         {
             InitializeComponent();
@@ -44,6 +47,20 @@ namespace ProjectMyShop.Views
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             // Check validity
+
+            Phone phone = new Phone()
+            {
+                PhoneName = "Galaxy",
+                Manufacturer = "Samsung",
+                BoughtPrice = 500,
+                SoldPrice = 700,
+                Description = "stronglymanfok@outlook.com"
+            };
+
+            _phoneBus.addPhone(phone);
+            
+
+            
 
             DialogResult = true;
         }

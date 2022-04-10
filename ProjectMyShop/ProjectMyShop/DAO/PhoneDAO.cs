@@ -57,5 +57,76 @@ namespace ProjectMyShop.DAO
             reader.Close();
             return list;
         }
+
+        public List<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
+        {
+            var sql = "select * from Phone where CatID = @CategoryID";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@CategoryID";
+            sqlParameter.Value = srcCategoryID;
+
+            var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
+
+            var reader = command.ExecuteReader();
+
+            List<Phone> list = new List<Phone>();
+            while (reader.Read())
+            {
+                var ID = (int)reader["ID"];
+                var PhoneName = (String)reader["PhoneName"];
+                var Manufacturer = (String)reader["Manufacturer"];
+
+                var SoldPrice = (int)(decimal)reader["SoldPrice"];
+                //var SoldPrice = (int)reader["SoldPrice"];
+                var Stock = (int)reader["Stock"];
+
+                Phone phone = new Phone()
+                {
+                    ID = ID,
+                    PhoneName = PhoneName,
+                    Manufacturer = Manufacturer,
+                    SoldPrice = SoldPrice,
+                    Stock = Stock,
+                };
+                if (phone.PhoneName != "")
+                    list.Add(phone);
+            }
+            reader.Close();
+            return list;
+        }
+
+        public void addPhone(Phone phone)
+        {
+            // ID Auto Increment
+            var sql = "insert into Phones(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Description) " +
+                "values (@PhoneName, @Manufacturer, @BoughtPrice, @Description)"; //
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+
+            sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
+            sqlCommand.Parameters.AddWithValue("@Manufacturer", phone.Manufacturer);
+            sqlCommand.Parameters.AddWithValue("@BoughtPrice", phone.BoughtPrice);
+            sqlCommand.Parameters.AddWithValue("@Description", phone.Description);
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Inserted {phone.ID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Inserted {phone.ID} Fail: " + ex.Message);
+            }
+        }
+
+        public int GetLastestInsertID()
+        {
+            string sql = "select ident_current('Phones')";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+            var resutl = sqlCommand.ExecuteScalar();
+            System.Diagnostics.Debug.WriteLine(resutl);
+            return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
+        }
     }
 }

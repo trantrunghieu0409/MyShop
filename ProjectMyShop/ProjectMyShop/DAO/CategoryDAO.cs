@@ -38,5 +38,27 @@ namespace ProjectMyShop.DAO
             reader.Close();
             return result;
         }
+
+        public List<Category> getCategoryList()
+        {
+            var sql = "select * from Category;";
+
+            var command = new SqlCommand(sql, _connection);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Category>();
+            while (reader.Read())
+            {
+                Category category = new Category()
+                {
+                    ID = (int)reader["ID"],
+                    CatName = (string)reader["CatName"],
+                };
+                resultList.Add(category);
+            }
+            reader.Close();
+            return resultList;
+        }
     }
 }
