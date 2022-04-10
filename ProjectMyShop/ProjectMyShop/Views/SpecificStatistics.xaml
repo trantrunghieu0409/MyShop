@@ -66,7 +66,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
 
-                <DatePicker Name="statisticsDatePicker" SelectedDate="{Binding selectedDate}"/>
+                <DatePicker Name="statisticsDatePicker" SelectedDate="{Binding selectedDate}" SelectedDateChanged="statisticsDatePicker_SelectedDateChanged"/>
 
                 <!--
                 <ComboBox Name="yearCombobox"
@@ -99,7 +99,7 @@
                 <ComboBox Name="categoriesCombobox" HorizontalAlignment="Left"
                                 Height="50"
                                 SelectionChanged="categoriesCombobox_SelectionChanged"
-                                SelectedIndex="{Binding categoriesFigureIndex}"
+                                SelectedIndex="{Binding Path=categoriesFigureIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Background="#60ffffff"
                                 VerticalContentAlignment="Center"
                                 Padding="10, 0, 0, 0"
@@ -113,12 +113,13 @@
 
                 <ComboBox Name="productCombobox" HorizontalAlignment="Right"
                                 Height="50"
-                                SelectedIndex="{Binding productFigureIndex}"
+                                SelectedIndex="{Binding Path=productFigureIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectionChanged="productCombobox_SelectionChanged"
                                 Background="#60ffffff"
-                                VerticalContentAlignment="Center"
                                 Margin="30, 0, 0, 0"
-                                Padding="20, 0, 0, 0"
-                                Width="300" SelectionChanged="productCombobox_SelectionChanged">
+                                Padding="10, 0, 0, 0"
+                                VerticalContentAlignment="Center"
+                                Width="300">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding PhoneName}"/>
@@ -151,8 +152,7 @@
                             <ComboBox Name="bargraphCombobox" HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding bargraphFigureIndex}"
-                                
-                                
+                                SelectionChanged="bargraphCombobox_SelectionChanged"
                                 Width="62">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>

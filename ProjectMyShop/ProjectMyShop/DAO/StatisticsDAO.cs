@@ -226,19 +226,77 @@ namespace ProjectMyShop.DAO
             return resultList;
         }
 
-        public List<Tuple<string, decimal>> getDailyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, int srcDate)
+        public List<Tuple<string, int>> getDailyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, DateTime srcDate)
         {
-            var sql = "select o.OrderDate as OrderDate, SUM(do.Quantity) as Quantity from Phone p left join DetailOrder do on p.ID = do.PhoneID join Orders o on do.OrderID = o.ID where p.ID = @PhoneID  and p.CatID = @CategoryID and o.OrderDate <= @SelectedDate";
+            var sql = "select convert(varchar, o.OrderDate) as OrderDate, SUM(do.Quantity) as Quantity from Phone p left join DetailOrder do on p.ID = do.PhoneID join Orders o on do.OrderID = o.ID where p.ID = @PhoneID  and p.CatID = @CategoryID and o.OrderDate <= @SelectedDate group by o.OrderDate order by o.OrderDate asc";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@PhoneID";
+            sqlParameter.Value = srcPhoneID;
+
+            var sqlParameter1 = new SqlParameter();
+            sqlParameter1.ParameterName = "@CategoryID";
+            sqlParameter1.Value = srcCategoryID;
+
+            string sqlFormattedDate = srcDate.ToString("yyyy-MM-dd");
+            var sqlParameter2 = new SqlParameter();
+            sqlParameter2.ParameterName = "@SelectedDate";
+            sqlParameter2.Value = sqlFormattedDate;
 
             var command = new SqlCommand(sql, _connection);
 
+            command.Parameters.Add(sqlParameter);
+            command.Parameters.Add(sqlParameter1);
+            command.Parameters.Add(sqlParameter2);
+
             var reader = command.ExecuteReader();
 
-            var resultList = new List<Tuple<string, decimal>>();
+            var resultList = new List<Tuple<string, int>>();
             while (reader.Read())
             {
-                var tuple = Tuple.Create((string)reader["OrderYear"], (decimal)reader["Profit"]);
+                var tuple = Tuple.Create((string)reader["OrderDate"], (int)reader["Quantity"]);
                 resultList.Add(tuple);
+            }
+            reader.Close();
+            return resultList;
+        }
+
+        public List<Tuple<string, int>> getMonthlyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID, DateTime srcDate)
+        {
+            var sql = "WITH Months as (select month(GETDATE()) as Monthnumber, datename(month, GETDATE()) as NameOfMonth, 1 as number union all select month(dateadd(month, number, (GETDATE()))) Monthnumber, datename(month, dateadd(month, number, (GETDATE()))) as NameOfMonth, number + 1  from Months  where number < 12) select NameOfMonth, Quantity from Months left join (select datepart(month, o.OrderDate) as OrderMonth, SUM(do.Quantity) as Quantity from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where datepart(year, o.OrderDate) = @SelectedYear and p.ID = @PhoneID and p.CatID = @CategoryID group by datepart(month, o.OrderDate)) MonthlyQuantity on Months.Monthnumber = MonthlyQuantity .OrderMonth order by Monthnumber;";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@PhoneID";
+            sqlParameter.Value = srcPhoneID;
+
+            var sqlParameter1 = new SqlParameter();
+            sqlParameter1.ParameterName = "@CategoryID";
+            sqlParameter1.Value = srcCategoryID;
+
+            string sqlFormattedDate = srcDate.ToString("yyyy");
+            var sqlParameter2 = new SqlParameter();
+            sqlParameter2.ParameterName = "@SelectedYear";
+            sqlParameter2.Value = sqlFormattedDate;
+
+            var command = new SqlCommand(sql, _connection);
+
+            command.Parameters.Add(sqlParameter2);
+            command.Parameters.Add(sqlParameter);
+            command.Parameters.Add(sqlParameter1);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Tuple<string, int>>();
+            while (reader.Read())
+            {
+                string monthName = (string)reader["NameOfMonth"];
+                int quantity = 0;
+
+                if (reader["Quantity"].GetType() != typeof(DBNull))
+                {
+                    quantity = (int)reader["Quantity"];
+                }
+                resultList.Add(Tuple.Create(monthName, quantity));
             }
             reader.Close();
             return resultList;

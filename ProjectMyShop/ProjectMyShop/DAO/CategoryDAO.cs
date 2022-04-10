@@ -2,6 +2,7 @@
 using ProjectMyShop.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace ProjectMyShop.DAO
             return result;
         }
 
-        public List<Category> getCategoryList()
+        public BindingList<Category> getCategoryList()
         {
             var sql = "select * from Category;";
 
@@ -47,7 +48,7 @@ namespace ProjectMyShop.DAO
 
             var reader = command.ExecuteReader();
 
-            var resultList = new List<Category>();
+            var resultList = new BindingList<Category>();
             while (reader.Read())
             {
                 Category category = new Category()

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectMyShop.DTO;
+using System.ComponentModel;
 
 namespace ProjectMyShop.DAO
 {
@@ -58,7 +59,7 @@ namespace ProjectMyShop.DAO
             return list;
         }
 
-        public List<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
+        public BindingList<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
         {
             var sql = "select * from Phone where CatID = @CategoryID";
 
@@ -71,7 +72,7 @@ namespace ProjectMyShop.DAO
 
             var reader = command.ExecuteReader();
 
-            List<Phone> list = new List<Phone>();
+            BindingList<Phone> list = new BindingList<Phone>();
             while (reader.Read())
             {
                 var ID = (int)reader["ID"];

@@ -2,6 +2,7 @@
 using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace ProjectMyShop.BUS
             return _phoneDAO.GetTop5OutStock();
         }
 
-        public List<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
+        public BindingList<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
         {
             return _phoneDAO.getPhonesAccordingToSpecificCategory(srcCategoryID);
         }
