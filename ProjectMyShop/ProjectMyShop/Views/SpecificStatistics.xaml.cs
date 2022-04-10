@@ -158,6 +158,43 @@ namespace ProjectMyShop.Views
                     productBarGraph.Series = monthlyQuantityCollection;
                     break;
                 case 3:
+                    var yearlyProductResult = _statisticsBUS.getYearlyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID);
+
+                    var yearlyQuantity = new ChartValues<int>();
+                    var years = new List<string>();
+
+                    foreach (var item in yearlyProductResult)
+                    {
+                        yearlyQuantity.Add((int)item.Item2);
+                        years.Add(item.Item1.ToString());
+                    }
+
+                    var yearlyQuantityCollection = new SeriesCollection()
+                    {
+                    new ColumnSeries
+                    {
+                        Title = "Quantity: ",
+                        Values = yearlyQuantity,
+                    }
+                    };
+
+
+                    productBarGraph.AxisX.Clear();
+                    productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Month",
+                        Labels = years
+                    });
+
+                    productBarGraph.AxisY.Clear();
+                    productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Quantity",
+                        LabelFormatter = x => x.ToString("N0")
+
+                    });
+
+                    productBarGraph.Series = yearlyQuantityCollection;
                     break;
             }
         }

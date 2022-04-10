@@ -74,5 +74,10 @@ namespace ProjectMyShop.BUS
         {
             return _statisticsDAO.getMonthlyQuantityOfSpecificProduct(srcPhoneID, srcCategoryID, srcDate);
         }
+
+        public List<Tuple<string, int>> getYearlyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID)
+        {
+            return _statisticsDAO.getYearlyQuantityOfSpecificProduct(srcPhoneID, srcCategoryID);
+        }
     }
 }

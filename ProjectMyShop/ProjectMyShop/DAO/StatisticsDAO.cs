@@ -302,5 +302,32 @@ namespace ProjectMyShop.DAO
             return resultList;
         }
 
+        public List<Tuple<string, int>> getYearlyQuantityOfSpecificProduct(int srcPhoneID, int srcCategoryID)
+        {
+            var sql = "select convert(varchar, datepart(year, o.OrderDate)) as OrderYear, SUM(do.Quantity) as Quantity from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID join Category cat on p.CatID = cat.ID where p.ID = @PhoneID and cat.ID = @CategoryID group by convert(varchar, datepart(year, o.OrderDate)) order by convert(varchar, datepart(year, o.OrderDate)) asc;";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@PhoneID";
+            sqlParameter.Value = srcPhoneID;
+
+            var sqlParameter1 = new SqlParameter();
+            sqlParameter1.ParameterName = "@CategoryID";
+            sqlParameter1.Value = srcCategoryID;
+
+            var command = new SqlCommand(sql, _connection);
+
+            command.Parameters.Add(sqlParameter);
+            command.Parameters.Add(sqlParameter1);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Tuple<string, int>>();
+            while (reader.Read())
+            {
+                resultList.Add(Tuple.Create((string)reader["OrderYear"], (int)reader["Quantity"]));
+            }
+            reader.Close();
+            return resultList;
+        }
     }
 }
