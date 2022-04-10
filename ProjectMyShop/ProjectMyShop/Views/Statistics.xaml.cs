@@ -30,13 +30,14 @@ namespace ProjectMyShop.Views
 
             _statisticsBUS = new StatisticsBUS();
 
-            typeCombobox.ItemsSource = figureValues;
-            typeCombobox.SelectedIndex = figureValueIndex;
+            revenueCombobox.ItemsSource = figureValues;
+            revenueCombobox.SelectedIndex = figureValueIndex;
 
             statisticsDatePicker.SelectedDate = selectedDate;
+            chartTabControl.SelectedIndex = tabSelectedIndex;
 
-            configureGeneral();
-            configureCharts();
+            configureRevenueGeneral();
+            configureRevenueCharts();
 
             DataContext = this;
         }
@@ -45,16 +46,17 @@ namespace ProjectMyShop.Views
 
         public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
         public int figureValueIndex { get; set; } = 0;
+        public int tabSelectedIndex { get; set; } = 0;
         public DateTime selectedDate { get; set; } = DateTime.Now;
 
-        public void configureGeneral()
+        public void configureRevenueGeneral()
         {
             TotalRevenueTextBlock.Text = _statisticsBUS.getTotalRevenueUntilDate(selectedDate).ToString();
             TotalProfitTextBlock.Text = _statisticsBUS.getTotalProfitUntilDate(selectedDate).ToString();
             TotalOrdersTextBlock.Text = _statisticsBUS.getTotalOrdersUntilDate(selectedDate).ToString();
         }
 
-        public void configureCharts()
+        public void configureRevenueCharts()
         {
             switch (figureValueIndex)
             {
@@ -118,26 +120,96 @@ namespace ProjectMyShop.Views
                     revenueChart.AxisX.Clear();
                     revenueChart.AxisX.Add(new LiveCharts.Wpf.Axis
                     {
-                        Title = "Date",
+                        Title = "Month",
                         Labels = months
                     });
 
                     revenueChart.Series = monthlyRevenueCollection;
 
                     break;
+                case 3:
+                    var yearlyRevenueResult = _statisticsBUS.getYearlyRevenue();
+
+                    var yearlyRevenues = new ChartValues<double>();
+                    var years = new List<string>();
+
+                    foreach (var item in yearlyRevenueResult)
+                    {
+                        years.Add(item.Item1.ToString());
+                        yearlyRevenues.Add((double)item.Item2);
+                    }
+
+                    var yearlyRevenueCollection = new SeriesCollection()
+                    {
+                    new ColumnSeries
+                    {
+                        Title = "Revenue: ",
+                        Values = yearlyRevenues
+                    }
+                    };
+
+
+                    revenueChart.AxisX.Clear();
+                    revenueChart.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Year",
+                        Labels = years
+                    });
+
+                    revenueChart.Series = yearlyRevenueCollection;
+
+                    break;
             }
         }
 
-        private void typeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void revenueCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            configureGeneral();
-            configureCharts();
+            switch (tabSelectedIndex)
+            {
+                case 0:
+                    configureRevenueGeneral();
+                    configureRevenueCharts();
+                    break;
+                case 1:
+                    configureRevenueGeneral();
+                    configureRevenueCharts();
+                    break;
+            }
         }
 
         private void statisticsDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            configureGeneral();
-            configureCharts();
+            switch (tabSelectedIndex)
+            {
+                case 0:
+                    configureRevenueGeneral();
+                    configureRevenueCharts();
+                    break;
+                case 1:
+                    configureRevenueGeneral();
+                    configureRevenueCharts();
+                    break;
+            }
+        }
+
+        private void chartTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (tabSelectedIndex)
+            {
+                case 0:
+                    configureRevenueGeneral();
+                    configureRevenueCharts();
+                    break;
+                case 1:
+                    configureRevenueGeneral();
+                    configureRevenueCharts();
+                    break;
+            }
+        }
+
+        private void profitCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

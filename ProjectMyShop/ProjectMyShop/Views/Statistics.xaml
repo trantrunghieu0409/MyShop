@@ -154,7 +154,7 @@
             Margin="25, 20, 25, 0"
             materialDesign:ShadowAssist.ShadowDepth="Depth0">
 
-            <TabControl Name="chartTabControl">
+            <TabControl Name="chartTabControl" SelectionChanged="chartTabControl_SelectionChanged" SelectedIndex="{Binding tabSelectedIndex}">
                 <TabItem Header="Revenue">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -163,11 +163,11 @@
                         </Grid.RowDefinitions>
 
                         <DockPanel>
-                            <ComboBox Name="typeCombobox" HorizontalAlignment="Right"
+                            <ComboBox Name="revenueCombobox" HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding figureValueIndex}"
                                 
-                                SelectionChanged="typeCombobox_SelectionChanged"
+                                SelectionChanged="revenueCombobox_SelectionChanged"
                                 Width="62">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -209,9 +209,20 @@
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Revenue"
-                               Foreground="{DynamicResource MyLightBrown}"
-                               FontFamily="{DynamicResource GilroySemiBold}"/>
+                        <DockPanel>
+                            <ComboBox Name="profitCombobox" HorizontalAlignment="Right"
+                                Height="30"
+                                SelectedIndex="{Binding figureValueProfitIndex}"
+                                
+                                SelectionChanged="profitCombobox_SelectionChanged"
+                                Width="62">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DockPanel>
 
                         <lvc:CartesianChart Name="profitChart"
                                         Grid.Row="1">

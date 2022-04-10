@@ -135,6 +135,24 @@ namespace ProjectMyShop.DAO
             return resultList;
         }
 
+        public List<Tuple<string, decimal>> getYearlyRevenue()
+        {
+            var sql = "select convert(varchar, datepart(year, o.OrderDate)) as OrderYear, cast(SUM(do.Quantity * SoldPrice) AS decimal(13,4)) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID group by datepart(year, o.OrderDate) order by datepart(year, o.OrderDate) asc;";
+
+            var command = new SqlCommand(sql, _connection);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Tuple<string, decimal>>();
+            while (reader.Read())
+            {
+                var tuple = Tuple.Create((string)reader["OrderYear"], (decimal)reader["Revenue"]);
+                resultList.Add(tuple);
+            }
+            reader.Close();
+            return resultList;
+        }
+
         //public Tuple<List<string>, List<string>> getDailyRevenue(DateTime src)
         //{
         //    string sqlFormattedDate = src.ToString("yyyy-MM-dd");
