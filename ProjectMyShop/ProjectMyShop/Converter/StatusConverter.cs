@@ -1,4 +1,4 @@
-﻿using ProjectMyShop.BUS;
+﻿using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,8 +13,8 @@ namespace ProjectMyShop.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int status = (int)value;
-            return OrderBUS.GetStatus(status); 
+            var converter = (Order.OrderStatusEnum)value;
+            return converter.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -27,6 +27,7 @@ namespace ProjectMyShop.Views
 
         OrderViewModel _vm;
 
+
         public ManageOrder()
         {
             InitializeComponent();
@@ -37,13 +38,13 @@ namespace ProjectMyShop.Views
             _vm = new OrderViewModel();
             
             _orderBUS = new OrderBUS();
-            _orders = new BindingList<Order>(_orderBUS.GetAllOrders());
 
             _vm.Orders = _orders;
 
             Reload();
             OrderDataGrid.ItemsSource = _vm.SelectedOrders;
         }
+
 
         private void OrderDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -54,21 +55,30 @@ namespace ProjectMyShop.Views
         int _totalItems = 0;
         int _currentPage = 1;
         int _totalPages = 0;
-        int _rowsPerPage = 10;
+        int _rowsPerPage = 4; // 8
 
         void Reload()
         {
-            _currentPage = 1;
+            _vm.SelectedOrders = _orderBUS.GetOrders((_currentPage - 1) * _rowsPerPage, _rowsPerPage);
 
-            _vm.Orders = _orders;
-            _vm.SelectedOrders = _vm.Orders
-               .Skip((_currentPage - 1) * _rowsPerPage)
-               .Take(_rowsPerPage).ToList();
+            _totalItems = _orderBUS.CountOrders();
+            _totalPages = _totalItems / _rowsPerPage +
+                (_totalItems % _rowsPerPage == 0 ? 0 : 1);
 
-            _totalItems = _vm.Orders.Count;
-            _totalPages = _vm.Orders.Count / _rowsPerPage +
-                (_vm.Orders.Count % _rowsPerPage == 0 ? 0 : 1);
+            // control prev & next buttons
+            if (_currentPage == 1) PreviousButton.IsEnabled = false;
+            else
+            {
+                PreviousButton.IsEnabled = true;
+            }
+            if (_currentPage == _totalPages) NextButton.IsEnabled = false;
+            else
+            {
+                NextButton.IsEnabled = true;
+            }
 
+            CurrentPageText.Text = _currentPage.ToString();
+            TotalPageText.Text = _totalPages.ToString();
 
             OrderDataGrid.ItemsSource = _vm.SelectedOrders;
         }
@@ -111,10 +121,9 @@ namespace ProjectMyShop.Views
                 CustomerName = "Long",
                 Address = "HCM",
                 OrderDate = DateOnly.Parse("04/05/2022"),
-                Status = 2
+                Status = Order.OrderStatusEnum.Open
             };
             _orderBUS.AddOrder(order);
-            _orders.Add(order);
             Reload();
         }
 
@@ -124,50 +133,25 @@ namespace ProjectMyShop.Views
 
             if (index != -1)
             {
-                _orderBUS.DeleteOrder(_orders[index].ID);
-                _orders.RemoveAt(index);
+                _orderBUS.DeleteOrder(_vm.SelectedOrders[index].ID);
                 Reload();
+                if (_vm.SelectedOrders.Count == 0)
+                {
+                    if (_currentPage > 1)
+                    {
+                        _currentPage--;
+                        Reload();
+                    }
+                    else
+                    {
+                        // Empty Orders List -> Do nothing
+                    }
+                }
             }
             else
             {
                // Do nothing
             }
-
-
-            /*
-            var p = (Phone)phonesListView.SelectedItem;
-            var result = MessageBox.Show($"Bạn thật sự muốn xóa điện thoại {p.PhoneName} - {p.Manufacturer}?",
-                "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (MessageBoxResult.Yes == result)
-            {
-                //_phones.Remove(p);
-                _vm.Phones.Remove(p);
-                _categories[i].Phones.Remove(p);
-                //_vm.SelectedPhones.Remove(p);
-
-                _vm.SelectedPhones = _vm.Phones
-                    .Skip((_currentPage - 1) * _rowsPerPage)
-                    .Take(_rowsPerPage).ToList();
-
-
-                // Tính toán lại thông số phân trang
-                _totalItems = _vm.Phones.Count;
-                _totalPages = _vm.Phones.Count / _rowsPerPage +
-                    (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
-
-                currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
-                if (_currentPage + 1 > _totalPages)
-                {
-                    nextButton.IsEnabled = false;
-                }
-
-                phonesListView.ItemsSource = _vm.SelectedPhones;
-            }
-            */
-        }
-
-        private void OrderDataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
 
         }
 
@@ -179,6 +163,18 @@ namespace ProjectMyShop.Views
         private void DetailButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            _currentPage++;
+            Reload();
+        }
+
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
+        {
+            _currentPage -= 1;
+            Reload();
         }
     }
 }

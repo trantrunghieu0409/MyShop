@@ -20,21 +20,14 @@ namespace ProjectMyShop.BUS
                 _orderDAO.Connect();
             }
         }
-        public List<Order> GetAllOrders()
+        public List<Order> GetOrders(int offset, int size)
         {
-            return _orderDAO.GetAllOrders();
+            return _orderDAO.GetOrders(offset, size);
         }
 
         public static string StatusOpen = "Open";
         public static string StatusClose = "Close";
         public static string StatusProgess = "Progress";
-
-        enum OrderStatus
-        {
-            Open = 0,
-            Close = 1,
-            Progess = 2
-        }
 
 
         public static string GetStatus(int status)
@@ -61,6 +54,10 @@ namespace ProjectMyShop.BUS
             }
         }
 
+        public int CountOrders()
+        {
+            return _orderDAO.CountOrders();
+        }
         public int CountOrderByWeek()
         {
             return _orderDAO.CountOrderByWeek();

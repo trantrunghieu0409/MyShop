@@ -13,18 +13,26 @@ namespace ProjectMyShop.DAO
 {
     internal class OrderDAO: SqlDataAccess
     {
-        public List<Order> GetAllOrders()
+        public List<Order> GetOrders(int offset, int size)
         {
-            var sql = "select * from Orders";
+            string sql = "select * from Orders " +
+                "Order by OrderDate DESC, ID ASC " +
+                "offset @Off rows " +
+                "fetch first @Size rows only";
+
             var command = new SqlCommand(sql, _connection);
+
+            command.Parameters.AddWithValue("@Off", offset);
+            command.Parameters.AddWithValue("@Size", size);
+
 
             var reader = command.ExecuteReader();
 
-            List<Order>? result = new List<Order>();
+            var result = new List<Order>();
 
             while (reader.Read())
             {
-                var ID = (int)reader["ID"];    
+                var ID = (int)reader["ID"];
                 var CustomerName = (String)reader["CustomerName"];
                 var OrderDate = DateOnly.Parse(DateTime.Parse(reader["OrderDate"].ToString()).Date.ToShortDateString());
                 var Status = (System.Int16)reader["Status"];
@@ -36,7 +44,7 @@ namespace ProjectMyShop.DAO
                     ID = ID,
                     CustomerName = CustomerName,
                     OrderDate = OrderDate,
-                    Status = Status,
+                    Status = (Order.OrderStatusEnum)Status,
                     Address = Address
                 };
 
@@ -47,6 +55,7 @@ namespace ProjectMyShop.DAO
             reader.Close();
             return result;
         }
+
         private void AddDetailOrder(DetailOrder detail)
         {
             var sql = "insert into DetailOrder(OrderID, PhoneID, Quantity) " +
@@ -116,7 +125,24 @@ namespace ProjectMyShop.DAO
                 System.Diagnostics.Debug.WriteLine($"Deleted {orderID} Fail: " + ex.Message);
             }
         }
-        
+
+        public int CountOrders()
+        {
+            string sql = "select count(*) as c from Orders";
+            var command = new SqlCommand(sql, _connection);
+
+            var reader = command.ExecuteReader();
+
+            int result = 0;
+
+            if (reader.Read())
+            {
+                result = (int)reader["c"];
+            }
+            reader.Close();
+            return result;
+        }
+
         public int CountOrderByWeek()
         {
             string sql = "select count(*) as week from Orders where datediff(day, OrderDate, GETDATE()) < 7";
