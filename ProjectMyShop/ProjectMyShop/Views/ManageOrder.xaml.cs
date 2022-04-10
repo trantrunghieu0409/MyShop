@@ -69,8 +69,8 @@ namespace ProjectMyShop.Views
             if (_currentPage > _totalPages) _currentPage = _totalPages;
 
             // control prev & next buttons
-            PreviousButton.IsEnabled = FirstButton.IsEnabled = _currentPage <= 1;
-            NextButton.IsEnabled = LastButton.IsEnabled = _currentPage >= _totalPages;
+            PreviousButton.IsEnabled = FirstButton.IsEnabled = _currentPage > 1;
+            NextButton.IsEnabled = LastButton.IsEnabled = _currentPage < _totalPages;
 
             CurrentPageText.Text = _currentPage.ToString();
             TotalPageText.Text = _totalPages.ToString();
