@@ -46,6 +46,15 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            <Button x:Name="categoriesButton" Click="categoriesButton_Click"  Background="{DynamicResource MyPinkGradient}" materialDesign:ButtonAssist.CornerRadius="5"
+                    Height="60">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Category" Width="25" Height="25"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="18">Manage categories</TextBlock>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
             <Button x:Name="productButton" Click="productButton_Click"  Background="{DynamicResource MyPinkGradient}" materialDesign:ButtonAssist.CornerRadius="5"
                     Height="60">
                 <Button.Content>
