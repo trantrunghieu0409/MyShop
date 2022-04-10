@@ -43,7 +43,7 @@ namespace ProjectMyShop.Views
 
         private StatisticsBUS _statisticsBUS;
 
-        public List<string> figureValues = new List<string>() { "Daily", "Monthly", "Weekly", "Yearly" };
+        public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
         public int figureValueIndex { get; set; } = 0;
         public DateTime selectedDate { get; set; } = DateTime.Now;
 
@@ -66,7 +66,6 @@ namespace ProjectMyShop.Views
 
                     foreach (var item in revenueResult)
                     {
-                        Debug.WriteLine((double)item.Item2);
                         revenues.Add((double)item.Item2);
                         dates.Add(item.Item1.ToString());
                     }
@@ -89,7 +88,43 @@ namespace ProjectMyShop.Views
                     });
 
                     revenueChart.Series = revenueCollection;
-                break;
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    var monthlyRevenueResult = _statisticsBUS.getMonthlyRevenue(selectedDate);
+
+                    var monthlyRevenues = new ChartValues<double>();
+                    var months = new List<string>();
+
+                    foreach (var item in monthlyRevenueResult)
+                    {
+                        months.Add(item.Item1.ToString());
+                        monthlyRevenues.Add((double)item.Item2);
+                    }
+
+                    var monthlyRevenueCollection = new SeriesCollection()
+                    {
+                    new ColumnSeries
+                    {
+                        Title = "Revenue: ",
+                        Values = monthlyRevenues
+                    }
+                    };
+
+
+                    revenueChart.AxisX.Clear();
+                    revenueChart.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Date",
+                        Labels = months
+                    });
+
+                    revenueChart.Series = monthlyRevenueCollection;
+
+                    break;
             }
         }
 
@@ -102,6 +137,7 @@ namespace ProjectMyShop.Views
         private void statisticsDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             configureGeneral();
+            configureCharts();
         }
     }
 }

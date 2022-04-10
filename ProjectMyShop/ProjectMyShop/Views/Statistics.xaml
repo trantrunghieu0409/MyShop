@@ -163,10 +163,6 @@
                         </Grid.RowDefinitions>
 
                         <DockPanel>
-                            <TextBlock Text="Revenue"
-                               Foreground="{DynamicResource MyLightBrown}"
-                               FontFamily="{DynamicResource GilroySemiBold}"/>
-
                             <ComboBox Name="typeCombobox" HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding figureValueIndex}"
