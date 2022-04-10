@@ -52,6 +52,7 @@ namespace ProjectMyShop.Views
         public int figureValueProfitIndex { get; set; } = 0;
         public int tabSelectedIndex { get; set; } = 0;
         public DateTime selectedDate { get; set; } = DateTime.Now;
+        public System.Globalization.CultureInfo info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 
         public void configureGeneral()
         {
@@ -76,12 +77,15 @@ namespace ProjectMyShop.Views
                         dates.Add(item.Item1.ToString());
                     }
 
+                    
+
                     var revenueCollection = new SeriesCollection()
                     {
                     new LineSeries
                     {
                         Title = "Revenue: ",
-                        Values = revenues
+                        Values = revenues,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
                     }
                     };
 
@@ -91,6 +95,13 @@ namespace ProjectMyShop.Views
                     {
                         Title = "Date",
                         Labels = dates
+                    });
+
+                    revenueChart.AxisY.Clear();
+                    revenueChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Revenue",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
                     });
 
                     revenueChart.Series = revenueCollection;
@@ -116,16 +127,23 @@ namespace ProjectMyShop.Views
                     new ColumnSeries
                     {
                         Title = "Revenue: ",
-                        Values = monthlyRevenues
+                        Values = monthlyRevenues,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
                     }
                     };
-
 
                     revenueChart.AxisX.Clear();
                     revenueChart.AxisX.Add(new LiveCharts.Wpf.Axis
                     {
                         Title = "Month",
                         Labels = months
+                    });
+
+                    revenueChart.AxisY.Clear();
+                    revenueChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Revenue",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
                     });
 
                     revenueChart.Series = monthlyRevenueCollection;
@@ -148,7 +166,8 @@ namespace ProjectMyShop.Views
                     new ColumnSeries
                     {
                         Title = "Revenue: ",
-                        Values = yearlyRevenues
+                        Values = yearlyRevenues,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
                     }
                     };
 
@@ -158,6 +177,13 @@ namespace ProjectMyShop.Views
                     {
                         Title = "Year",
                         Labels = years
+                    });
+
+                    revenueChart.AxisY.Clear();
+                    revenueChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Revenue",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
                     });
 
                     revenueChart.Series = yearlyRevenueCollection;
@@ -187,7 +213,8 @@ namespace ProjectMyShop.Views
                     new LineSeries
                     {
                         Title = "Profit: ",
-                        Values = profits
+                        Values = profits,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
                     }
                     };
 
@@ -197,6 +224,13 @@ namespace ProjectMyShop.Views
                     {
                         Title = "Date",
                         Labels = dates
+                    });
+
+                    profitChart.AxisY.Clear();
+                    profitChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Profit",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
                     });
 
                     profitChart.Series = profitCollection;
@@ -222,7 +256,8 @@ namespace ProjectMyShop.Views
                     new ColumnSeries
                     {
                         Title = "Revenue: ",
-                        Values = monthlyProfits
+                        Values = monthlyProfits,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
                     }
                     };
 
@@ -232,6 +267,13 @@ namespace ProjectMyShop.Views
                     {
                         Title = "Month",
                         Labels = months
+                    });
+
+                    profitChart.AxisY.Clear();
+                    profitChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Profit",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
                     });
 
                     profitChart.Series = monthlyProfitCollection;
@@ -254,7 +296,8 @@ namespace ProjectMyShop.Views
                     new ColumnSeries
                     {
                         Title = "Profit: ",
-                        Values = yearlyProfits
+                        Values = yearlyProfits,
+                        LabelPoint = point => String.Format(info, "{0:c}", point.Y)
                     }
                     };
 
@@ -264,6 +307,13 @@ namespace ProjectMyShop.Views
                     {
                         Title = "Year",
                         Labels = years
+                    });
+
+                    profitChart.AxisY.Clear();
+                    profitChart.AxisY.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Profit",
+                        LabelFormatter = x => String.Format(info, "{0:c}", x)
                     });
 
                     profitChart.Series = yearlyProfitCollection;

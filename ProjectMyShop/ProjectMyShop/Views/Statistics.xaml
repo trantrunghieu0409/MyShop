@@ -196,9 +196,11 @@
                             </lvc:CartesianChart.AxisX >
                             -->
 
+                            <!--
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Revenue"></lvc:Axis>
+                                <lvc:Axis Title="Revenue" LabelFormatter="{Binding currencyLabelFormatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
+                            -->
                         </lvc:CartesianChart>
                     </Grid>
                 </TabItem>
@@ -234,9 +236,19 @@
                                 <lvc:ColumnSeries Title="Maria" Values="6" />
                             </lvc:CartesianChart.Series>
 
+                            <!--
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Name="profitChartAxisX" Title="Month" Labels="{Binding Labels}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+
+                            </lvc:CartesianChart.AxisX >
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Revenue"></lvc:Axis>
+                                <lvc:Axis Title="Profit"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
+                            -->
                         </lvc:CartesianChart>
                     </Grid>
                 </TabItem>
