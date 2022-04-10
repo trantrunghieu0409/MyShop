@@ -34,5 +34,10 @@ namespace ProjectMyShop.BUS
         {
             return _categoryDAO.getCategoryList();
         }
+        public void AddCategory(Category cat)
+        {
+            _categoryDAO.AddCategory(cat);
+            cat.ID = _categoryDAO.GetLastestInsertID();
+        }
     }
 }

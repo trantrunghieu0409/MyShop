@@ -24,10 +24,10 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <ComboBox Background="{ DynamicResource MaterialDesignDarkSeparatorBackground }" Name="categoryCombobox" Width="100" Height="35" SelectionChanged="categoryCombobox_SelectionChanged" Grid.Column="1" Grid.ColumnSpan="2">
+        <ComboBox Background="MediumPurple" Name="categoryCombobox" Width="100" Height="35" SelectionChanged="categoryCombobox_SelectionChanged" Grid.Column="1" Grid.ColumnSpan="2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding CatName}"/>
+                    <TextBlock Text="{Binding CatName}" Background="White"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

@@ -178,7 +178,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Margin="10,0" Text="{Binding Stock}" Foreground="White" FontWeight="DemiBold"/>
+                                    <TextBlock Margin="10,0" Text="{Binding Stock}" FontWeight="DemiBold"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

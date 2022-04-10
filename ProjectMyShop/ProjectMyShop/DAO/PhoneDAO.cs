@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectMyShop.DTO;
-using System.ComponentModel;
 
 namespace ProjectMyShop.DAO
 {
@@ -29,7 +28,7 @@ namespace ProjectMyShop.DAO
 
         public List<Phone> GetTop5OutStock()
         {
-            var sql = "select top(5) * from Phone order by stock desc";
+            var sql = "select top(5) * from Phone where stock < 5 order by stock ";
             var command = new SqlCommand(sql, _connection);
             var reader = command.ExecuteReader();
 
@@ -101,14 +100,19 @@ namespace ProjectMyShop.DAO
         public void addPhone(Phone phone)
         {
             // ID Auto Increment
-            var sql = "insert into Phones(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Description) " +
-                "values (@PhoneName, @Manufacturer, @BoughtPrice, @Description)"; //
+            var sql = "insert into Phone(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Stock, UploadDate, Description, CatID) " +
+                "values (@PhoneName, @Manufacturer, @BoughtPrice, @SoldPrice, @Stock, @UploadDate, @Description, @CatID)"; //
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
             sqlCommand.Parameters.AddWithValue("@Manufacturer", phone.Manufacturer);
             sqlCommand.Parameters.AddWithValue("@BoughtPrice", phone.BoughtPrice);
+            sqlCommand.Parameters.AddWithValue("@SoldPrice", phone.SoldPrice);
+            sqlCommand.Parameters.AddWithValue("@Stock", phone.Stock);
+            sqlCommand.Parameters.AddWithValue("@UploadDate", phone.UploadDate);
             sqlCommand.Parameters.AddWithValue("@Description", phone.Description);
+           // sqlCommand.Parameters.AddWithValue("@Avatar", phone.Avatar);
+            sqlCommand.Parameters.AddWithValue("@CatID", phone.Category.ID);
 
             try
             {
@@ -123,7 +127,7 @@ namespace ProjectMyShop.DAO
 
         public int GetLastestInsertID()
         {
-            string sql = "select ident_current('Phones')";
+            string sql = "select ident_current('Phone')";
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
             var resutl = sqlCommand.ExecuteScalar();
             System.Diagnostics.Debug.WriteLine(resutl);
