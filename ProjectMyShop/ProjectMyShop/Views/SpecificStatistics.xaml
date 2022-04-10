@@ -40,6 +40,7 @@
                 <ComboBox Name="statisticsCombobox" HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding statisticsFigureIndex}"
+                                SelectionChanged="statisticsCombobox_SelectionChanged"
                                 VerticalContentAlignment="Center"
                                 Width="85">
                     <ComboBox.ItemTemplate>
