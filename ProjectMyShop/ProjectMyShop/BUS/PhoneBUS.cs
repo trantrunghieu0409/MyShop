@@ -28,5 +28,10 @@ namespace ProjectMyShop.BUS
         {
             return _phoneDAO.GetTop5OutStock();
         }
+
+        public List<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
+        {
+            return _phoneDAO.getPhonesAccordingToSpecificCategory(srcCategoryID);
+        }
     }
 }

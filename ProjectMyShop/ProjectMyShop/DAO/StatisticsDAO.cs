@@ -226,33 +226,6 @@ namespace ProjectMyShop.DAO
             return resultList;
         }
 
-        //public Tuple<List<string>, List<string>> getDailyRevenue(DateTime src)
-        //{
-        //    string sqlFormattedDate = src.ToString("yyyy-MM-dd");
-
-        //    var sql = "select convert(varchar, o.OrderDate) as OrderDate, convert(varchar, cast(SUM(do.Quantity) as money), 1) as Revenue from DetailOrder do join Phone p on do.PhoneID = p.ID join Orders o on do.OrderID = o.ID where OrderDate < @SelectedDate group by o.OrderDate order by o.OrderDate asc;";
-        //    var sqlParameter = new SqlParameter();
-        //    sqlParameter.ParameterName = "@SelectedDate";
-        //    sqlParameter.Value = sqlFormattedDate;
-
-        //    var command = new SqlCommand(sql, _connection);
-        //    command.Parameters.Add(sqlParameter);
-
-        //    var reader = command.ExecuteReader();
-
-        //    List<string> dateList = new List<string>();
-        //    List<string> revenueList = new List<string>();
-
-
-        //    if (reader.Read())
-        //    {
-        //        dateList.Add((string)reader["OrderDate"]);
-        //        revenueList.Add((string)reader["Revenue"]);
-
-        //    }
-        //    reader.Close();
-        //    var mergedList = Tuple.Create(dateList, revenueList);
-        //    return mergedList;
-        //}
+        
     }
 }

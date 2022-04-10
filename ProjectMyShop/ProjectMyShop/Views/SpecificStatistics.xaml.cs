@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjectMyShop.BUS;
+using ProjectMyShop.DTO;
 
 namespace ProjectMyShop.Views
 {
@@ -26,6 +28,10 @@ namespace ProjectMyShop.Views
 
             selectedDate = srcSelectedDate;
 
+            _statisticsBUS = new StatisticsBUS();
+            _categoryBUS = new CategoryBUS();
+            _phoneBUS = new PhoneBUS();
+
             statisticsCombobox.ItemsSource = statisticsFigureValues;
             statisticsCombobox.SelectedIndex = statisticsFigureIndex;
 
@@ -39,15 +45,43 @@ namespace ProjectMyShop.Views
 
             chartTabControl.SelectedIndex = tabSelectedIndex;
 
+            categories = _categoryBUS.getCategoryList();
+            categoriesCombobox.ItemsSource = categories;
+            categoriesCombobox.SelectedIndex = categoriesFigureIndex;
+
+            phones = _phoneBUS.getPhonesAccordingToSpecificCategory(categories[categoriesFigureIndex].ID);
+            productCombobox.ItemsSource = phones;
+            productCombobox.SelectedIndex = productFigureIndex;
+
             DataContext = this;
         }
 
+        private StatisticsBUS _statisticsBUS;
+        private CategoryBUS _categoryBUS;
+        private PhoneBUS _phoneBUS;
         public int statisticsFigureIndex { get; set; } = 1;
         public int bargraphFigureIndex { get; set; } = 0;
         public int piechartFigureIndex { get; set; } = 0;
         public int tabSelectedIndex { get; set; } = 0;
+        public int categoriesFigureIndex { get; set; } = 0;
+        public int productFigureIndex { get; set; } = 0;
         public DateTime selectedDate { get; set; }
         public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
         public List<string> statisticsFigureValues = new List<string>() { "General", "Specific", "Advanced" };
+        public List<Category> categories;
+        public List<Phone> phones;
+
+        private void categoriesCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            phones = _phoneBUS.getPhonesAccordingToSpecificCategory(categories[categoriesFigureIndex].ID);
+            productCombobox.ItemsSource = phones;
+            productFigureIndex = 0;
+            productCombobox.SelectedIndex = productFigureIndex;
+        }
+
+        private void productCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

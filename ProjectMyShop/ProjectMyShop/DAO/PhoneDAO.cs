@@ -57,5 +57,44 @@ namespace ProjectMyShop.DAO
             reader.Close();
             return list;
         }
+
+        public List<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
+        {
+            var sql = "select * from Phone where CatID = @CategoryID";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@CategoryID";
+            sqlParameter.Value = srcCategoryID;
+
+            var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
+
+            var reader = command.ExecuteReader();
+
+            List<Phone> list = new List<Phone>();
+            while (reader.Read())
+            {
+                var ID = (int)reader["ID"];
+                var PhoneName = (String)reader["PhoneName"];
+                var Manufacturer = (String)reader["Manufacturer"];
+
+                var SoldPrice = (int)(decimal)reader["SoldPrice"];
+                //var SoldPrice = (int)reader["SoldPrice"];
+                var Stock = (int)reader["Stock"];
+
+                Phone phone = new Phone()
+                {
+                    ID = ID,
+                    PhoneName = PhoneName,
+                    Manufacturer = Manufacturer,
+                    SoldPrice = SoldPrice,
+                    Stock = Stock,
+                };
+                if (phone.PhoneName != "")
+                    list.Add(phone);
+            }
+            reader.Close();
+            return list;
+        }
     }
 }

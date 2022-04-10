@@ -64,10 +64,5 @@ namespace ProjectMyShop.BUS
         {
             return _statisticsDAO.getYearlyProfit();
         }
-
-        //public Tuple<List<string>, List<string>> getDailyRevenue(DateTime src)
-        //{
-        //    return _statisticsDAO.getDailyRevenue(src);
-        //}
     }
 }
