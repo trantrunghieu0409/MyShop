@@ -91,11 +91,27 @@
                     BorderThickness="1"
                     VerticalScrollBarVisibility="Hidden" 
                     HorizontalScrollBarVisibility="Hidden" 
-                    AllowDrop="True"  GridLinesVisibility="None" 
+                    GridLinesVisibility="None" 
                     CanUserAddRows="False"
-                    Margin="0,0,0,10" Grid.ColumnSpan="7" AutomationProperties.IsColumnHeader="True">
+                    Margin="0,0,0,10" Grid.ColumnSpan="7" AutomationProperties.IsColumnHeader="True" SelectedIndex="-1" CanUserDeleteRows="False">
+                    <DataGrid.RowStyleSelector>
+                        <StyleSelector/>
+                    </DataGrid.RowStyleSelector>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="DeepPink"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Effect>
+                        <DropShadowEffect/>
+                    </DataGrid.Effect>
 
-                    
+
                     <DataGrid.HorizontalGridLinesBrush>
                         <SolidColorBrush Color="{DynamicResource Primary100}"/>
                     </DataGrid.HorizontalGridLinesBrush>
@@ -193,13 +209,6 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                    <DataGrid.RowStyle>
-                        <Style>
-                            <Style.Setters>
-                                <Setter Property="TextBlock.FontWeight" Value="Normal"></Setter>
-                            </Style.Setters>
-                        </Style>
-                    </DataGrid.RowStyle>
                     <DataGrid.ColumnHeaderStyle>
                         <Style>
                             <Style.Setters>
