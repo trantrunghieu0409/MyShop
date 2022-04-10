@@ -33,10 +33,13 @@ namespace ProjectMyShop.Views
             revenueCombobox.ItemsSource = figureValues;
             revenueCombobox.SelectedIndex = figureValueIndex;
 
+            profitCombobox.ItemsSource = figureValues;
+            profitCombobox.SelectedIndex = figureValueProfitIndex;
+
             statisticsDatePicker.SelectedDate = selectedDate;
             chartTabControl.SelectedIndex = tabSelectedIndex;
 
-            configureRevenueGeneral();
+            configureGeneral();
             configureRevenueCharts();
 
             DataContext = this;
@@ -46,10 +49,11 @@ namespace ProjectMyShop.Views
 
         public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
         public int figureValueIndex { get; set; } = 0;
+        public int figureValueProfitIndex { get; set; } = 0;
         public int tabSelectedIndex { get; set; } = 0;
         public DateTime selectedDate { get; set; } = DateTime.Now;
 
-        public void configureRevenueGeneral()
+        public void configureGeneral()
         {
             TotalRevenueTextBlock.Text = _statisticsBUS.getTotalRevenueUntilDate(selectedDate).ToString();
             TotalProfitTextBlock.Text = _statisticsBUS.getTotalProfitUntilDate(selectedDate).ToString();
@@ -162,17 +166,123 @@ namespace ProjectMyShop.Views
             }
         }
 
+        public void configureProfitCharts()
+        {
+            switch (figureValueProfitIndex)
+            {
+                case 0:
+                    var profitResult = _statisticsBUS.getDailyProfit(selectedDate);
+
+                    var profits = new ChartValues<double>();
+                    var dates = new List<string>();
+
+                    foreach (var item in profitResult)
+                    {
+                        profits.Add((double)item.Item2);
+                        dates.Add(item.Item1.ToString());
+                    }
+
+                    var profitCollection = new SeriesCollection()
+                    {
+                    new LineSeries
+                    {
+                        Title = "Profit: ",
+                        Values = profits
+                    }
+                    };
+
+
+                    profitChart.AxisX.Clear();
+                    profitChart.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Date",
+                        Labels = dates
+                    });
+
+                    profitChart.Series = profitCollection;
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    var monthlyProfitResult = _statisticsBUS.getMonthlyProfit(selectedDate);
+
+                    var monthlyProfits = new ChartValues<double>();
+                    var months = new List<string>();
+
+                    foreach (var item in monthlyProfitResult)
+                    {
+                        months.Add(item.Item1.ToString());
+                        monthlyProfits.Add((double)item.Item2);
+                    }
+
+                    var monthlyProfitCollection = new SeriesCollection()
+                    {
+                    new ColumnSeries
+                    {
+                        Title = "Revenue: ",
+                        Values = monthlyProfits
+                    }
+                    };
+
+
+                    profitChart.AxisX.Clear();
+                    profitChart.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Month",
+                        Labels = months
+                    });
+
+                    profitChart.Series = monthlyProfitCollection;
+
+                    break;
+                case 3:
+                    var yearlyProfitResult = _statisticsBUS.getYearlyProfit();
+
+                    var yearlyProfits = new ChartValues<double>();
+                    var years = new List<string>();
+
+                    foreach (var item in yearlyProfitResult)
+                    {
+                        years.Add(item.Item1.ToString());
+                        yearlyProfits.Add((double)item.Item2);
+                    }
+
+                    var yearlyProfitCollection = new SeriesCollection()
+                    {
+                    new ColumnSeries
+                    {
+                        Title = "Profit: ",
+                        Values = yearlyProfits
+                    }
+                    };
+
+
+                    profitChart.AxisX.Clear();
+                    profitChart.AxisX.Add(new LiveCharts.Wpf.Axis
+                    {
+                        Title = "Year",
+                        Labels = years
+                    });
+
+                    profitChart.Series = yearlyProfitCollection;
+
+                    break;
+            }
+        }
+
         private void revenueCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (tabSelectedIndex)
             {
                 case 0:
-                    configureRevenueGeneral();
+                    configureGeneral();
                     configureRevenueCharts();
                     break;
                 case 1:
-                    configureRevenueGeneral();
-                    configureRevenueCharts();
+                    configureGeneral();
+                    configureProfitCharts();
                     break;
             }
         }
@@ -182,12 +292,12 @@ namespace ProjectMyShop.Views
             switch (tabSelectedIndex)
             {
                 case 0:
-                    configureRevenueGeneral();
+                    configureGeneral();
                     configureRevenueCharts();
                     break;
                 case 1:
-                    configureRevenueGeneral();
-                    configureRevenueCharts();
+                    configureGeneral();
+                    configureProfitCharts();
                     break;
             }
         }
@@ -197,12 +307,12 @@ namespace ProjectMyShop.Views
             switch (tabSelectedIndex)
             {
                 case 0:
-                    configureRevenueGeneral();
+                    configureGeneral();
                     configureRevenueCharts();
                     break;
                 case 1:
-                    configureRevenueGeneral();
-                    configureRevenueCharts();
+                    configureGeneral();
+                    configureProfitCharts();
                     break;
             }
         }

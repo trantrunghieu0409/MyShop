@@ -50,6 +50,21 @@ namespace ProjectMyShop.BUS
             return _statisticsDAO.getYearlyRevenue();
         }
 
+        public List<Tuple<string, decimal>> getDailyProfit(DateTime src)
+        {
+            return _statisticsDAO.getDailyProfit(src);
+        }
+
+        public List<Tuple<string, decimal>> getMonthlyProfit(DateTime src)
+        {
+            return _statisticsDAO.getMonthlyProfit(src);
+        }
+
+        public List<Tuple<string, decimal>> getYearlyProfit()
+        {
+            return _statisticsDAO.getYearlyProfit();
+        }
+
         //public Tuple<List<string>, List<string>> getDailyRevenue(DateTime src)
         //{
         //    return _statisticsDAO.getDailyRevenue(src);
