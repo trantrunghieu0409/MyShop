@@ -54,7 +54,7 @@ namespace ProjectMyShop.Views
         int _totalItems = 0;
         int _currentPage = 1;
         int _totalPages = 0;
-        int _rowsPerPage = 4; // 8
+        int _rowsPerPage = 8;
 
         void Reload()
         {
@@ -69,16 +69,8 @@ namespace ProjectMyShop.Views
             if (_currentPage > _totalPages) _currentPage = _totalPages;
 
             // control prev & next buttons
-            if (_currentPage == 1) PreviousButton.IsEnabled = false;
-            else
-            {
-                PreviousButton.IsEnabled = true;
-            }
-            if (_currentPage == _totalPages) NextButton.IsEnabled = false;
-            else
-            {
-                NextButton.IsEnabled = true;
-            }
+            PreviousButton.IsEnabled = FirstButton.IsEnabled = _currentPage != 1;
+            NextButton.IsEnabled = LastButton.IsEnabled = _currentPage != _totalPages;
 
             CurrentPageText.Text = _currentPage.ToString();
             TotalPageText.Text = _totalPages.ToString();
@@ -126,18 +118,23 @@ namespace ProjectMyShop.Views
 
             if (i != - 1)
             {
-                _orderBUS.DeleteOrder(_vm.SelectedOrders[i].ID);
-                Reload();
-                if (_vm.SelectedOrders.Count == 0)
+                Order order = _vm.SelectedOrders[i];
+                var res = MessageBox.Show($"Are you sure to delete this order: {order.ID} - {order.CustomerName}?", "Delete order", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
                 {
-                    if (_currentPage > 1)
+                    _orderBUS.DeleteOrder(order.ID);
+                    Reload();
+                    if (_vm.SelectedOrders.Count == 0)
                     {
-                        _currentPage--;
-                        Reload();
-                    }
-                    else
-                    {
-                        // Empty Orders List -> Do nothing
+                        if (_currentPage > 1)
+                        {
+                            _currentPage--;
+                            Reload();
+                        }
+                        else
+                        {
+                            // Empty Orders List -> Do nothing
+                        }
                     }
                 }
             }
@@ -197,6 +194,18 @@ namespace ProjectMyShop.Views
             {
                 MessageBox.Show("Start Date cannot after End Date", "Date Filter", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void FirstButton_Click(object sender, RoutedEventArgs e)
+        {
+            _currentPage = 1;
+            Reload();
+        }
+
+        private void LastButton_Click(object sender, RoutedEventArgs e)
+        {
+            _currentPage = _totalPages;
+            Reload();
         }
     }
 }

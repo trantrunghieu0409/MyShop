@@ -35,9 +35,11 @@ namespace ProjectMyShop
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             login = new Login();
+            this.Opacity = 0.3;
             login.Owner = this;
             if (login.ShowDialog() == true)
             {
+                this.Opacity = 1;
                 dashboard = new Dashboard();
                 manageProductPage = new ManageProduct();
                 _manageOrderPage = new ManageOrder();
