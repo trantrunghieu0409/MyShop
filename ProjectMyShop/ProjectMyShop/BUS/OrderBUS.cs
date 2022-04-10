@@ -2,6 +2,7 @@
 using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,14 @@ namespace ProjectMyShop.BUS
             {
                 _orderDAO.Connect();
             }
+        }
+        public List<Order> GetAllOrders()
+        {
+            return _orderDAO.GetAllOrders();
+        }
+        public List<Order> GetAllOrdersByDate(DateTime FromDate, DateTime ToDate)
+        {
+            return _orderDAO.GetAllOrdersByDate(FromDate, ToDate);
         }
         public List<Order> GetOrders(int offset, int size)
         {
@@ -45,7 +54,10 @@ namespace ProjectMyShop.BUS
             _orderDAO.AddOrder(order);
             order.ID = _orderDAO.GetLastestInsertID();
         }
-
+        public void UpdateOrder(int orderID, Order order)
+        {
+            _orderDAO.UpdateOrder(orderID, order);
+        }
         public void DeleteOrder(int orderID)
         {
             if (orderID > -1)

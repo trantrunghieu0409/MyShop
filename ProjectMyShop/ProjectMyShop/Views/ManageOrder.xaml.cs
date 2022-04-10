@@ -26,7 +26,8 @@ namespace ProjectMyShop.Views
         private OrderBUS _orderBUS;
 
         OrderViewModel _vm;
-
+        DateTime FromDate;
+        DateTime ToDate;
 
         public ManageOrder()
         {
@@ -36,11 +37,11 @@ namespace ProjectMyShop.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _vm = new OrderViewModel();
-            
             _orderBUS = new OrderBUS();
 
-            _vm.Orders = _orders;
-
+            FromDate = DateTime.Parse("1/1/1970");
+            ToDate = DateTime.Now;
+            
             Reload();
             OrderDataGrid.ItemsSource = _vm.SelectedOrders;
         }
@@ -50,8 +51,6 @@ namespace ProjectMyShop.Views
         {
 
         }
-
-        BindingList<Order> _orders;
         int _totalItems = 0;
         int _currentPage = 1;
         int _totalPages = 0;
@@ -59,11 +58,15 @@ namespace ProjectMyShop.Views
 
         void Reload()
         {
-            _vm.SelectedOrders = _orderBUS.GetOrders((_currentPage - 1) * _rowsPerPage, _rowsPerPage);
+            _vm.Orders = new BindingList<Order>(_orderBUS.GetAllOrdersByDate(FromDate, ToDate));
+            _vm.SelectedOrders = _vm.Orders.Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage).ToList();
 
-            _totalItems = _orderBUS.CountOrders();
+            _totalItems = _vm.Orders.Count();
             _totalPages = _totalItems / _rowsPerPage +
                 (_totalItems % _rowsPerPage == 0 ? 0 : 1);
+
+            if (_currentPage > _totalPages) _currentPage = _totalPages;
 
             // control prev & next buttons
             if (_currentPage == 1) PreviousButton.IsEnabled = false;
@@ -83,35 +86,25 @@ namespace ProjectMyShop.Views
             OrderDataGrid.ItemsSource = _vm.SelectedOrders;
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            var p = (Phone)phonesListView.SelectedItem;
-            var screen = new EditPhoneScreen(p);
-            var result = screen.ShowDialog();
-            if (result == true)
+            int i = OrderDataGrid.SelectedIndex;
+
+            if (i != -1)
             {
-                var info = screen.EditedPhone;
-                p.PhoneName = info.PhoneName;
-                p.Manufacturer = info.Manufacturer;
-                p.SoldPrice = info.SoldPrice;
-                p.BoughtPrice = info.BoughtPrice;
-                p.Description = info.Description;
-                p.Avatar = info.Avatar;
-
-                _vm.Phones = _categories[i].Phones;
-                _vm.SelectedPhones = _vm.Phones
-                    .Skip((_currentPage - 1) * _rowsPerPage)
-                    .Take(_rowsPerPage).ToList();
-
-                phonesListView.ItemsSource = _vm.SelectedPhones;
+                Order order = new Order()
+                {
+                    CustomerName = "Long Nguyen Van",
+                    Address = "Ha Noi",
+                    OrderDate = DateOnly.Parse("08/05/2022"),
+                    Status = Order.OrderStatusEnum.Close
+                };
+                _orderBUS.UpdateOrder(_vm.SelectedOrders[i].ID, order);
+                Reload();
             }
-            */
+            {
+                // do nothing
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -129,11 +122,11 @@ namespace ProjectMyShop.Views
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var index = OrderDataGrid.SelectedIndex;
+            int i = OrderDataGrid.SelectedIndex;
 
-            if (index != -1)
+            if (i != - 1)
             {
-                _orderBUS.DeleteOrder(_vm.SelectedOrders[index].ID);
+                _orderBUS.DeleteOrder(_vm.SelectedOrders[i].ID);
                 Reload();
                 if (_vm.SelectedOrders.Count == 0)
                 {
@@ -150,9 +143,8 @@ namespace ProjectMyShop.Views
             }
             else
             {
-               // Do nothing
+                // do nothing
             }
-
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -175,6 +167,36 @@ namespace ProjectMyShop.Views
         {
             _currentPage -= 1;
             Reload();
+        }
+
+        private void FilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (FromDatePicker.SelectedDate != null)
+            {
+                FromDate = (DateTime)FromDatePicker.SelectedDate;
+            }
+            else
+            {
+                FromDate = DateTime.Parse("1/1/1970");
+            }
+
+            if (ToDatePicker.SelectedDate != null)
+            {
+                ToDate = (DateTime)ToDatePicker.SelectedDate;
+            }
+            else
+            {
+                ToDate= DateTime.Now;
+            }
+
+            if (FromDate <= ToDate)
+            {
+                Reload();
+            }
+            else
+            {
+                MessageBox.Show("Start Date cannot after End Date", "Date Filter", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

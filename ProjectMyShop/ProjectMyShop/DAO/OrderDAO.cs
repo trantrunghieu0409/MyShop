@@ -13,6 +13,41 @@ namespace ProjectMyShop.DAO
 {
     internal class OrderDAO: SqlDataAccess
     {
+        Order ORMapping(SqlDataReader reader)
+        {
+            var ID = (int)reader["ID"];
+            var CustomerName = (String)reader["CustomerName"];
+            var OrderDate = DateOnly.Parse(DateTime.Parse(reader["OrderDate"].ToString()).Date.ToShortDateString());
+            var Status = (System.Int16)reader["Status"];
+            var Address = (String)reader["Address"];
+            // var VoucherID = (Voucher)reader["VoucherID"];
+
+            Order order = new Order()
+            {
+                ID = ID,
+                CustomerName = CustomerName,
+                OrderDate = OrderDate,
+                Status = (Order.OrderStatusEnum)Status,
+                Address = Address
+            };
+            return order;
+        }
+
+        List<Order> Select(SqlCommand command)
+        {
+            var reader = command.ExecuteReader();
+
+            var result = new List<Order>();
+
+            while (reader.Read())
+            {
+                result.Add(ORMapping(reader));
+            }
+
+            reader.Close();
+            return result;
+        } 
+
         public List<Order> GetOrders(int offset, int size)
         {
             string sql = "select * from Orders " +
@@ -25,35 +60,47 @@ namespace ProjectMyShop.DAO
             command.Parameters.AddWithValue("@Off", offset);
             command.Parameters.AddWithValue("@Size", size);
 
+            return Select(command);
+        }
 
-            var reader = command.ExecuteReader();
+        public List<Order> GetAllOrders()
+        {
+            string sql = "select * from Orders " +
+                "Order by OrderDate DESC, ID ASC ";
 
-            var result = new List<Order>();
+            var command = new SqlCommand(sql, _connection);
+            return Select(command);
+        }
 
-            while (reader.Read())
-            {
-                var ID = (int)reader["ID"];
-                var CustomerName = (String)reader["CustomerName"];
-                var OrderDate = DateOnly.Parse(DateTime.Parse(reader["OrderDate"].ToString()).Date.ToShortDateString());
-                var Status = (System.Int16)reader["Status"];
-                var Address = (String)reader["Address"];
-                // var VoucherID = (Voucher)reader["VoucherID"];
+        internal List<Order> GetAllOrdersByDate(DateTime FromDate, DateTime ToDate)
+        {
+            string sql = "select * from Orders " +
+                "Where OrderDate >= @fromDate AND OrderDate <= @toDate";
+            var command = new SqlCommand(sql, _connection);
 
-                Order order = new Order()
-                {
-                    ID = ID,
-                    CustomerName = CustomerName,
-                    OrderDate = OrderDate,
-                    Status = (Order.OrderStatusEnum)Status,
-                    Address = Address
-                };
+            command.Parameters.AddWithValue("@fromDate", DateTime.Parse(FromDate.ToString()));
+            command.Parameters.AddWithValue("@toDate", DateTime.Parse(ToDate.ToString()));
 
-                if (CustomerName != "")
-                    result.Add(order);
-            }
+            return Select(command);
+        }
 
-            reader.Close();
-            return result;
+
+        public List<Order> GetOrdersByDate(int offset, int size, DateTime fromDate, DateTime toDate)
+        {
+            string sql = "select * from Orders " +
+                "Where OrderDate >= @fromDate AND OrderDate <= @toDate" +
+                "Order by OrderDate DESC, ID ASC " +
+                "offset @Off rows " +
+                "fetch first @Size rows only";
+
+            var command = new SqlCommand(sql, _connection);
+
+            command.Parameters.AddWithValue("@fromDate", DateTime.Parse(fromDate.ToString()));
+            command.Parameters.AddWithValue("@toDate", DateTime.Parse(toDate.ToString()));
+            command.Parameters.AddWithValue("@Off", offset);
+            command.Parameters.AddWithValue("@Size", size);
+
+            return Select(command);
         }
 
         private void AddDetailOrder(DetailOrder detail)
@@ -108,6 +155,31 @@ namespace ProjectMyShop.DAO
             System.Diagnostics.Debug.WriteLine(resutl);
             return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
+        public void UpdateOrder(int orderID,Order order)
+        {
+            var sql = "update Orders " +
+                "SET CustomerName = @CustomerName, OrderDate = @OrderDate, Status =  @Status, Address = @Address " +
+                "where ID = @OrderID";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+
+            sqlCommand.Parameters.AddWithValue("@OrderID", orderID);
+            sqlCommand.Parameters.AddWithValue("@CustomerName", order.CustomerName);
+            sqlCommand.Parameters.AddWithValue("@OrderDate", DateTime.Parse(order.OrderDate.ToString()));
+            sqlCommand.Parameters.AddWithValue("@Status", order.Status);
+            sqlCommand.Parameters.AddWithValue("@Address", order.Address);
+
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Updated {orderID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Updated {orderID} Fail: " + ex.Message);
+            }
+        }
+
         public void DeleteOrder(int orderID)
         {
             var sql = "delete from Orders where ID = @OrderID";

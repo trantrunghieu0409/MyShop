@@ -64,11 +64,35 @@
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                         <TextBlock Text="From" VerticalAlignment="Center" FontWeight="Bold" Foreground="MediumPurple" Margin="10,0"/>
-                        <DatePicker SelectedDate="01/01/1990"/>
+                        <DatePicker Name="FromDatePicker"  IsTodayHighlighted="True" AutomationProperties.IsOffscreenBehavior="Onscreen">
+                            <DatePicker.CalendarStyle>
+                                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                    <Style.Resources>
+                                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="DeepPink" />
+                                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Green" />
+                                    </Style.Resources>
+                                    <Style.Setters>
+                                        <Setter Property="Background" Value="White"/>
+                                    </Style.Setters>
+                                </Style>
+                            </DatePicker.CalendarStyle>
+                        </DatePicker>
                         <TextBlock Text="To" VerticalAlignment="Center" FontWeight="Bold" Foreground="MediumPurple" Margin="10,0"/>
-                        <DatePicker SelectedDate="01/01/1990"/>
+                        <DatePicker Name="ToDatePicker" IsTodayHighlighted="True">
+                            <DatePicker.CalendarStyle>
+                                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                    <Style.Resources>
+                                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="DeepPink" />
+                                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Green" />
+                                    </Style.Resources>
+                                    <Style.Setters>
+                                        <Setter Property="Background" Value="White"/>
+                                    </Style.Setters>
+                                </Style>
+                            </DatePicker.CalendarStyle>
+                        </DatePicker>
 
-                        <Button Name="SearchButton" Click="SearchButton_Click" Margin="10,0"
+                        <Button Name="FilterButton" Click="FilterButton_Click" Margin="10,0"
                             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
                             <Button.Content>
                                 <materialDesign:PackIcon Kind="Filter"/>
