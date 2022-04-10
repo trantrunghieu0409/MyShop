@@ -30,7 +30,7 @@ namespace ProjectMyShop.BUS
             return _phoneDAO.GetTop5OutStock();
         }
 
-        public BindingList<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
+        public List<Phone> getPhonesAccordingToSpecificCategory(int srcCategoryID)
         {
             return _phoneDAO.getPhonesAccordingToSpecificCategory(srcCategoryID);
         }

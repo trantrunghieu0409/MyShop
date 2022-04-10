@@ -70,8 +70,8 @@ namespace ProjectMyShop.Views
         public DateTime selectedDate { get; set; }
         public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
         public List<string> statisticsFigureValues = new List<string>() { "General", "Specific", "Advanced" };
-        public BindingList<Category> categories;
-        public BindingList<Phone> phones;
+        public List<Category> categories;
+        public List<Phone> phones;
 
         public void configureBarGraphs()
         {

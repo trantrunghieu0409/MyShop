@@ -30,7 +30,7 @@ namespace ProjectMyShop.BUS
             return result;
         }
 
-        public BindingList<Category> getCategoryList()
+        public List<Category> getCategoryList()
         {
             return _categoryDAO.getCategoryList();
         }

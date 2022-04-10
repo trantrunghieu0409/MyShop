@@ -40,7 +40,7 @@ namespace ProjectMyShop.DAO
             return result;
         }
 
-        public BindingList<Category> getCategoryList()
+        public List<Category> getCategoryList()
         {
             var sql = "select * from Category;";
 
@@ -48,7 +48,7 @@ namespace ProjectMyShop.DAO
 
             var reader = command.ExecuteReader();
 
-            var resultList = new BindingList<Category>();
+            var resultList = new List<Category>();
             while (reader.Read())
             {
                 Category category = new Category()
