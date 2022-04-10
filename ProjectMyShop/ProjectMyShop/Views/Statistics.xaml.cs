@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using ProjectMyShop.BUS;
+using ProjectMyShop.Views;
 
 namespace ProjectMyShop.Views
 {
@@ -30,11 +31,14 @@ namespace ProjectMyShop.Views
 
             _statisticsBUS = new StatisticsBUS();
 
+            statisticsCombobox.ItemsSource = statisticsFigureValues;
+            statisticsCombobox.SelectedIndex = statisticsFigureIndex;
+
             revenueCombobox.ItemsSource = figureValues;
-            revenueCombobox.SelectedIndex = figureValueIndex;
+            revenueCombobox.SelectedIndex = figureIndex;
 
             profitCombobox.ItemsSource = figureValues;
-            profitCombobox.SelectedIndex = figureValueProfitIndex;
+            profitCombobox.SelectedIndex = profitFigureIndex;
 
             statisticsDatePicker.SelectedDate = selectedDate;
             chartTabControl.SelectedIndex = tabSelectedIndex;
@@ -46,10 +50,12 @@ namespace ProjectMyShop.Views
         }
 
         private StatisticsBUS _statisticsBUS;
-
+        public SpecificStatistics _specificStatistics;
         public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
-        public int figureValueIndex { get; set; } = 0;
-        public int figureValueProfitIndex { get; set; } = 0;
+        public List<string> statisticsFigureValues = new List<string>() { "General", "Specific", "Advanced" };
+        public int statisticsFigureIndex { get; set; } = 0;
+        public int figureIndex { get; set; } = 0;
+        public int profitFigureIndex { get; set; } = 0;
         public int tabSelectedIndex { get; set; } = 0;
         public DateTime selectedDate { get; set; } = DateTime.Now;
         public System.Globalization.CultureInfo info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
@@ -63,7 +69,7 @@ namespace ProjectMyShop.Views
 
         public void configureRevenueCharts()
         {
-            switch (figureValueIndex)
+            switch (figureIndex)
             {
                 case 0:
                     var revenueResult = _statisticsBUS.getDailyRevenue(selectedDate);
@@ -194,7 +200,7 @@ namespace ProjectMyShop.Views
 
         public void configureProfitCharts()
         {
-            switch (figureValueProfitIndex)
+            switch (profitFigureIndex)
             {
                 case 0:
                     var profitResult = _statisticsBUS.getDailyProfit(selectedDate);
@@ -369,7 +375,34 @@ namespace ProjectMyShop.Views
 
         private void profitCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            switch (tabSelectedIndex)
+            {
+                case 0:
+                    configureGeneral();
+                    configureRevenueCharts();
+                    break;
+                case 1:
+                    configureGeneral();
+                    configureProfitCharts();
+                    break;
+            }
+        }
 
+        private void statisticsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (statisticsFigureIndex)
+            {
+                case 1:
+                    _specificStatistics = new SpecificStatistics(selectedDate);
+                    NavigationService.Navigate(_specificStatistics);
+                    break;
+                case 2:
+                    configureGeneral();
+                    configureRevenueCharts();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
