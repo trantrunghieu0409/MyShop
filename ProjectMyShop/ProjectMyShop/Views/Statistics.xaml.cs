@@ -46,6 +46,8 @@ namespace ProjectMyShop.Views
             configureGeneral();
             configureRevenueCharts();
 
+            _specificStatistics = new SpecificStatistics(this, selectedDate);
+
             DataContext = this;
         }
 
@@ -392,9 +394,12 @@ namespace ProjectMyShop.Views
         {
             switch (statisticsFigureIndex)
             {
+                case 0:
+                    break;
                 case 1:
-                    _specificStatistics = new SpecificStatistics(selectedDate);
                     NavigationService.Navigate(_specificStatistics);
+                    statisticsFigureIndex = 0;
+                    statisticsCombobox.SelectedIndex = statisticsFigureIndex;
                     break;
                 case 2:
                     configureGeneral();

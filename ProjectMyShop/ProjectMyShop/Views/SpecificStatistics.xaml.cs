@@ -26,9 +26,11 @@ namespace ProjectMyShop.Views
     /// </summary>
     public partial class SpecificStatistics : Page
     {
-        public SpecificStatistics(DateTime srcSelectedDate)
+        public SpecificStatistics(Statistics srcPage, DateTime srcSelectedDate)
         {
             InitializeComponent();
+
+            _statisticsPage = srcPage;
 
             selectedDate = srcSelectedDate;
 
@@ -72,6 +74,7 @@ namespace ProjectMyShop.Views
         public List<string> statisticsFigureValues = new List<string>() { "General", "Specific", "Advanced" };
         public List<Category> categories;
         public List<Phone> phones;
+        private Statistics _statisticsPage;
 
         public void configureBarGraphs()
         {
@@ -230,6 +233,22 @@ namespace ProjectMyShop.Views
         private void statisticsDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             configureBarGraphs();
+        }
+
+        private void statisticsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (statisticsFigureIndex)
+            {
+                case 0:
+                    NavigationService.Navigate(_statisticsPage);
+                    statisticsFigureIndex = 1;
+                    statisticsCombobox.SelectedIndex = statisticsFigureIndex;
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
         }
     }
 }
