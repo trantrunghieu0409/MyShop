@@ -33,5 +33,11 @@ namespace ProjectMyShop.BUS
         {
             return _phoneDAO.getPhonesAccordingToSpecificCategory(srcCategoryID);
         }
+
+        public void addPhone(Phone phone)
+        {
+            _phoneDAO.addPhone(phone);
+            phone.ID = _phoneDAO.GetLastestInsertID();
+        }
     }
 }

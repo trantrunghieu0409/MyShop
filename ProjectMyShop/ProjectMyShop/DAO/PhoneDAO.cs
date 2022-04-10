@@ -96,5 +96,37 @@ namespace ProjectMyShop.DAO
             reader.Close();
             return list;
         }
+
+        public void addPhone(Phone phone)
+        {
+            // ID Auto Increment
+            var sql = "insert into Phones(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Description) " +
+                "values (@PhoneName, @Manufacturer, @BoughtPrice, @Description)"; //
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+
+            sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
+            sqlCommand.Parameters.AddWithValue("@Manufacturer", phone.Manufacturer);
+            sqlCommand.Parameters.AddWithValue("@BoughtPrice", phone.BoughtPrice);
+            sqlCommand.Parameters.AddWithValue("@Description", phone.Description);
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Inserted {phone.ID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Inserted {phone.ID} Fail: " + ex.Message);
+            }
+        }
+
+        public int GetLastestInsertID()
+        {
+            string sql = "select ident_current('Phones')";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+            var resutl = sqlCommand.ExecuteScalar();
+            System.Diagnostics.Debug.WriteLine(resutl);
+            return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
+        }
     }
 }

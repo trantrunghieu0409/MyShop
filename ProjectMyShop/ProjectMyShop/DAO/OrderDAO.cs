@@ -108,6 +108,7 @@ namespace ProjectMyShop.DAO
             System.Diagnostics.Debug.WriteLine(resutl);
             return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
+
         public void DeleteOrder(int orderID)
         {
             var sql = "delete from Orders where ID = @OrderID";
