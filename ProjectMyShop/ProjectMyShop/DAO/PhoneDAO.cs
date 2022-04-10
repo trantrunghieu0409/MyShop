@@ -6,6 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectMyShop.DTO;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace ProjectMyShop.DAO
 {
@@ -28,7 +32,7 @@ namespace ProjectMyShop.DAO
 
         public List<Phone> GetTop5OutStock()
         {
-            var sql = "select top(5) * from Phone order by stock desc";
+            var sql = "select top(5) * from Phone where stock < 5 order by stock ";
             var command = new SqlCommand(sql, _connection);
             var reader = command.ExecuteReader();
 
@@ -81,6 +85,7 @@ namespace ProjectMyShop.DAO
                 var SoldPrice = (int)(decimal)reader["SoldPrice"];
                 //var SoldPrice = (int)reader["SoldPrice"];
                 var Stock = (int)reader["Stock"];
+                var byteAvatar = (byte[])reader["Avatar"];
 
                 Phone phone = new Phone()
                 {
@@ -90,6 +95,18 @@ namespace ProjectMyShop.DAO
                     SoldPrice = SoldPrice,
                     Stock = Stock,
                 };
+                using (MemoryStream ms = new MemoryStream(byteAvatar))
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    image.Freeze();
+                    phone.Avatar = image;
+                }
                 if (phone.PhoneName != "")
                     list.Add(phone);
             }
@@ -100,14 +117,25 @@ namespace ProjectMyShop.DAO
         public void addPhone(Phone phone)
         {
             // ID Auto Increment
-            var sql = "insert into Phones(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Description) " +
-                "values (@PhoneName, @Manufacturer, @BoughtPrice, @Description)"; //
+            var sql = "insert into Phone(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Stock, UploadDate, Description, CatID, Avatar) " +
+                "values (@PhoneName, @Manufacturer, @BoughtPrice, @SoldPrice, @Stock, @UploadDate, @Description, @CatID, @Avatar)"; //
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
             sqlCommand.Parameters.AddWithValue("@Manufacturer", phone.Manufacturer);
             sqlCommand.Parameters.AddWithValue("@BoughtPrice", phone.BoughtPrice);
+            sqlCommand.Parameters.AddWithValue("@SoldPrice", phone.SoldPrice);
+            sqlCommand.Parameters.AddWithValue("@Stock", phone.Stock);
+            sqlCommand.Parameters.AddWithValue("@UploadDate", phone.UploadDate);
             sqlCommand.Parameters.AddWithValue("@Description", phone.Description);
+            var encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(phone.Avatar));
+            using (var stream = new MemoryStream())
+            {
+                encoder.Save(stream);
+                sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
+            }
+            sqlCommand.Parameters.AddWithValue("@CatID", phone.Category.ID);
 
             try
             {
@@ -122,7 +150,7 @@ namespace ProjectMyShop.DAO
 
         public int GetLastestInsertID()
         {
-            string sql = "select ident_current('Phones')";
+            string sql = "select ident_current('Phone')";
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
             var resutl = sqlCommand.ExecuteScalar();
             System.Diagnostics.Debug.WriteLine(resutl);

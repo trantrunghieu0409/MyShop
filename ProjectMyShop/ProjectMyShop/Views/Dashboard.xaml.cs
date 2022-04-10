@@ -1,6 +1,7 @@
 ﻿using ProjectMyShop.BUS;
 using ProjectMyShop.DTO;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,7 +16,7 @@ namespace ProjectMyShop.Views
         public int weekOrder { get; set; } = 0;
         public int monthOrder { get; set; } = 0;
 
-        List<Phone> _phones = new List<Phone>();
+        List<Phone>? _phones = null;
         public Dashboard()
         {
             InitializeComponent();

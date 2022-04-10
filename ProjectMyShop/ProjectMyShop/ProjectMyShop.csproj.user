@@ -20,6 +20,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ManageDetailOrder.xaml.cs">
+    <Compile Update="Views\ManageCategory.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ManageOrder.xaml.cs">
@@ -52,6 +53,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ManageDetailOrder.xaml">
+    <Page Update="Views\ManageCategory.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ManageOrder.xaml">

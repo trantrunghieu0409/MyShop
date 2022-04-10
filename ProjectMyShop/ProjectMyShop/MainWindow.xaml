@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ProjectMyShop"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" 
-        Title="MainWindow" Height="600" Width="1100"
+        Title="MainWindow" Height="650" Width="1100"
         Loaded="Window_Loaded">
     <Grid x:Name="layoutContainer">
         <Grid.ColumnDefinitions>
@@ -43,6 +43,15 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Home" Width="25" Height="25"/>
                         <TextBlock VerticalAlignment="Center" FontSize="18">Dashboard</TextBlock>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button x:Name="categoriesButton" Click="categoriesButton_Click"  Background="{DynamicResource MyPinkGradient}" materialDesign:ButtonAssist.CornerRadius="5"
+                    Height="60">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Category" Width="25" Height="25"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="18">Manage categories</TextBlock>
                     </StackPanel>
                 </Button.Content>
             </Button>

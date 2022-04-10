@@ -2,6 +2,7 @@
 using ProjectMyShop.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -59,6 +60,32 @@ namespace ProjectMyShop.DAO
             }
             reader.Close();
             return resultList;
+        }
+        public void AddCategory(Category cat)
+        {
+            var sql = "insert into Category(CatName) " +
+                "values (@CatName)"; //
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+
+            sqlCommand.Parameters.AddWithValue("@CatName", cat.CatName);
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Inserted {cat.ID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Inserted {cat.ID} Fail: " + ex.Message);
+            }
+        }
+        public int GetLastestInsertID()
+        {
+            string sql = "select ident_current('Category')";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+            var resutl = sqlCommand.ExecuteScalar();
+            System.Diagnostics.Debug.WriteLine(resutl);
+            return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
     }
 }

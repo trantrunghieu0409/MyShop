@@ -2,6 +2,7 @@
 using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,11 @@ namespace ProjectMyShop.BUS
         public List<Category> getCategoryList()
         {
             return _categoryDAO.getCategoryList();
+        }
+        public void AddCategory(Category cat)
+        {
+            _categoryDAO.AddCategory(cat);
+            cat.ID = _categoryDAO.GetLastestInsertID();
         }
     }
 }

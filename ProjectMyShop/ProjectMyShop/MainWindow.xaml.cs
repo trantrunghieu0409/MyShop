@@ -30,6 +30,7 @@ namespace ProjectMyShop
         ManageProduct manageProductPage;
         ManageOrder _manageOrderPage;
         Statistics statisticsPage;
+        ManageCategory _manageCategory;
         Login login;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -43,6 +44,8 @@ namespace ProjectMyShop
                 dashboard = new Dashboard();
                 manageProductPage = new ManageProduct();
                 _manageOrderPage = new ManageOrder();
+                _manageCategory = new ManageCategory();
+                
 
                 pageNavigation.NavigationService.Navigate(dashboard);
             }
@@ -77,6 +80,11 @@ namespace ProjectMyShop
         private void configButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void categoriesButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageNavigation.NavigationService.Navigate(_manageCategory);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Aspose.Cells;
 using Microsoft.Win32;
+using ProjectMyShop.BUS;
 using ProjectMyShop.DTO;
 using ProjectMyShop.ViewModels;
 using System;
@@ -84,6 +85,17 @@ namespace ProjectMyShop.Views
             nextButton.IsEnabled = false;
             _currentPage = 0;
             _totalPages = 0;
+            var catBUS = new CategoryBUS();
+            var phoneBUS = new PhoneBUS();
+            _categories = catBUS.getCategoryList();
+            foreach (var category in _categories)
+            {
+                category.Phones = new BindingList<Phone>(phoneBUS.getPhonesAccordingToSpecificCategory(category.ID));
+            }
+            if(_categories.Count > 0)
+            {
+                loadPhones();
+            }
         }
 
         private void filterRangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -236,6 +248,8 @@ namespace ProjectMyShop.Views
                 string filename = screen.FileName;
 
                 var workbook = new Workbook(filename);
+                var _phoneBUS = new PhoneBUS();
+                var _cateBUS = new CategoryBUS();
 
                 var tabs = workbook.Worksheets;
                 // In ra các tab để d ebug
@@ -246,6 +260,7 @@ namespace ProjectMyShop.Views
                         CatName = tab.Name,
                         Phones = new BindingList<Phone>()
                     };
+                    _cateBUS.AddCategory(cat);
 
                     // Bắt đầu từ ô B3
                     var column = 'C';
@@ -262,7 +277,7 @@ namespace ProjectMyShop.Views
                         int stock = tab.Cells[$"G{row}"].IntValue;
                         string desc = tab.Cells[$"H{row}"].StringValue;
                         string uploaddate = tab.Cells[$"I{row}"].StringValue;
-                        string ava = tab.Cells[$"J{row}"].StringValue;
+                        string avaURL = tab.Cells[$"J{row}"].StringValue;
 
                         var p = new Phone()
                         {
@@ -273,10 +288,12 @@ namespace ProjectMyShop.Views
                             Stock = stock,
                             Description = desc,
                             UploadDate = uploaddate,
-                            Avatar = ava,
+                            Avatar = new BitmapImage(new Uri(avaURL, UriKind.Absolute)),
                             Category = cat,
                         };
                         cat.Phones.Add(p);
+                        _phoneBUS.addPhone(p);
+                        
 
                         row++;
                         cell = tab.Cells[$"{column}{row}"];
@@ -300,8 +317,6 @@ namespace ProjectMyShop.Views
                 if(catIndex >= 0)
                 {
                     _categories[catIndex].Phones.Add(newPhone);
-                    foreach (var phone in _categories[catIndex].Phones)
-                        Debug.WriteLine(phone.PhoneName);
                    
                     loadPhones();
                 }
