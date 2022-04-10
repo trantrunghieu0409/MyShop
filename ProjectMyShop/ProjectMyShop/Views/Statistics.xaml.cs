@@ -85,8 +85,6 @@ namespace ProjectMyShop.Views
                         dates.Add(item.Item1.ToString());
                     }
 
-                    
-
                     var revenueCollection = new SeriesCollection()
                     {
                     new LineSeries

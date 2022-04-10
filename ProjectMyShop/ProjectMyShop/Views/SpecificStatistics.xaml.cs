@@ -41,7 +41,11 @@ namespace ProjectMyShop.Views
             categories = _categoryBUS.getCategoryList();
             categoriesCombobox.ItemsSource = categories;
 
-            phones = _phoneBUS.getPhonesAccordingToSpecificCategory(categories[categoriesFigureIndex].ID);
+            if (categories.Count() > 0)
+                phones = _phoneBUS.getPhonesAccordingToSpecificCategory(categories[categoriesFigureIndex].ID);
+            else
+                phones = new List<Phone> { };
+
             productCombobox.ItemsSource = phones;
 
             statisticsCombobox.ItemsSource = statisticsFigureValues;
@@ -81,18 +85,20 @@ namespace ProjectMyShop.Views
             switch (bargraphFigureIndex)
             {
                 case 0:
-                    var productResult = _statisticsBUS.getDailyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID, selectedDate);
-
-                    var quantity = new ChartValues<int>();
-                    var dates = new List<string>();
-
-                    foreach (var item in productResult)
+                    if (phones.Count() > 0 && categories.Count() > 0)
                     {
-                        quantity.Add((int)item.Item2);
-                        dates.Add(item.Item1.ToString());
-                    }
+                        var productResult = _statisticsBUS.getDailyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID, selectedDate);
 
-                    var quantityCollection = new SeriesCollection()
+                        var quantity = new ChartValues<int>();
+                        var dates = new List<string>();
+
+                        foreach (var item in productResult)
+                        {
+                            quantity.Add((int)item.Item2);
+                            dates.Add(item.Item1.ToString());
+                        }
+
+                        var quantityCollection = new SeriesCollection()
                     {
                     new RowSeries
                     {
@@ -102,38 +108,41 @@ namespace ProjectMyShop.Views
                     };
 
 
-                    productBarGraph.AxisY.Clear();
-                    productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
-                    {
-                        Title = "Date",
-                        Labels = dates
-                    });
+                        productBarGraph.AxisY.Clear();
+                        productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Date",
+                            Labels = dates
+                        });
 
-                    productBarGraph.AxisX.Clear();
-                    productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
-                    {
-                        Title = "Quantity",
-                        LabelFormatter = x => x.ToString("N0")
+                        productBarGraph.AxisX.Clear();
+                        productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Quantity",
+                            LabelFormatter = x => x.ToString("N0")
 
-                    });
+                        });
 
-                    productBarGraph.Series = quantityCollection;
+                        productBarGraph.Series = quantityCollection;
+                    }
                     break;
                 case 1:
                     break;
                 case 2:
-                    var monthlyProductResult = _statisticsBUS.getMonthlyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID, selectedDate);
-
-                    var monthlyQuantity = new ChartValues<int>();
-                    var months = new List<string>();
-
-                    foreach (var item in monthlyProductResult)
+                    if (phones.Count() > 0 && categories.Count() > 0)
                     {
-                        monthlyQuantity.Add((int)item.Item2);
-                        months.Add(item.Item1.ToString());
-                    }
+                        var monthlyProductResult = _statisticsBUS.getMonthlyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID, selectedDate);
 
-                    var monthlyQuantityCollection = new SeriesCollection()
+                        var monthlyQuantity = new ChartValues<int>();
+                        var months = new List<string>();
+
+                        foreach (var item in monthlyProductResult)
+                        {
+                            monthlyQuantity.Add((int)item.Item2);
+                            months.Add(item.Item1.ToString());
+                        }
+
+                        var monthlyQuantityCollection = new SeriesCollection()
                     {
                     new ColumnSeries
                     {
@@ -143,36 +152,39 @@ namespace ProjectMyShop.Views
                     };
 
 
-                    productBarGraph.AxisX.Clear();
-                    productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
-                    {
-                        Title = "Month",
-                        Labels = months
-                    });
+                        productBarGraph.AxisX.Clear();
+                        productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Month",
+                            Labels = months
+                        });
 
-                    productBarGraph.AxisY.Clear();
-                    productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
-                    {
-                        Title = "Quantity",
-                        LabelFormatter = x => x.ToString("N0")
+                        productBarGraph.AxisY.Clear();
+                        productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Quantity",
+                            LabelFormatter = x => x.ToString("N0")
 
-                    });
+                        });
 
-                    productBarGraph.Series = monthlyQuantityCollection;
+                        productBarGraph.Series = monthlyQuantityCollection;
+                    }
                     break;
                 case 3:
-                    var yearlyProductResult = _statisticsBUS.getYearlyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID);
-
-                    var yearlyQuantity = new ChartValues<int>();
-                    var years = new List<string>();
-
-                    foreach (var item in yearlyProductResult)
+                    if (phones.Count() > 0 && categories.Count() > 0)
                     {
-                        yearlyQuantity.Add((int)item.Item2);
-                        years.Add(item.Item1.ToString());
-                    }
+                        var yearlyProductResult = _statisticsBUS.getYearlyQuantityOfSpecificProduct(phones[productFigureIndex].ID, categories[categoriesFigureIndex].ID);
 
-                    var yearlyQuantityCollection = new SeriesCollection()
+                        var yearlyQuantity = new ChartValues<int>();
+                        var years = new List<string>();
+
+                        foreach (var item in yearlyProductResult)
+                        {
+                            yearlyQuantity.Add((int)item.Item2);
+                            years.Add(item.Item1.ToString());
+                        }
+
+                        var yearlyQuantityCollection = new SeriesCollection()
                     {
                     new ColumnSeries
                     {
@@ -180,24 +192,23 @@ namespace ProjectMyShop.Views
                         Values = yearlyQuantity,
                     }
                     };
+                        productBarGraph.AxisX.Clear();
+                        productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Month",
+                            Labels = years
+                        });
 
+                        productBarGraph.AxisY.Clear();
+                        productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
+                        {
+                            Title = "Quantity",
+                            LabelFormatter = x => x.ToString("N0")
 
-                    productBarGraph.AxisX.Clear();
-                    productBarGraph.AxisX.Add(new LiveCharts.Wpf.Axis
-                    {
-                        Title = "Month",
-                        Labels = years
-                    });
+                        });
 
-                    productBarGraph.AxisY.Clear();
-                    productBarGraph.AxisY.Add(new LiveCharts.Wpf.Axis
-                    {
-                        Title = "Quantity",
-                        LabelFormatter = x => x.ToString("N0")
-
-                    });
-
-                    productBarGraph.Series = yearlyQuantityCollection;
+                        productBarGraph.Series = yearlyQuantityCollection;
+                    }
                     break;
             }
         }

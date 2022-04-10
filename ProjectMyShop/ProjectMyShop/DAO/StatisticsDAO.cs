@@ -27,7 +27,8 @@ namespace ProjectMyShop.DAO
             string result = "0";
             if (reader.Read())
             {
-                result = (string)reader["Revenue"];
+                if (reader["Revenue"].GetType() != typeof(DBNull))
+                    result = (string)reader["Revenue"];
             }
             reader.Close();
             return result.ToString();
@@ -50,7 +51,8 @@ namespace ProjectMyShop.DAO
             string result = "0";
             if (reader.Read())
             {
-                result = (string)reader["Profit"];
+                if (reader["Profit"].GetType() != typeof(DBNull))
+                    result = (string)reader["Profit"];
             }
             reader.Close();
             return result.ToString();
