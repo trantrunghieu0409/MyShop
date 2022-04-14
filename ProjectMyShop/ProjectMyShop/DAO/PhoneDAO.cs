@@ -85,7 +85,6 @@ namespace ProjectMyShop.DAO
                 var SoldPrice = (int)(decimal)reader["SoldPrice"];
                 //var SoldPrice = (int)reader["SoldPrice"];
                 var Stock = (int)reader["Stock"];
-                var byteAvatar = (byte[])reader["Avatar"];
 
                 Phone phone = new Phone()
                 {
@@ -95,17 +94,21 @@ namespace ProjectMyShop.DAO
                     SoldPrice = SoldPrice,
                     Stock = Stock,
                 };
-                using (MemoryStream ms = new MemoryStream(byteAvatar))
+                if(!reader["Avatar"].Equals(DBNull.Value))
                 {
-                    var image = new BitmapImage();
-                    image.BeginInit();
-                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.UriSource = null;
-                    image.StreamSource = ms;
-                    image.EndInit();
-                    image.Freeze();
-                    phone.Avatar = image;
+                    var byteAvatar = (byte[])reader["Avatar"];
+                    using (MemoryStream ms = new MemoryStream(byteAvatar))
+                    {
+                        var image = new BitmapImage();
+                        image.BeginInit();
+                        image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.UriSource = null;
+                        image.StreamSource = ms;
+                        image.EndInit();
+                        image.Freeze();
+                        phone.Avatar = image;
+                    }
                 }
                 if (phone.PhoneName != "")
                     list.Add(phone);
@@ -117,8 +120,17 @@ namespace ProjectMyShop.DAO
         public void addPhone(Phone phone)
         {
             // ID Auto Increment
-            var sql = "insert into Phone(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Stock, UploadDate, Description, CatID, Avatar) " +
-                "values (@PhoneName, @Manufacturer, @BoughtPrice, @SoldPrice, @Stock, @UploadDate, @Description, @CatID, @Avatar)"; //
+            var sql = "";
+            if (phone.Avatar != null)
+            {
+                sql = "insert into Phone(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Stock, UploadDate, Description, CatID, Avatar) " +
+                    "values (@PhoneName, @Manufacturer, @BoughtPrice, @SoldPrice, @Stock, @UploadDate, @Description, @CatID, @Avatar)"; //
+            }
+            else
+            {
+                sql = "insert into Phone(PhoneName, Manufacturer, BoughtPrice, SoldPrice, Stock, UploadDate, Description, CatID) " +
+                    "values (@PhoneName, @Manufacturer, @BoughtPrice, @SoldPrice, @Stock, @UploadDate, @Description, @CatID)"; //
+            }
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
@@ -128,14 +140,17 @@ namespace ProjectMyShop.DAO
             sqlCommand.Parameters.AddWithValue("@Stock", phone.Stock);
             sqlCommand.Parameters.AddWithValue("@UploadDate", phone.UploadDate);
             sqlCommand.Parameters.AddWithValue("@Description", phone.Description);
-            var encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(phone.Avatar));
-            using (var stream = new MemoryStream())
-            {
-                encoder.Save(stream);
-                sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
-            }
             sqlCommand.Parameters.AddWithValue("@CatID", phone.Category.ID);
+            if(phone.Avatar != null)
+            {
+                var encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(phone.Avatar));
+                using (var stream = new MemoryStream())
+                {
+                    encoder.Save(stream);
+                    sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
+                }
+            }
 
             try
             {
@@ -155,6 +170,64 @@ namespace ProjectMyShop.DAO
             var resutl = sqlCommand.ExecuteScalar();
             System.Diagnostics.Debug.WriteLine(resutl);
             return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
+        }
+        public void deletePhone(int phoneid)
+        {
+            string sql = "delete from Phone where ID = @ID";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+            sqlCommand.Parameters.AddWithValue("@ID", phoneid);
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Deleted {phoneid} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Deleted {phoneid} Fail: " + ex.Message);
+            }
+        }
+        public void updatePhone(int id, Phone phone)
+        {
+            string sql = "";
+            if (phone.Avatar != null)
+            {
+                sql = "update Phone set PhoneName = @PhoneName, Manufacturer = @Manufacturer, Description = @Description, " +
+                "BoughtPrice = @BoughtPrice, SoldPrice = @SoldPrice, Avatar = @Avatar where ID = @ID";
+            }
+            else
+            {
+                sql = "update Phone set PhoneName = @PhoneName, Manufacturer = @Manufacturer, Description = @Description, " +
+                "BoughtPrice = @BoughtPrice, SoldPrice = @SoldPrice where ID = @ID";
+            }
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+
+            sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
+            sqlCommand.Parameters.AddWithValue("@Manufacturer", phone.Manufacturer);
+            sqlCommand.Parameters.AddWithValue("@BoughtPrice", phone.BoughtPrice);
+            sqlCommand.Parameters.AddWithValue("@SoldPrice", phone.SoldPrice);
+            sqlCommand.Parameters.AddWithValue("@Stock", phone.Stock);
+            sqlCommand.Parameters.AddWithValue("@Description", phone.Description);
+
+            if (phone.Avatar != null)
+            {
+                var encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(phone.Avatar));
+                using (var stream = new MemoryStream())
+                {
+                    encoder.Save(stream);
+                    sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
+                }
+            }
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Updated {phone.ID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Updated {phone.ID} Fail: " + ex.Message);
+            }
         }
     }
 }

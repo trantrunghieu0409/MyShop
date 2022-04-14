@@ -37,8 +37,17 @@ namespace ProjectMyShop.BUS
 
         public void addPhone(Phone phone)
         {
+            phone.UploadDate = DateTime.Now.Date;
             _phoneDAO.addPhone(phone);
             phone.ID = _phoneDAO.GetLastestInsertID();
+        }
+        public void removePhone(Phone phone)
+        {
+            _phoneDAO.deletePhone(phone.ID);
+        }
+        public void updatePhone(int ID, Phone phone)
+        {
+            _phoneDAO.updatePhone(ID, phone);
         }
     }
 }

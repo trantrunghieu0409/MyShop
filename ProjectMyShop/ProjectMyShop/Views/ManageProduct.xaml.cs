@@ -31,6 +31,14 @@ namespace ProjectMyShop.Views
         {
             InitializeComponent();
         }
+        private PhoneBUS _phoneBus = new PhoneBUS();
+        PhoneViewModel _vm = new PhoneViewModel();
+        List<Category>? _categories = null;
+        int _totalItems = 0;
+        int _currentPage = 1;
+        int _totalPages = 0;
+        int _rowsPerPage = 10;
+        int i = 0;
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -71,13 +79,7 @@ namespace ProjectMyShop.Views
                 loadPhones();
             }
         }
-        PhoneViewModel _vm = new PhoneViewModel();
-        List<Category>? _categories = null;
-        int _totalItems = 0;
-        int _currentPage = 1;
-        int _totalPages = 0;
-        int _rowsPerPage = 10;
-        int i = 0;
+        
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -156,6 +158,7 @@ namespace ProjectMyShop.Views
                 p.BoughtPrice = info.BoughtPrice;
                 p.Description = info.Description;
                 p.Avatar = info.Avatar;
+                _phoneBus.updatePhone(p.ID, p);
 
                 _vm.Phones = _categories[i].Phones;
                 _vm.SelectedPhones = _vm.Phones
@@ -176,6 +179,7 @@ namespace ProjectMyShop.Views
                 //_phones.Remove(p);
                 _vm.Phones.Remove(p);
                 _categories[i].Phones.Remove(p);
+                _phoneBus.removePhone(p);
                 //_vm.SelectedPhones.Remove(p);
 
                 _vm.SelectedPhones = _vm.Phones
@@ -276,7 +280,7 @@ namespace ProjectMyShop.Views
                         int soldprice = tab.Cells[$"F{row}"].IntValue;
                         int stock = tab.Cells[$"G{row}"].IntValue;
                         string desc = tab.Cells[$"H{row}"].StringValue;
-                        string uploaddate = tab.Cells[$"I{row}"].StringValue;
+                        DateTime uploaddate = tab.Cells[$"I{row}"].DateTimeValue;
                         string avaURL = tab.Cells[$"J{row}"].StringValue;
 
                         var p = new Phone()
@@ -304,7 +308,7 @@ namespace ProjectMyShop.Views
                 loadPhones();
             }
         }
-
+        
         private void AddMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var screen = new AddPhoneScreen(_categories!);
@@ -317,7 +321,8 @@ namespace ProjectMyShop.Views
                 if(catIndex >= 0)
                 {
                     _categories[catIndex].Phones.Add(newPhone);
-                   
+                    newPhone.Category = _categories[catIndex];
+                    _phoneBus.addPhone(newPhone);
                     loadPhones();
                 }
             }

@@ -47,6 +47,7 @@ namespace ProjectMyShop.Views
             if (screen.ShowDialog() == true)
             {
                 EditedPhone.Avatar = new BitmapImage(new Uri(screen.FileName, UriKind.Absolute));
+                avatar.Source = EditedPhone.Avatar;
             }
         }
     }

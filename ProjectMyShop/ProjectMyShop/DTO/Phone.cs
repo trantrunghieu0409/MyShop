@@ -17,7 +17,7 @@ namespace ProjectMyShop.DTO
         public int BoughtPrice { get; set; }
         public int SoldPrice { get; set; }
         public Category Category { get; set; }
-        public string UploadDate { get; set; }
+        public DateTime UploadDate { get; set; }
         public BitmapImage Avatar { get; set; }
 
         public object Clone()
