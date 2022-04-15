@@ -90,6 +90,7 @@ namespace ProjectMyShop.Views
             var catBUS = new CategoryBUS();
             var phoneBUS = new PhoneBUS();
             _categories = catBUS.getCategoryList();
+            categoriesListView.ItemsSource = _categories;
             foreach (var category in _categories)
             {
                 category.Phones = new BindingList<Phone>(phoneBUS.getPhonesAccordingToSpecificCategory(category.ID));
@@ -136,7 +137,7 @@ namespace ProjectMyShop.Views
             }
 
             phonesListView.ItemsSource = _vm.SelectedPhones;
-           
+            
         }
 
         private void categoriesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

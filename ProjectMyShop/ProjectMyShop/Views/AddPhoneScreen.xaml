@@ -23,10 +23,10 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <ComboBox Background="MediumPurple" Name="categoryCombobox" Width="100" Height="35" SelectionChanged="categoryCombobox_SelectionChanged" Grid.Column="1" Grid.ColumnSpan="2">
+        <ComboBox BorderThickness="1" BorderBrush="MediumPurple" Name="categoryCombobox" Width="100" Height="35" SelectionChanged="categoryCombobox_SelectionChanged" Grid.Column="1" Grid.ColumnSpan="2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding CatName}"/>
+                    <TextBlock Padding="5" Text="{Binding CatName}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

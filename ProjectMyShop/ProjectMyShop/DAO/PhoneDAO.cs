@@ -83,6 +83,8 @@ namespace ProjectMyShop.DAO
                 var Manufacturer = (String)reader["Manufacturer"];
 
                 var SoldPrice = (int)(decimal)reader["SoldPrice"];
+                var BoughtPrice = (int)(decimal)reader["BoughtPrice"];
+                var Description = (String)reader["Description"];
                 //var SoldPrice = (int)reader["SoldPrice"];
                 var Stock = (int)reader["Stock"];
 
@@ -93,6 +95,8 @@ namespace ProjectMyShop.DAO
                     Manufacturer = Manufacturer,
                     SoldPrice = SoldPrice,
                     Stock = Stock,
+                    BoughtPrice = BoughtPrice,
+                    Description = Description
                 };
                 if(!reader["Avatar"].Equals(DBNull.Value))
                 {
@@ -188,19 +192,19 @@ namespace ProjectMyShop.DAO
         }
         public void updatePhone(int id, Phone phone)
         {
-            string sql = "";
+            string sql;
             if (phone.Avatar != null)
             {
                 sql = "update Phone set PhoneName = @PhoneName, Manufacturer = @Manufacturer, Description = @Description, " +
-                "BoughtPrice = @BoughtPrice, SoldPrice = @SoldPrice, Avatar = @Avatar where ID = @ID";
+                "BoughtPrice = @BoughtPrice, Stock = @Stock, SoldPrice = @SoldPrice, Avatar = @Avatar where ID = @ID";
             }
             else
             {
                 sql = "update Phone set PhoneName = @PhoneName, Manufacturer = @Manufacturer, Description = @Description, " +
-                "BoughtPrice = @BoughtPrice, SoldPrice = @SoldPrice where ID = @ID";
+                "BoughtPrice = @BoughtPrice, Stock = @Stock, SoldPrice = @SoldPrice where ID = @ID";
             }
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
-
+            sqlCommand.Parameters.AddWithValue("@ID", id);
             sqlCommand.Parameters.AddWithValue("@PhoneName", phone.PhoneName);
             sqlCommand.Parameters.AddWithValue("@Manufacturer", phone.Manufacturer);
             sqlCommand.Parameters.AddWithValue("@BoughtPrice", phone.BoughtPrice);
