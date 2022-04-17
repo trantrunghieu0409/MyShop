@@ -3,6 +3,7 @@ using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,9 +38,20 @@ namespace ProjectMyShop.BUS
 
         public void addPhone(Phone phone)
         {
-            phone.UploadDate = DateTime.Now.Date;
-            _phoneDAO.addPhone(phone);
-            phone.ID = _phoneDAO.GetLastestInsertID();
+            if(phone.Stock < 0)
+            {
+                throw new Exception("Invalid stock");
+            }
+            else if (phone.BoughtPrice < 0 || phone.SoldPrice < 0)
+            {
+                throw new Exception("Invalid price");
+            }
+            else
+            {
+                phone.UploadDate = DateTime.Now.Date;
+                _phoneDAO.addPhone(phone);
+                phone.ID = _phoneDAO.GetLastestInsertID();
+            }
         }
         public void removePhone(Phone phone)
         {
@@ -47,7 +59,19 @@ namespace ProjectMyShop.BUS
         }
         public void updatePhone(int ID, Phone phone)
         {
-            _phoneDAO.updatePhone(ID, phone);
+            Debug.WriteLine(phone.Stock);
+            if (phone.Stock < 0)
+            {
+                throw new Exception("Invalid stock");
+            }
+            else if (phone.BoughtPrice < 0 || phone.SoldPrice < 0)
+            {
+                throw new Exception("Invalid price");
+            }
+            else
+            {
+                _phoneDAO.updatePhone(ID, phone);
+            }
         }
     }
 }

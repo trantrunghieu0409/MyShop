@@ -24,6 +24,7 @@ namespace ProjectMyShop.Views
     {
         public Phone newPhone { get; set; }
         public int catIndex { get; set; } = -1;
+        PhoneBUS _phoneBUS { get; set; }
         
 
         public AddPhoneScreen(List<Category> category)
@@ -56,11 +57,16 @@ namespace ProjectMyShop.Views
             //    SoldPrice = 700,
             //    Description = "stronglymanfok@outlook.com"
             //};
+            if(catIndex < 0)
+            {
+                MessageBox.Show(this, "Invalid category");
+            }
+            else
+            {
+                DialogResult = true;
+            }
             
 
-            
-
-            DialogResult = true;
         }
 
         private void chooseImageButton_Click(object sender, RoutedEventArgs e)

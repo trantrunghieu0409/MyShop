@@ -10,6 +10,9 @@
     <Compile Update="Views\AddPhoneScreen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AddStockScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AdvancedStatistics.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +49,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddPhoneScreen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddStockScreen.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AdvancedStatistics.xaml">

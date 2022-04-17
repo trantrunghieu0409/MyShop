@@ -13,7 +13,7 @@
         <local1:CurrencyConverter x:Key="currencyConverter"/>
         <local1:AbsoluteConverter x:Key="absoluteConverter"/>
     </Page.Resources>
-
+    <materialDesign:Card Background="White" UniformCornerRadius="10" materialDesign:ShadowAssist.ShadowEdges="All" Padding="10 10 0 0">
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <Button x:Name="ImportButton"
@@ -55,7 +55,8 @@
                 <RowDefinition Height="58*"/>
             </Grid.RowDefinitions>
             <Grid Name="searchContainer"
-              Grid.Column="1"
+              Grid.Column="0"
+                  Grid.ColumnSpan="2"
               Grid.Row="0">
 
                 <Grid.ColumnDefinitions>
@@ -187,7 +188,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="220">
+                        <Grid Width="300">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -207,12 +208,12 @@
             </ListView>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">
-                <Button x:Name="previousButton" Width="80" Height="35" Content="&lt;" Click="previousButton_Click" IsEnabled="False" />
+                <Button x:Name="previousButton" Width="60" Height="30" Content="&lt;" Click="previousButton_Click" IsEnabled="False" />
                 <TextBlock Name="currentPagingTextBlock" Width="80" Text="0" TextAlignment="Center" VerticalAlignment="Center"/>
-                <Button x:Name="nextButton" Width="80" Height="35" Content="&gt;" Click="nextButton_Click"/>
+                <Button x:Name="nextButton" Width="60" Height="30" Content="&gt;" Click="nextButton_Click"/>
             </StackPanel>
         </Grid>
     </DockPanel>
-
+    </materialDesign:Card>
 
 </Page>

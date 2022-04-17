@@ -46,6 +46,8 @@ namespace ProjectMyShop.Views
             if(search_text.Length > 0)
             {
                 _currentPage = 1;
+                previousButton.IsEnabled = false;
+
                 _vm.SelectedPhones.Clear();
                 BindingList<Phone> phones = new BindingList<Phone>();
                 foreach (Phone phone in _vm.Phones)
@@ -119,6 +121,7 @@ namespace ProjectMyShop.Views
                 return;
             }
             _currentPage = 1;
+            previousButton.IsEnabled = false;
 
             _vm.Phones = _categories[i].Phones;
             _vm.SelectedPhones = _vm.Phones
@@ -142,6 +145,7 @@ namespace ProjectMyShop.Views
 
         private void categoriesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            previousButton.IsEnabled = false;
             loadPhones();
         }
 
@@ -159,14 +163,23 @@ namespace ProjectMyShop.Views
                 p.BoughtPrice = info.BoughtPrice;
                 p.Description = info.Description;
                 p.Avatar = info.Avatar;
-                _phoneBus.updatePhone(p.ID, p);
+                try
+                {
+                    _phoneBus.updatePhone(p.ID, p);
+                    searchTextBox_TextChanged(sender, null);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception here");
+                    MessageBox.Show(screen, ex.Message);
+                }
 
-                _vm.Phones = _categories[i].Phones;
-                _vm.SelectedPhones = _vm.Phones
-                    .Skip((_currentPage - 1) * _rowsPerPage)
-                    .Take(_rowsPerPage).ToList();
+                //_vm.Phones = _categories[i].Phones;
+                //_vm.SelectedPhones = _vm.Phones
+                //    .Skip((_currentPage - 1) * _rowsPerPage)
+                //    .Take(_rowsPerPage).ToList();
 
-                phonesListView.ItemsSource = _vm.SelectedPhones;
+                //phonesListView.ItemsSource = _vm.SelectedPhones;
             }
         }
 
@@ -181,27 +194,28 @@ namespace ProjectMyShop.Views
                 _vm.Phones.Remove(p);
                 _categories[i].Phones.Remove(p);
                 _phoneBus.removePhone(p);
+                searchTextBox_TextChanged(sender, null);
                 //_vm.SelectedPhones.Remove(p);
 
-                _vm.SelectedPhones = _vm.Phones
-                    .Skip((_currentPage - 1) * _rowsPerPage)
-                    .Take(_rowsPerPage).ToList();
+                //_vm.SelectedPhones = _vm.Phones
+                //    .Skip((_currentPage - 1) * _rowsPerPage)
+                //    .Take(_rowsPerPage).ToList();
 
 
 
 
-                // Tính toán lại thông số phân trang
-                _totalItems = _vm.Phones.Count;
-                _totalPages = _vm.Phones.Count / _rowsPerPage +
-                    (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
+                //// Tính toán lại thông số phân trang
+                //_totalItems = _vm.Phones.Count;
+                //_totalPages = _vm.Phones.Count / _rowsPerPage +
+                //    (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
 
-                currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
-                if (_currentPage + 1 > _totalPages)
-                {
-                    nextButton.IsEnabled = false;
-                }
+                //currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+                //if (_currentPage + 1 > _totalPages)
+                //{
+                //    nextButton.IsEnabled = false;
+                //}
 
-                phonesListView.ItemsSource = _vm.SelectedPhones;
+                //phonesListView.ItemsSource = _vm.SelectedPhones;
             }
         }
 
@@ -321,10 +335,17 @@ namespace ProjectMyShop.Views
                 var catIndex = screen.catIndex;
                 if(catIndex >= 0)
                 {
-                    _categories[catIndex].Phones.Add(newPhone);
+                    try
+                    {
                     newPhone.Category = _categories[catIndex];
                     _phoneBus.addPhone(newPhone);
+                    _categories[catIndex].Phones.Add(newPhone);
                     loadPhones();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(screen, ex.Message);
+                    }
                 }
             }
         }

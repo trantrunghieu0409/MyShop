@@ -122,15 +122,20 @@
 
         </materialDesign:Card>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
-            <TextBlock Text="Top 5 phone (nearly) out of stock" FontSize="20" Background="MediumPurple" Foreground="White"/>
+            <TextBlock Text="Top 5 phone (nearly) out of stock" Padding="10 0 0 0" FontSize="20" Background="MediumPurple" Foreground="White"/>
             <DataGrid Grid.Row="0" x:Name="PhoneDataGrid" 
                     AutoGenerateColumns="False" ColumnHeaderHeight="30" HeadersVisibility="Column" 
                     RowHeaderWidth="100" SelectionChanged="PhoneDataGrid_SelectionChanged" 
                     CanUserResizeColumns="False" 
-                    materialDesign:DataGridAssist.CornerRadius="20"
                     BorderBrush="Gray"
                     BorderThickness="1"
-                    VerticalScrollBarVisibility="Auto"  AllowDrop="True"  GridLinesVisibility="None" HorizontalGridLinesBrush="Gray" SelectionMode="Single">
+                    VerticalScrollBarVisibility="Hidden"
+                      HorizontalScrollBarVisibility="Hidden" 
+                      CanUserAddRows="False"
+                    GridLinesVisibility="None" 
+                    HorizontalGridLinesBrush="Gray"
+                    SelectionMode="Single"
+                      AutomationProperties.IsColumnHeader="True" SelectedIndex="-1" CanUserDeleteRows="False">
 
 
 

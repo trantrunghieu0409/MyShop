@@ -42,7 +42,6 @@ namespace ProjectMyShop
             {
                 this.Opacity = 1;
                 dashboard = new Dashboard();
-                manageProductPage = new ManageProduct();
                 _manageOrderPage = new ManageOrder();
                 _manageCategory = new ManageCategory();
                 
@@ -63,6 +62,7 @@ namespace ProjectMyShop
 
         private void productButton_Click(object sender, RoutedEventArgs e)
         {
+            manageProductPage = new ManageProduct();
             pageNavigation.NavigationService.Navigate(manageProductPage);
         }
 
