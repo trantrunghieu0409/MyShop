@@ -30,6 +30,59 @@ namespace ProjectMyShop.DAO
             return result;
         }
 
+        public Phone? getPhoneByID(int phoneID)
+        {
+            var sql = "select * from Phone WHERE ID = @phoneID";
+            var command = new SqlCommand(sql, _connection);
+
+            command.Parameters.AddWithValue("@phoneID", phoneID);
+
+            var reader = command.ExecuteReader();
+
+            Phone? phone = null;
+            if (reader.Read())
+            {
+                var ID = (int)reader["ID"];
+                var PhoneName = (String)reader["PhoneName"];
+                var Manufacturer = (String)reader["Manufacturer"];
+
+                var SoldPrice = (int)(decimal)reader["SoldPrice"];
+                //var SoldPrice = (int)reader["SoldPrice"];
+                var Stock = (int)reader["Stock"];
+
+                phone = new Phone()
+                {
+                    ID = ID,
+                    PhoneName = PhoneName,
+                    Manufacturer = Manufacturer,
+                    SoldPrice = SoldPrice,
+                    Stock = Stock,
+                };
+
+                byte[] byteAvatar = new byte[5];
+                if (reader["Avatar"] != System.DBNull.Value)
+                {
+
+                    byteAvatar = (byte[])reader["Avatar"];
+
+                    using (MemoryStream ms = new MemoryStream(byteAvatar))
+                    {
+                        var image = new BitmapImage();
+                        image.BeginInit();
+                        image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.UriSource = null;
+                        image.StreamSource = ms;
+                        image.EndInit();
+                        image.Freeze();
+                        phone.Avatar = image;
+                    }
+                }
+            }
+            reader.Close();
+            return phone;
+        }
+
         public List<Phone> GetTop5OutStock()
         {
             var sql = "select top(5) * from Phone where stock < 5 order by stock ";

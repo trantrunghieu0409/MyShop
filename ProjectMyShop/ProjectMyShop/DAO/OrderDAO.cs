@@ -1,4 +1,5 @@
-﻿using ProjectMyShop.DTO;
+﻿using ProjectMyShop.BUS;
+using ProjectMyShop.DTO;
 using ProjectMyShop.Helpers;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,42 @@ namespace ProjectMyShop.DAO
 {
     internal class OrderDAO: SqlDataAccess
     {
+        List<DetailOrder> GetDetailOrder(int orderID)
+        {
+            string sql = "select * from DetailOrder WHERE OrderID = @orderID";
+
+            System.Diagnostics.Debug.WriteLine("OK1");
+
+            var command = new SqlCommand(sql, _connection);
+            command.Parameters.AddWithValue("@orderID", orderID);
+            
+            var reader = command.ExecuteReader();
+
+            var result = new List<DetailOrder>();
+
+            var _phoneBUS = new PhoneBUS();
+            while (reader.Read())
+            {
+                var OrderID = reader.GetInt32("OrderID");
+                var PhoneID = reader.GetInt32("PhoneID");
+                var Quantity = reader.GetInt32("Quantity");
+
+                var Phone = _phoneBUS.getPhoneByID(PhoneID);
+
+                DetailOrder _order = new DetailOrder()
+                {
+                    OrderID = OrderID,
+                    Phone = Phone,
+                    Quantity = Quantity
+                };
+
+                result.Add(_order);
+            }
+
+            reader.Close();
+            return result;
+        }
+
         Order ORMapping(SqlDataReader reader)
         {
             var ID = (int)reader["ID"];
@@ -22,13 +59,14 @@ namespace ProjectMyShop.DAO
             var Address = (String)reader["Address"];
             // var VoucherID = (Voucher)reader["VoucherID"];
 
+
             Order order = new Order()
             {
                 ID = ID,
                 CustomerName = CustomerName,
                 OrderDate = OrderDate,
                 Status = (Order.OrderStatusEnum)Status,
-                Address = Address
+                Address = Address,
             };
             return order;
         }
@@ -43,8 +81,14 @@ namespace ProjectMyShop.DAO
             {
                 result.Add(ORMapping(reader));
             }
-
             reader.Close();
+
+            foreach (var order in result)
+            {
+                List<DetailOrder> DetailOrderList = GetDetailOrder(order.ID);
+                order.DetailOrderList = DetailOrderList;
+            }
+
             return result;
         } 
 
@@ -65,7 +109,7 @@ namespace ProjectMyShop.DAO
 
         public List<Order> GetAllOrders()
         {
-            string sql = "select * from Orders " +
+            string sql = "select * from Orders" +
                 "Order by OrderDate DESC, ID ASC ";
 
             var command = new SqlCommand(sql, _connection);
@@ -109,18 +153,18 @@ namespace ProjectMyShop.DAO
                 "values (@OrderID, @PhoneID, @Quantity)";
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
-            sqlCommand.Parameters.AddWithValue("@OrderID", detail.Order.ID);
+            sqlCommand.Parameters.AddWithValue("@OrderID", detail.OrderID);
             sqlCommand.Parameters.AddWithValue("@PhoneID", detail.Phone.ID);
             sqlCommand.Parameters.AddWithValue("@Quantity", detail.Quantity);
 
             try
             {
                 sqlCommand.ExecuteNonQuery();
-                System.Diagnostics.Debug.WriteLine($"Inserted {detail.Order.ID} OK");
+                System.Diagnostics.Debug.WriteLine($"Inserted {detail.OrderID} OK");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Inserted {detail.Order.ID} Fail: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Inserted {detail.OrderID} Fail: " + ex.Message);
             }
         }
         

@@ -73,5 +73,10 @@ namespace ProjectMyShop.BUS
                 _phoneDAO.updatePhone(ID, phone);
             }
         }
+
+        public Phone? getPhoneByID(int phoneID)
+        {
+            return _phoneDAO.getPhoneByID(phoneID);
+        }
     }
 }

@@ -65,7 +65,8 @@ namespace ProjectMyShop.Views
             _totalItems = _vm.Orders.Count();
             _totalPages = _totalItems / _rowsPerPage +
                 (_totalItems % _rowsPerPage == 0 ? 0 : 1);
-
+           
+            if (_totalPages <= 0) _totalPages = 1;
             if (_currentPage > _totalPages) _currentPage = _totalPages;
 
             // control prev & next buttons

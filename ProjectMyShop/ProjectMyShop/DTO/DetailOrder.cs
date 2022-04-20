@@ -8,7 +8,7 @@ namespace ProjectMyShop.DTO
 {
     public class DetailOrder
     {
-        public Order Order { get; set; }
+        public int OrderID { get; set; }
         public Phone Phone { get; set; }
         public int Quantity { get; set; }
     }
