@@ -295,7 +295,12 @@ namespace ProjectMyShop.Views
                         int soldprice = tab.Cells[$"F{row}"].IntValue;
                         int stock = tab.Cells[$"G{row}"].IntValue;
                         string desc = tab.Cells[$"H{row}"].StringValue;
-                        DateTime uploaddate = tab.Cells[$"I{row}"].DateTimeValue;
+                        DateTime uploaddate = DateTime.Now;
+                        if (tab.Cells[$"I{row}"].Type != CellValueType.IsNull)
+                        {
+                            Debug.WriteLine(tab.Cells[$"I{row}"].DateTimeValue);
+                            uploaddate = tab.Cells[$"I{row}"].DateTimeValue;
+                        }
                         string avaURL = tab.Cells[$"J{row}"].StringValue;
 
                         var p = new Phone()
