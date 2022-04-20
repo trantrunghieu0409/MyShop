@@ -289,7 +289,7 @@ namespace ProjectMyShop.DAO
 
         public List<Phone> getWeeklyBestSellingPhones()
         {
-            var sql = "select TOP(3) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where OrderDate between DATEADD(DAY, -7, GETDATE()) and DATEADD(DAY, 1, GETDATE()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where OrderDate between DATEADD(DAY, -7, GETDATE()) and DATEADD(DAY, 1, GETDATE()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
 
             var command = new SqlCommand(sql, _connection);
 
@@ -342,7 +342,7 @@ namespace ProjectMyShop.DAO
 
         public List<Phone> getMonthlyBestSellingPhones()
         {
-            var sql = "select TOP(3) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) and datepart(month, OrderDate) = datepart(month, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) and datepart(month, OrderDate) = datepart(month, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
 
             var command = new SqlCommand(sql, _connection);
 
@@ -395,7 +395,7 @@ namespace ProjectMyShop.DAO
 
         public List<Phone> getYearlyBestSellingPhones()
         {
-            var sql = "select TOP(3) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
 
             var command = new SqlCommand(sql, _connection);
 

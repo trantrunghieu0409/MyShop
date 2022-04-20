@@ -47,6 +47,16 @@
                             <TextBlock Text="{Binding}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="DeepPink" />
+                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Green" />
+                    </ComboBox.Resources>
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
                 </ComboBox>
             </StackPanel>
         </materialDesign:Card>
@@ -137,8 +147,8 @@
                                         IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Margin="10,0" Text="{Binding BoughtPrice}" FontWeight="DemiBold"/>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Margin="10,0" Text="{Binding BoughtPrice}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
