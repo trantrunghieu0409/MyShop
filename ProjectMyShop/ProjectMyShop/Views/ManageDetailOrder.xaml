@@ -7,6 +7,7 @@
       xmlns:local="clr-namespace:ProjectMyShop.Views" xmlns:local1="clr-namespace:ProjectMyShop.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="550"
+      WindowStyle="None"
       Width="550"
       WindowStartupLocation="CenterScreen" 
       Loaded="Window_Loaded">
@@ -85,11 +86,35 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <DataGrid>
+                            <DataGrid x:Name="PhoneDataGrid">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Phones Name"></DataGridTextColumn>
-                                    <DataGridComboBoxColumn Header="Category"></DataGridComboBoxColumn>
-                                    <DataGridTextColumn Header="Quantity"></DataGridTextColumn>
+                                    <DataGridTemplateColumn Header="Phone Name">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ComboBox x:Name="CategoryComboBox" ItemsSource="{Binding Path=Phone}">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=CatName}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Category">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ComboBox x:Name="CategoryComboBox" ItemsSource="{Binding Path=Phone}">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=CatName}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn x:Name="QuantityComBox" Header="Quantity" Binding="{Binding Quantity}"></DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>

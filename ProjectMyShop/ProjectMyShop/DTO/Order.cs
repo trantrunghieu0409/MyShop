@@ -29,8 +29,8 @@ namespace ProjectMyShop.DTO
         public DateOnly OrderDate { get; set; }
         public OrderStatusEnum Status { get; set; }
         public string Address { get; set; }
-        Voucher? VoucherID { get; set; }
-        List<DetailOrder>? DetailOrderList { get; set; }
+        public Voucher? Voucher { get; set; }
+        public List<DetailOrder> DetailOrderList { get; set; }
     }
 
 }

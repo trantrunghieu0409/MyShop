@@ -1,4 +1,5 @@
-﻿using ProjectMyShop.DTO;
+﻿using ProjectMyShop.BUS;
+using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,13 @@ namespace ProjectMyShop.Views
     public partial class ManageDetailOrder : Window
     {
         public Order order;
+        private CategoryBUS _categoryBUS; 
+        private PhoneBUS _phoneBUS;
+
+        private List<Category> categories;
+        private List<Phone> phones;
+
+
         public ManageDetailOrder(Order order)
         {
             InitializeComponent();
@@ -37,6 +45,30 @@ namespace ProjectMyShop.Views
             StatusComboBox.ItemsSource = Order.GetAllStatusValues();
             DataContext = order;
 
+
+
+
+
+            PhoneDataGrid.ItemsSource = order.DetailOrderList;
+            foreach (var detail in order.DetailOrderList)
+                System.Diagnostics.Debug.WriteLine($"{detail.OrderID} - {detail.Phone.PhoneName} - {detail.Quantity}");
+            
+
+
+            /*
+            _categoryBUS = new CategoryBUS();
+            _phoneBUS = new PhoneBUS();
+
+            categories = _categoryBUS.getCategoryList();
+            categoriesComboBox.ItemsSource = categories;
+
+            if (categories.Count() > 0)
+                phones = _phoneBUS.getPhonesAccordingToSpecificCategory(categories[categoriesFigureIndex].ID);
+            else
+                phones = new List<Phone> { };
+
+            productComboBox.ItemsSource = phones;
+            */
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

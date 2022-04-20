@@ -75,19 +75,6 @@ namespace ProjectMyShop.BUS
             }
         }
 
-        public List<Phone> getWeeklyBestSellingPhones()
-        {
-            return _phoneDAO.getWeeklyBestSellingPhones();
-        }
-
-        public List<Phone> getMonthlyBestSellingPhones()
-        {
-            return _phoneDAO.getMonthlyBestSellingPhones();
-        }
-
-        public List<Phone> getYearlyBestSellingPhones()
-        {
-            return _phoneDAO.getYearlyBestSellingPhones();
-        }
+        
     }
 }
