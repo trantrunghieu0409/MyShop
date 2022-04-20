@@ -39,7 +39,29 @@ namespace ProjectMyShop.Views
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var screen = new AddCategoryScreen();
+            var result = screen.ShowDialog();
+            if (result == true)
+            {
+/*                var newPhone = screen.newPhone;
+                Debug.WriteLine(newPhone.PhoneName);
+                var catIndex = screen.catIndex;
+                if (catIndex >= 0)
+                {
+                    try
+                    {
+                        newPhone.Category = _categories[catIndex];
+                        _phoneBus.addPhone(newPhone);
+                        _categories[catIndex].Phones.Add(newPhone);
+                        loadPhones();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(screen, ex.Message);
+                    }
+                }*/
+            }
+            
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
