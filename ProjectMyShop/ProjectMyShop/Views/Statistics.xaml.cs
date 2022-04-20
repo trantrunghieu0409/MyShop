@@ -46,13 +46,15 @@ namespace ProjectMyShop.Views
             configureGeneral();
             configureRevenueCharts();
 
-            _specificStatistics = new SpecificStatistics(this, selectedDate);
+            _specificStatistics = new SpecificStatistics(this, _advancedStatistics);
+            _advancedStatistics = new AdvancedStatistics(this, _specificStatistics);
 
             DataContext = this;
         }
 
         private StatisticsBUS _statisticsBUS;
         public SpecificStatistics _specificStatistics;
+        public AdvancedStatistics _advancedStatistics;
         public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
         public List<string> statisticsFigureValues = new List<string>() { "General", "Specific", "Advanced" };
         public int statisticsFigureIndex { get; set; } = 0;
@@ -470,12 +472,13 @@ namespace ProjectMyShop.Views
                     break;
                 case 1:
                     NavigationService.Navigate(_specificStatistics);
-                    statisticsFigureIndex = 0;
+                    statisticsFigureIndex = 1;
                     statisticsCombobox.SelectedIndex = statisticsFigureIndex;
                     break;
                 case 2:
-                    configureGeneral();
-                    configureRevenueCharts();
+                    NavigationService.Navigate(_advancedStatistics);
+                    statisticsFigureIndex = 2;
+                    statisticsCombobox.SelectedIndex = statisticsFigureIndex;
                     break;
                 default:
                     break;

@@ -14,7 +14,8 @@ namespace ProjectMyShop.BUS
     {
         private PhoneDAO _phoneDAO;
 
-        public PhoneBUS() {
+        public PhoneBUS()
+        {
             _phoneDAO = new PhoneDAO();
             if (_phoneDAO.CanConnect())
             {
@@ -38,7 +39,7 @@ namespace ProjectMyShop.BUS
 
         public void addPhone(Phone phone)
         {
-            if(phone.Stock < 0)
+            if (phone.Stock < 0)
             {
                 throw new Exception("Invalid stock");
             }
@@ -72,6 +73,21 @@ namespace ProjectMyShop.BUS
             {
                 _phoneDAO.updatePhone(ID, phone);
             }
+        }
+
+        public List<Phone> getWeeklyBestSellingPhones()
+        {
+            return _phoneDAO.getWeeklyBestSellingPhones();
+        }
+
+        public List<Phone> getMonthlyBestSellingPhones()
+        {
+            return _phoneDAO.getMonthlyBestSellingPhones();
+        }
+
+        public List<Phone> getYearlyBestSellingPhones()
+        {
+            return _phoneDAO.getYearlyBestSellingPhones();
         }
     }
 }

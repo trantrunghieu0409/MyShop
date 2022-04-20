@@ -26,13 +26,12 @@ namespace ProjectMyShop.Views
     /// </summary>
     public partial class SpecificStatistics : Page
     {
-        public SpecificStatistics(Statistics srcPage, DateTime srcSelectedDate)
+        public SpecificStatistics(Statistics srcPage, AdvancedStatistics srcAdvancedStatistics)
         {
             InitializeComponent();
 
             _statisticsPage = srcPage;
-
-            selectedDate = srcSelectedDate;
+            _advancedPage = srcAdvancedStatistics;
 
             _statisticsBUS = new StatisticsBUS();
             _categoryBUS = new CategoryBUS();
@@ -73,12 +72,13 @@ namespace ProjectMyShop.Views
         public int tabSelectedIndex { get; set; } = 0;
         public int categoriesFigureIndex { get; set; } = 0;
         public int productFigureIndex { get; set; } = 0;
-        public DateTime selectedDate { get; set; }
+        public DateTime selectedDate { get; set; } = DateTime.Now;
         public List<string> figureValues = new List<string>() { "Daily", "Weekly", "Monthly", "Yearly" };
         public List<string> statisticsFigureValues = new List<string>() { "General", "Specific", "Advanced" };
         public List<Category> categories;
         public List<Phone> phones;
         private Statistics _statisticsPage;
+        private AdvancedStatistics _advancedPage;
 
         public void configureBarGraphs()
         {
@@ -291,12 +291,17 @@ namespace ProjectMyShop.Views
             {
                 case 0:
                     NavigationService.Navigate(_statisticsPage);
-                    statisticsFigureIndex = 1;
+                    statisticsFigureIndex = 0;
                     statisticsCombobox.SelectedIndex = statisticsFigureIndex;
                     break;
                 case 1:
                     break;
                 case 2:
+                    NavigationService.Navigate(_advancedPage);
+                    statisticsFigureIndex = 2;
+                    statisticsCombobox.SelectedIndex = statisticsFigureIndex;
+                    break;
+                default:
                     break;
             }
         }
