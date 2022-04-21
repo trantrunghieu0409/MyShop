@@ -167,6 +167,41 @@ namespace ProjectMyShop.DAO
                 System.Diagnostics.Debug.WriteLine($"Inserted {detail.OrderID} Fail: " + ex.Message);
             }
         }
+        public void UpdateDetailOrder(DetailOrder detail)
+        {
+            var sql = "update DetailOrder set Quantity = @Quantity where OrderID = @OrderID";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+
+            sqlCommand.Parameters.AddWithValue("@OrderID", detail.OrderID);
+            sqlCommand.Parameters.AddWithValue("@Quantity", detail.Quantity);
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Updated {detail.OrderID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Updated {detail.OrderID} Fail: " + ex.Message);
+            }
+        }
+        public void DeleteDetailOrder(DetailOrder detail)
+        {
+            var sql = "delete from DetailOrder where OrderID = @OrderID";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+
+            sqlCommand.Parameters.AddWithValue("@OrderID", detail.OrderID);
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Deleted {detail.OrderID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Deleted {detail.OrderID} Fail: " + ex.Message);
+            }
+        }
         
         public void AddOrder(Order order)
         {

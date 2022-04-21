@@ -87,5 +87,20 @@ namespace ProjectMyShop.DAO
             System.Diagnostics.Debug.WriteLine(resutl);
             return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
+        public bool isExisted(Category cat)
+        {
+            string sql = "select count(*) as n from Category where CatName = @CatName";
+            SqlCommand command = new SqlCommand(sql, _connection);
+            command.Parameters.AddWithValue("@CatName", cat.CatName);
+
+            var reader = command.ExecuteReader();
+            int count = 0;
+            while (reader.Read())
+            {
+                count = (int)reader["n"];
+            }
+            if (count > 0) return true;
+            return false;
+        }
     }
 }

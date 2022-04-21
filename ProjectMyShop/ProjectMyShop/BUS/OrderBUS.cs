@@ -78,5 +78,20 @@ namespace ProjectMyShop.BUS
         {
             return _orderDAO.CountOrderByMonth();
         }
+        public void UpdateDetailOrder(DetailOrder detail)
+        {
+            if(detail.Quantity > 0)
+            {
+                _orderDAO.UpdateDetailOrder(detail);
+            }
+            else
+            {
+                throw new Exception("Invalid Quantity");
+            }
+        }
+        public void DeleteDetailOrder(DetailOrder detail)
+        {
+            _orderDAO.DeleteDetailOrder(detail);
+        }
     }
 }

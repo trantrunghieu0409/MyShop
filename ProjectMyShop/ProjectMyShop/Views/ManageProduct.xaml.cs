@@ -298,7 +298,6 @@ namespace ProjectMyShop.Views
                         DateTime uploaddate = DateTime.Now;
                         if (tab.Cells[$"I{row}"].Type != CellValueType.IsNull)
                         {
-                            Debug.WriteLine(tab.Cells[$"I{row}"].DateTimeValue);
                             uploaddate = tab.Cells[$"I{row}"].DateTimeValue;
                         }
                         string avaURL = tab.Cells[$"J{row}"].StringValue;
