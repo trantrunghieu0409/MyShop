@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using ProjectMyShop.BUS;
+using ProjectMyShop.Config;
 using ProjectMyShop.Views;
 
 namespace ProjectMyShop.Views
@@ -483,6 +484,11 @@ namespace ProjectMyShop.Views
                 default:
                     break;
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            AppConfig.SetValue(AppConfig.LastWindow, "Statistics");
         }
     }
 }

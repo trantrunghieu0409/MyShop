@@ -18,6 +18,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ProjectMyShop.Config;
+using System.Configuration;
 
 namespace ProjectMyShop.Views
 {
@@ -34,6 +36,8 @@ namespace ProjectMyShop.Views
 
         public ManageCategory()
         {
+
+
             InitializeComponent();
             CategoryBUS catBUS = new CategoryBUS();
             CategoryViewModel.Categories = new BindingList<Category>(catBUS.getCategoryList());
@@ -113,7 +117,7 @@ namespace ProjectMyShop.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
 
-
+            AppConfig.SetValue(AppConfig.LastWindow, "ManageCategory");
             loadCategory();
 
 

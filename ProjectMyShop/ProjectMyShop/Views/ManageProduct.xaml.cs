@@ -1,6 +1,7 @@
 ﻿using Aspose.Cells;
 using Microsoft.Win32;
 using ProjectMyShop.BUS;
+using ProjectMyShop.Config;
 using ProjectMyShop.DTO;
 using ProjectMyShop.ViewModels;
 using System;
@@ -101,6 +102,8 @@ namespace ProjectMyShop.Views
             {
                 loadPhones();
             }
+
+            AppConfig.SetValue(AppConfig.LastWindow, "ManageProduct");
         }
 
         private void filterRangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
