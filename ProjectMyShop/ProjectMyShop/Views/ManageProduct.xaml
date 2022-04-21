@@ -130,9 +130,9 @@
                                  Grid.Column="0" Margin="0,0,-110,0">
                         <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="From" VerticalAlignment="Center" FontWeight="Bold" Foreground="MediumPurple" Margin="10,0"/>
-                            <TextBox Width="45" Height="30" Padding="0 6 0 0" Text="0" Foreground="Black" HorizontalAlignment="Center"/>
+                            <TextBox Width="45" Name="fromTextbox" Height="30" Padding="0 6 0 0" Text="0" Foreground="Black" HorizontalAlignment="Center"/>
                             <TextBlock Text="To" VerticalAlignment="Center" FontWeight="Bold" Foreground="MediumPurple" Margin="10,0"/>
-                            <TextBox Width="45" Height="30" Padding="0 6 0 0" Text="0" Foreground="Black" HorizontalAlignment="Center"/>
+                            <TextBox Width="45" Name="toTextbox" Height="30" Padding="0 6 0 0" Text="0" Foreground="Black" HorizontalAlignment="Center"/>
 
                             <Button Name="FilterButton" Click="FilterButton_Click" Margin="5 0 0 0"
                         Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">

@@ -360,7 +360,52 @@ namespace ProjectMyShop.Views
 
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
+            float fromPrice = float.Parse(fromTextbox.Text);
+            float toPrice = float.Parse(toTextbox.Text);
+            if (fromPrice >= 0 && toPrice > 0 && fromPrice < toPrice)
+            {
+                _currentPage = 1;
+                previousButton.IsEnabled = false;
 
+                _vm.SelectedPhones.Clear();
+                BindingList<Phone> phones = new BindingList<Phone>();
+                foreach (Phone phone in _vm.Phones)
+                {
+                    if (phone.SoldPrice >= fromPrice && phone.SoldPrice <= toPrice)
+                    {
+                        phones.Add(phone);
+                    }
+                }
+
+                if(phones.Count <= 0)
+                {
+                    MessageBox.Show("Product not found!");
+                    return;
+                }
+
+                _vm.SelectedPhones = phones
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage).ToList();
+
+                if (_vm.SelectedPhones.Count > 0)
+                {
+                    _currentPage = 1;
+                    _totalItems = phones.Count;
+                    _totalPages = phones.Count / _rowsPerPage +
+                    (phones.Count % _rowsPerPage == 0 ? 0 : 1);
+                    phonesListView.ItemsSource = _vm.SelectedPhones;
+                    currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
+                }
+                if (_totalPages <= 1)
+                {
+                    nextButton.IsEnabled = false;
+                }
+            }
+            else
+            {
+               
+                MessageBox.Show("Product not found!");
+            }
         }
     }
 }
