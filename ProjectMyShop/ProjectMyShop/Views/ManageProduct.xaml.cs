@@ -53,7 +53,7 @@ namespace ProjectMyShop.Views
                 BindingList<Phone> phones = new BindingList<Phone>();
                 foreach (Phone phone in _vm.Phones)
                 {
-                    if(phone.PhoneName.ToLower().Contains(search_text))
+                    if(phone.PhoneName.ToLower().Contains(search_text.ToLower()))
                     {
                         phones.Add(phone);
                     }
@@ -317,14 +317,15 @@ namespace ProjectMyShop.Views
                             Avatar = new BitmapImage(new Uri(avaURL, UriKind.Absolute)),
                             Category = cat,
                         };
-                        cat.Phones.Add(p);
                         _phoneBUS.addPhone(p);
-                        
-
                         row++;
                         cell = tab.Cells[$"{column}{row}"];
                     }
-                    _categories.Add(cat);
+                }
+                _categories = _cateBUS.getCategoryList();
+                foreach(var category in _categories)
+                {
+                    category.Phones = new BindingList<Phone>(_phoneBUS.getPhonesAccordingToSpecificCategory(category.ID));
                 }
                 categoriesListView.ItemsSource = _categories;
                 loadPhones();

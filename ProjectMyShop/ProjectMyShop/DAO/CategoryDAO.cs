@@ -17,7 +17,7 @@ namespace ProjectMyShop.DAO
     {
         public Category GetCategoryById(int id)
         {
-            var sql = "select * from Category where category_id=@CatId";
+            var sql = "select * from Category where ID=@CatId";
             var command = new SqlCommand(sql, _connection);
 
             command.Parameters.Add("CatId", SqlDbType.Int).Value = id;
@@ -28,7 +28,7 @@ namespace ProjectMyShop.DAO
 
             if (reader.Read()) // ORM - Object relational mapping
             {
-                var catId = (int)reader["category_id"];
+                var catId = (int)reader["ID"];
                 var catName = (string)reader["category_name"];
 
                 result = new Category()
@@ -125,21 +125,20 @@ namespace ProjectMyShop.DAO
             System.Diagnostics.Debug.WriteLine(resutl);
             return System.Convert.ToInt32(sqlCommand.ExecuteScalar());
         }
-        public bool isExisted(Category cat)
+        public int isExisted(Category cat)
         {
-            string sql = "select count(*) as n from Category where CatName = @CatName";
+            string sql = "select ID from Category where CatName = @CatName";
             SqlCommand command = new SqlCommand(sql, _connection);
             command.Parameters.AddWithValue("@CatName", cat.CatName);
 
             var reader = command.ExecuteReader();
-            int count = 0;
+            int ID = 0;
             while (reader.Read())
             {
-                count = (int)reader["n"];
+                ID = (int)reader["ID"];
             }
             reader.Close();
-            if (count > 0) return true;
-            return false;
+            return ID;
         }
 
         public void updateCategory(int ID, Category category)

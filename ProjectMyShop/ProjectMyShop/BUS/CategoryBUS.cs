@@ -36,8 +36,15 @@ namespace ProjectMyShop.BUS
         }
         public void AddCategory(Category cat)
         {
-            if (!_categoryDAO.isExisted(cat))
+            int ID = _categoryDAO.isExisted(cat);
+            if (ID > 0)
             {
+                // existed category
+                cat.ID = ID;
+            }
+            else
+            {
+                // add new category
                 _categoryDAO.AddCategory(cat);
                 cat.ID = _categoryDAO.GetLastestInsertID();
             }
