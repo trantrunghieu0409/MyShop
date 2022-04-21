@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace ProjectMyShop.DAO
 {
@@ -56,6 +58,28 @@ namespace ProjectMyShop.DAO
                     ID = (int)reader["ID"],
                     CatName = (string)reader["CatName"],
                 };
+
+
+                byte[] byteAvatar = new byte[5];
+                if (reader["Avatar"] != System.DBNull.Value)
+                {
+
+                    byteAvatar = (byte[])reader["Avatar"];
+
+                    using (MemoryStream ms = new MemoryStream(byteAvatar))
+                    {
+                        var image = new BitmapImage();
+                        image.BeginInit();
+                        image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.UriSource = null;
+                        image.StreamSource = ms;
+                        image.EndInit();
+                        image.Freeze();
+                        category.Avatar = image;
+                    }
+                }
+
                 resultList.Add(category);
             }
             reader.Close();
@@ -63,11 +87,22 @@ namespace ProjectMyShop.DAO
         }
         public void AddCategory(Category cat)
         {
-            var sql = "insert into Category(CatName) " +
-                "values (@CatName)"; //
+            var sql = "insert into Category(CatName, Avatar) " +
+                "values (@CatName, @Avatar)"; //
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@CatName", cat.CatName);
+
+            if (cat.Avatar != null)
+            {
+                var encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(cat.Avatar));
+                using (var stream = new MemoryStream())
+                {
+                    encoder.Save(stream);
+                    sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
+                }
+            }
 
             try
             {

@@ -29,12 +29,16 @@ namespace ProjectMyShop.Views
 
         List<Category>? _categories = null;        
         CategoryViewModel CategoryViewModel = new CategoryViewModel();
+        private CategoryBUS _categoryBUS = new CategoryBUS();
+        
 
         public ManageCategory()
         {
             InitializeComponent();
-            
-            
+            CategoryBUS catBUS = new CategoryBUS();
+            CategoryViewModel.Categories = new BindingList<Category>(catBUS.getCategoryList());
+
+
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -43,25 +47,29 @@ namespace ProjectMyShop.Views
             var result = screen.ShowDialog();
             if (result == true)
             {
-/*                var newPhone = screen.newPhone;
-                Debug.WriteLine(newPhone.PhoneName);
-                var catIndex = screen.catIndex;
-                if (catIndex >= 0)
+                var newCategory = screen.newCategory;
+                Debug.WriteLine(newCategory.CatName);
+               
+
+                try
                 {
-                    try
-                    {
-                        newPhone.Category = _categories[catIndex];
-                        _phoneBus.addPhone(newPhone);
-                        _categories[catIndex].Phones.Add(newPhone);
-                        loadPhones();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(screen, ex.Message);
-                    }
-                }*/
+                    _categoryBUS.AddCategory(newCategory);           
+                    loadCategory();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(screen, ex.Message);
+                }
+
             }
             
+        }
+
+        void loadCategory()
+        {
+            _categories = _categoryBUS.getCategoryList();
+            categoriesListView.ItemsSource = _categories;
+
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -76,11 +84,11 @@ namespace ProjectMyShop.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-                      
-            var catBUS = new CategoryBUS();            
-            _categories = catBUS.getCategoryList();
 
-            categoriesListView.ItemsSource = _categories;
+
+            loadCategory();
+
+
         }
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
