@@ -8,7 +8,8 @@
       xmlns:local="clr-namespace:ProjectMyShop.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Statistics">
+      Title="Statistics"
+      Loaded="Page_Loaded">
 
     <Grid Name="StatisticsContainer">
         <Grid.ColumnDefinitions>

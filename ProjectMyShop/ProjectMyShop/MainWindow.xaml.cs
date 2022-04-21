@@ -1,4 +1,5 @@
-﻿using ProjectMyShop.Views;
+﻿using ProjectMyShop.Config;
+using ProjectMyShop.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,9 +45,26 @@ namespace ProjectMyShop
                 dashboard = new Dashboard();
                 _manageOrderPage = new ManageOrder();
                 _manageCategory = new ManageCategory();
-                
 
                 pageNavigation.NavigationService.Navigate(dashboard);
+
+                if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageCategory")
+                {
+                    pageNavigation.NavigationService.Navigate(_manageCategory);
+                }
+                else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageOrder")
+                {
+                    pageNavigation.NavigationService.Navigate(_manageOrderPage);
+                }
+                else if (AppConfig.GetValue(AppConfig.LastWindow) == "Statistics")
+                {
+                    pageNavigation.NavigationService.Navigate(statisticsPage);
+                }
+
+                else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageProduct")
+                {
+                    pageNavigation.NavigationService.Navigate(manageProductPage);
+                }
             }
             else
             {

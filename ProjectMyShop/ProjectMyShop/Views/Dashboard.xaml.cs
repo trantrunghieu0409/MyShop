@@ -1,4 +1,5 @@
 ﻿using ProjectMyShop.BUS;
+using ProjectMyShop.Config;
 using ProjectMyShop.DTO;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace ProjectMyShop.Views
 
             PhoneDataGrid.ItemsSource = _phones;
             DataContext = this;
+            AppConfig.SetValue(AppConfig.LastWindow, "Dashboard");
         }
 
         private void PhoneDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

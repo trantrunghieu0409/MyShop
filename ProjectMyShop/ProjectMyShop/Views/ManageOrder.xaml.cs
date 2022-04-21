@@ -1,4 +1,5 @@
 ﻿using ProjectMyShop.BUS;
+using ProjectMyShop.Config;
 using ProjectMyShop.DTO;
 using ProjectMyShop.ViewModels;
 using System;
@@ -44,6 +45,8 @@ namespace ProjectMyShop.Views
             
             Reload();
             OrderDataGrid.ItemsSource = _vm.SelectedOrders;
+
+            AppConfig.SetValue(AppConfig.LastWindow, "ManageOrder");
         }
 
 
