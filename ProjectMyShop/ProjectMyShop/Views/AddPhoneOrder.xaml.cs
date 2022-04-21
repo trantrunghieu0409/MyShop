@@ -32,7 +32,7 @@ namespace ProjectMyShop.Views
         public AddPhoneOrder(DetailOrder detailOrder)
         {
             InitializeComponent();
-            this.detailOrder = detailOrder;
+            this.detailOrder = (DetailOrder)detailOrder.Clone();
         }
 
 
