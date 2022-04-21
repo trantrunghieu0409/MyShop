@@ -28,6 +28,7 @@
         <StackPanel  Grid.Row="1" Grid.Column="1"  Margin="30 10 10 0" RenderTransformOrigin="0.624,0.417">
             <Label Margin="0 0 0 20" FontWeight="Bold">Application Settings</Label>
             <CheckBox  IsChecked="True" Margin="0 0 0 20">Open the last window when application startup</CheckBox>
+            <Label Content="Number of product per page"/>
             <ComboBox HorizontalAlignment="Left" BorderThickness="1" BorderBrush="MediumPurple" x:Name="nProductComboBox" Width="50" Height="30" SelectionChanged="nProductComboBox_SelectionChanged" RenderTransformOrigin="-0.994,1.569">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -37,6 +38,7 @@
                 </ComboBox.ItemTemplate>
                 
             </ComboBox>
+            
 
         </StackPanel>
 
