@@ -32,6 +32,7 @@ namespace ProjectMyShop
         ManageOrder _manageOrderPage;
         Statistics statisticsPage;
         ManageCategory _manageCategory;
+        Configuration _configPage;
         Login login;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -97,7 +98,8 @@ namespace ProjectMyShop
 
         private void configButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _configPage = new Configuration();
+            pageNavigation.NavigationService.Navigate(_configPage);
         }
 
         private void categoriesButton_Click(object sender, RoutedEventArgs e)
