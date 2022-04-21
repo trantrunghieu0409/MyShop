@@ -18,8 +18,6 @@ namespace ProjectMyShop.DAO
         {
             string sql = "select * from DetailOrder WHERE OrderID = @orderID";
 
-            System.Diagnostics.Debug.WriteLine("OK1");
-
             var command = new SqlCommand(sql, _connection);
             command.Parameters.AddWithValue("@orderID", orderID);
             
@@ -147,7 +145,7 @@ namespace ProjectMyShop.DAO
             return Select(command);
         }
 
-        private void AddDetailOrder(DetailOrder detail)
+        public void AddDetailOrder(DetailOrder detail)
         {
             var sql = "insert into DetailOrder(OrderID, PhoneID, Quantity) " +
                 "values (@OrderID, @PhoneID, @Quantity)";
@@ -169,10 +167,11 @@ namespace ProjectMyShop.DAO
         }
         public void UpdateDetailOrder(DetailOrder detail)
         {
-            var sql = "update DetailOrder set Quantity = @Quantity where OrderID = @OrderID";
+            var sql = "update DetailOrder set Quantity = @Quantity, PhoneID = @PhoneID where OrderID = @OrderID";
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@OrderID", detail.OrderID);
+            sqlCommand.Parameters.AddWithValue("@PhoneID", detail.Phone.ID);
             sqlCommand.Parameters.AddWithValue("@Quantity", detail.Quantity);
 
             try

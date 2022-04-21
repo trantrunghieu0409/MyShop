@@ -78,9 +78,15 @@ namespace ProjectMyShop.BUS
         {
             return _orderDAO.CountOrderByMonth();
         }
+
+        public void AddDetailOrder(DetailOrder detail)
+        {
+            _orderDAO.AddDetailOrder(detail);
+        }
+
         public void UpdateDetailOrder(DetailOrder detail)
         {
-            if(detail.Quantity > 0)
+            if(detail.Quantity >= 0)
             {
                 _orderDAO.UpdateDetailOrder(detail);
             }
