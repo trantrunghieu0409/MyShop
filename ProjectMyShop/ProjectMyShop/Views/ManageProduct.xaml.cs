@@ -133,12 +133,16 @@ namespace ProjectMyShop.Views
             _totalItems = _vm.Phones.Count;
             _totalPages = _vm.Phones.Count / _rowsPerPage +
                 (_vm.Phones.Count % _rowsPerPage == 0 ? 0 : 1);
-
+            _currentPage = _totalPages > 0 ? 1 : 0;
             currentPagingTextBlock.Text = $"{_currentPage}/{_totalPages}";
 
             if(_totalPages > 1)
             {
                 nextButton.IsEnabled = true;
+            }
+            else
+            {
+                nextButton.IsEnabled=false;
             }
 
             phonesListView.ItemsSource = _vm.SelectedPhones;

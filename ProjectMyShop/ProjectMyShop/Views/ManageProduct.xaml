@@ -6,7 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:ProjectMyShop.Views" xmlns:local1="clr-namespace:ProjectMyShop.Converter"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="650"
+      d:DesignHeight="450" d:DesignWidth="650"
       Title="ManageProduct"
       Loaded="Page_Loaded">
     <Page.Resources>
@@ -50,7 +50,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="90*"/>
-                <RowDefinition Height="75*"/>
+                <RowDefinition Height="120*"/>
                 <RowDefinition Height="555*"/>
                 <RowDefinition Height="58*"/>
             </Grid.RowDefinitions>
@@ -144,18 +144,21 @@
                     </materialDesign:Card>
                 </materialDesign:ColorZone>
             </Grid>
-            <ListView x:Name="categoriesListView" Margin="0 0 0 10" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" SelectionChanged="categoriesListView_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+            <!--Category list view-->
+                <ListView x:Name="categoriesListView" Margin="0 0 0 10" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" SelectionChanged="categoriesListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" Style="{DynamicResource MaterialDesignListView}">
                 <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="5 0 5 0">
-                            <Image Width="30" Height="30" Source="{Binding Avatar}"/>
-                            <TextBlock Text="{Binding CatName}" VerticalAlignment="Center"/>
-                        </StackPanel>
+                            <materialDesign:Card Background="MediumPurple" UniformCornerRadius="10" Width="100" Height="25" materialDesign:ShadowAssist.ShadowEdges="All">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 5 0">
+                                    <Image RenderOptions.BitmapScalingMode="HighQuality" Width="20" Height="20" Source="{Binding Avatar}"/>
+                                <TextBlock Text="{Binding CatName}" Foreground="White" Style="{StaticResource MaterialDesignBody2TextBlock}" Margin="5 0 0 0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </materialDesign:Card>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

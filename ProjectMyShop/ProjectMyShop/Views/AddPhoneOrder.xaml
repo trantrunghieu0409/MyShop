@@ -12,7 +12,7 @@
         Title="Detail Order" Height="500" Width="450">
     <StackPanel Orientation="Horizontal">
         <StackPanel Orientation="Vertical">
-            <ComboBox BorderThickness="1" BorderBrush="MediumPurple" Name="categoryCombobox" Width="100" Height="35" SelectionChanged="categoryCombobox_SelectionChanged" Grid.Column="1" Grid.ColumnSpan="2">
+            <ComboBox Style="{Binding MaterialDesign}" BorderThickness="1" BorderBrush="MediumPurple" Name="categoryCombobox" Width="100" Height="35" SelectionChanged="categoryCombobox_SelectionChanged" Grid.Column="1" Grid.ColumnSpan="2">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Padding="5" Text="{Binding CatName}"/>
