@@ -8,6 +8,14 @@
     <StartupObject>ProjectMyShop.App</StartupObject>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Assets\Images\background.jpg" />
     <None Remove="Assets\Images\home.png" />

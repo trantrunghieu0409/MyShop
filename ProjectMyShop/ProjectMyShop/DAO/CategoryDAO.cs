@@ -87,8 +87,17 @@ namespace ProjectMyShop.DAO
         }
         public void AddCategory(Category cat)
         {
-            var sql = "insert into Category(CatName, Avatar) " +
-                "values (@CatName, @Avatar)"; //
+            var sql = "";
+            if(cat.Avatar != null)
+            { 
+                sql = "insert into Category(CatName, Avatar) " +
+                    "values (@CatName, @Avatar)"; //
+            }
+            else
+            {
+                sql = "insert into Category(CatName) " +
+                    "values (@CatName)";
+            }
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@CatName", cat.CatName);

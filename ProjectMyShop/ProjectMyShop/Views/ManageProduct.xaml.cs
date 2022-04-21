@@ -125,7 +125,6 @@ namespace ProjectMyShop.Views
             }
             _currentPage = 1;
             previousButton.IsEnabled = false;
-
             _vm.Phones = _categories[i].Phones;
             _vm.SelectedPhones = _vm.Phones
                 .Skip((_currentPage - 1) * _rowsPerPage)
@@ -323,6 +322,7 @@ namespace ProjectMyShop.Views
                     }
                 }
                 _categories = _cateBUS.getCategoryList();
+                Debug.WriteLine(_categories.Count);
                 foreach(var category in _categories)
                 {
                     category.Phones = new BindingList<Phone>(_phoneBUS.getPhonesAccordingToSpecificCategory(category.ID));
