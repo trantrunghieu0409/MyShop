@@ -43,6 +43,11 @@ namespace ProjectMyShop.BUS
             }
         }
 
+        public void removeCategory(Category cat)
+        {
+            _categoryDAO.removeCategory(cat.ID);
+        }
+
         public void updateCategory(int ID, Category category)
         {
 

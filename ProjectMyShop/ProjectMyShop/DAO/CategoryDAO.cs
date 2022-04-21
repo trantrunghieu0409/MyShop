@@ -179,5 +179,25 @@ namespace ProjectMyShop.DAO
                 System.Diagnostics.Debug.WriteLine($"Updated {category.ID} Fail: " + ex.Message);
             }
         }
+
+        public void removeCategory(int ID)
+        {
+            string sql = "delete from Category where ID = @ID";
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+            sqlCommand.Parameters.AddWithValue("@ID", ID);
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                sql = "delete from Phone where CatID = @ID";
+                sqlCommand.Parameters.AddWithValue("@ID", ID);
+                sqlCommand.ExecuteNonQuery();
+
+                System.Diagnostics.Debug.WriteLine($"Deleted {ID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Deleted {ID} Fail: " + ex.Message);
+            }
+        }
     }
 }
