@@ -74,7 +74,26 @@ namespace ProjectMyShop.Views
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            var p = (Category)categoriesListView.SelectedItem;
+            var screen = new EditCategoryScreen(p);
+            var result = screen.ShowDialog();
+            if (result == true)
+            {
+                var info = screen.EditedCategory;
+                p.CatName = info.CatName;
+                p.Avatar = info.Avatar;
+                try
+                {
+                    _categoryBUS.updateCategory(p.ID, p);
+                    loadCategory();
 
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception here");
+                    MessageBox.Show(screen, ex.Message);
+                }
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -116,6 +135,6 @@ namespace ProjectMyShop.Views
 
         }
 
-       
+ 
     }
 }

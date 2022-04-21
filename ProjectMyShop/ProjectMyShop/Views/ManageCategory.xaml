@@ -27,32 +27,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <Button Name="EditButton"
-                    Click="EditButton_Click"
-                    Margin="0 0 10 0"
-                    Background="DeepPink"
-                    materialDesign:ButtonAssist.CornerRadius="5"
-                    >
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Edit"/>
-                        <TextBlock Text="Edit" Margin="5 0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-            <Button Name="DeleteButton"
-                    Click="DeleteButton_Click"
-                    Margin="0 0 10 0"
-                    Background="DeepPink"
-                    materialDesign:ButtonAssist.CornerRadius="5"
-                    >
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Delete"/>
-                        <TextBlock Text="Delete" Margin="5 0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+           
          <!-- End List Button-->   
             
         </StackPanel>
@@ -64,9 +39,9 @@
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="20*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*"/>
                 
             </Grid.RowDefinitions>
 
@@ -78,12 +53,12 @@
                 </ListView.ItemsPanel>
                 <ListView.Resources>
                     <ContextMenu x:Key="categoryContextMenu" Background="White">
-                        <MenuItem Header="Delete">
+                        <MenuItem Header="Delete" Click="DeleteButton_Click">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="TrashCan"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Edit" >
+                        <MenuItem Header="Edit" Click="EditButton_Click" >
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="Pencil"/>
                             </MenuItem.Icon>
@@ -111,11 +86,11 @@
 
 
             <!-- Next, Pre Button-->
-           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">
+            <!--         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">
                 <Button x:Name="previousButton" Width="80" Height="35" Content="&lt;" Click="previousButton_Click"  IsEnabled="False" />
                 <TextBlock Name="currentPagingTextBlock" Width="80" Text="0" TextAlignment="Center" VerticalAlignment="Center"/>
                 <Button x:Name="nextButton" Width="80" Height="35" Content="&gt;" Click="nextButton_Click"/>
-            </StackPanel> 
+            </StackPanel>  -->
         <!-- End Next, Pre Button-->
         </Grid>
     </DockPanel>

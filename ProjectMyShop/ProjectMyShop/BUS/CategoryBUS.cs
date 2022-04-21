@@ -42,5 +42,12 @@ namespace ProjectMyShop.BUS
                 cat.ID = _categoryDAO.GetLastestInsertID();
             }
         }
+
+        public void updateCategory(int ID, Category category)
+        {
+
+                _categoryDAO.updateCategory(ID, category);
+            
+        }
     }
 }

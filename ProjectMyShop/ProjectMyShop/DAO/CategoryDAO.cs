@@ -141,5 +141,43 @@ namespace ProjectMyShop.DAO
             if (count > 0) return true;
             return false;
         }
+
+        public void updateCategory(int ID, Category category)
+        {
+            string sql;
+            if (category.Avatar != null)
+            {
+                sql = "update Category set CatName = @CatName, Avatar = @Avatar where ID = @ID";
+            }
+            else
+            {
+                sql = "update Category set CatName = @CatName where ID = @ID";
+            }
+            SqlCommand sqlCommand = new SqlCommand(sql, _connection);
+            sqlCommand.Parameters.AddWithValue("@ID", ID);
+            sqlCommand.Parameters.AddWithValue("@CatName", category.CatName);
+
+
+            if (category.Avatar != null)
+            {
+                var encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(category.Avatar));
+                using (var stream = new MemoryStream())
+                {
+                    encoder.Save(stream);
+                    sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
+                }
+            }
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine($"Updated {category.ID} OK");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Updated {category.ID} Fail: " + ex.Message);
+            }
+        }
     }
 }
