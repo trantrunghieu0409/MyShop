@@ -110,7 +110,7 @@ namespace ProjectMyShop.DAO
         {
             string sqlFormattedDate = src.ToString("yyyy");
 
-            var sql = "SELECT DATEPART(iso_week, o.OrderDate) AS Week, convert(varchar,cast(SUM(do.Quantity * p.SoldPrice) as money), 1) as Revenue FROM Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID WHERE DATEPART(year, o.OrderDate) = @SelectedYear GROUP BY DATEPART(iso_week, o.OrderDate) ORDER BY DATEPART(iso_week, o.OrderDate);";
+            var sql = "SELECT convert(varchar, DATEPART(iso_week, o.OrderDate)) AS Week, cast(SUM(do.Quantity * p.SoldPrice) as decimal(13,4)) as Revenue FROM Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID WHERE DATEPART(year, o.OrderDate) = @SelectedYear GROUP BY DATEPART(iso_week, o.OrderDate) ORDER BY DATEPART(iso_week, o.OrderDate);";
             var sqlParameter = new SqlParameter();
             sqlParameter.ParameterName = "@SelectedYear";
             sqlParameter.Value = sqlFormattedDate;
@@ -207,7 +207,7 @@ namespace ProjectMyShop.DAO
         {
             string sqlFormattedDate = src.ToString("yyyy");
 
-            var sql = "SELECT DATEPART(iso_week, o.OrderDate) AS Week, convert(varchar,cast(SUM(do.Quantity * (p.SoldPrice - p.BoughtPrice)) as money), 1) as Profit FROM Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID WHERE DATEPART(year, o.OrderDate) = @SelectedYear GROUP BY DATEPART(iso_week, o.OrderDate) ORDER BY DATEPART(iso_week, o.OrderDate);";
+            var sql = "SELECT convert(varchar, DATEPART(iso_week, o.OrderDate)) AS Week, cast(SUM(do.Quantity * (p.SoldPrice - p.BoughtPrice)) as decimal(13,4)) as Profit FROM Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID WHERE DATEPART(year, o.OrderDate) = @SelectedYear GROUP BY DATEPART(iso_week, o.OrderDate) ORDER BY DATEPART(iso_week, o.OrderDate);";
             var sqlParameter = new SqlParameter();
             sqlParameter.ParameterName = "@SelectedYear";
             sqlParameter.Value = sqlFormattedDate;

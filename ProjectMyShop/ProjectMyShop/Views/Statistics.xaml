@@ -252,7 +252,7 @@
                 <TabItem Header="Profit">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1.5*"/>
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
@@ -260,9 +260,9 @@
                             <ComboBox Name="profitCombobox" HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding profitFigureIndex}"
-                                
+                                Style="{Binding MaterialDesign}"
                                 SelectionChanged="profitCombobox_SelectionChanged"
-                                Width="62">
+                                Width="75">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}"/>

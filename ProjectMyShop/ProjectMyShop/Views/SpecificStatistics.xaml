@@ -121,6 +121,7 @@
                 HorizontalAlignment="Center">
 
                 <ComboBox Name="categoriesCombobox" HorizontalAlignment="Left"
+                                Style="{Binding MaterialDesign}"
                                 Height="50"
                                 SelectionChanged="categoriesCombobox_SelectionChanged"
                                 SelectedIndex="{Binding Path=categoriesFigureIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -136,6 +137,7 @@
                 </ComboBox>
 
                 <ComboBox Name="productCombobox" HorizontalAlignment="Right"
+                                Style="{Binding MaterialDesign}"
                                 Height="50"
                                 SelectedIndex="{Binding Path=productFigureIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 SelectionChanged="productCombobox_SelectionChanged"
