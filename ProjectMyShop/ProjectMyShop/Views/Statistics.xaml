@@ -258,6 +258,7 @@
 
                         <DockPanel>
                             <ComboBox Name="profitCombobox" HorizontalAlignment="Right"
+                                VerticalContentAlignment="Center"
                                 Height="30"
                                 SelectedIndex="{Binding profitFigureIndex}"
                                 Style="{Binding MaterialDesign}"

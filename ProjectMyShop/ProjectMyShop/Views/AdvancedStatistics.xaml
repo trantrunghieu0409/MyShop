@@ -101,7 +101,7 @@
                                 Height="30"
                                 SelectedIndex="{Binding figureIndex}"
                                 SelectionChanged="timeCombobox_SelectionChanged"
-                                Width="75">
+                                Width="80">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>
@@ -128,7 +128,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="       Phone Name" IsReadOnly="True">
+                    <DataGridTemplateColumn Header="     Phone Name" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -147,7 +147,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="         Bought Price"
+                    <DataGridTemplateColumn Header="       Bought Price"
                                         IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -157,7 +157,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="        Sold Price"
+                    <DataGridTemplateColumn Header="      Sold Price"
                                         IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -176,7 +176,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn> -->
-                    <DataGridTemplateColumn Header="        Quantity">
+                    <DataGridTemplateColumn Header="       Quantity">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >

@@ -287,11 +287,18 @@ namespace ProjectMyShop.DAO
             }
         }
 
-        public List<BestSellingPhone> getWeeklyBestSellingPhones()
+        public List<BestSellingPhone> getBestSellingPhonesInWeek(DateTime src)
         {
-            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where OrderDate between DATEADD(DAY, -7, GETDATE()) and DATEADD(DAY, 1, GETDATE()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            string sqlFormattedDate = src.ToString("yyyy-MM-dd");
+
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where OrderDate between DATEADD(DAY, -7, @SelectedDate) and DATEADD(DAY, 1, @SelectedDate) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@SelectedDate";
+            sqlParameter.Value = sqlFormattedDate;
 
             var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
 
             var reader = command.ExecuteReader();
 
@@ -342,11 +349,18 @@ namespace ProjectMyShop.DAO
             return list;
         }
 
-        public List<BestSellingPhone> getMonthlyBestSellingPhones()
+        public List<BestSellingPhone> getBestSellingPhonesInMonth(DateTime src)
         {
-            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) and datepart(month, OrderDate) = datepart(month, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            string sqlFormattedDate = src.ToString("yyyy-MM-dd");
+
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, @SelectedDate) and datepart(month, OrderDate) = datepart(month, @SelectedDate) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@SelectedDate";
+            sqlParameter.Value = sqlFormattedDate;
 
             var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
 
             var reader = command.ExecuteReader();
 
@@ -397,11 +411,18 @@ namespace ProjectMyShop.DAO
             return list;
         }
 
-        public List<BestSellingPhone> getYearlyBestSellingPhones()
+        public List<BestSellingPhone> getBestSellingPhonesInYear(DateTime src)
         {
-            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            string sqlFormattedDate = src.ToString("yyyy-MM-dd");
+
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, @SelectedDate) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@SelectedDate";
+            sqlParameter.Value = sqlFormattedDate;
 
             var command = new SqlCommand(sql, _connection);
+            command.Parameters.Add(sqlParameter);
 
             var reader = command.ExecuteReader();
 
