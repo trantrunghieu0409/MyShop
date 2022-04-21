@@ -176,18 +176,11 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn> -->
-                    <DataGridTemplateColumn Header="        #">
+                    <DataGridTemplateColumn Header="        Quantity">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel>
-                                    <materialDesign:Badged>
-                                        <Button x:Name="AddButton"
-                                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}">
-                                            <Button.Content>
-                                                <materialDesign:PackIcon Kind="AddBox"/>
-                                            </Button.Content>
-                                        </Button>
-                                    </materialDesign:Badged>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                    <TextBlock Margin="10,0" Text="{Binding Quantity}" FontWeight="DemiBold"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

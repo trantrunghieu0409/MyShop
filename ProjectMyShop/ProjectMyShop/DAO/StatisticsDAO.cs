@@ -414,5 +414,35 @@ namespace ProjectMyShop.DAO
             reader.Close();
             return resultList;
         }
+
+        public List<Tuple<string, int>> getPhoneQuantityInCategory(int srcCategoryID)
+        {
+            var sql = "select p.PhoneName, sum(do.Quantity) as Quantity from Phone p join DetailOrder do on p.ID = do.PhoneID join Orders o on o.ID = do.OrderID where p.CatID = @SelectedCategory group by p.PhoneName;";
+
+            var sqlParameter = new SqlParameter();
+            sqlParameter.ParameterName = "@SelectedCategory";
+            sqlParameter.Value = srcCategoryID;
+
+            var command = new SqlCommand(sql, _connection);
+
+            command.Parameters.Add(sqlParameter);
+
+            var reader = command.ExecuteReader();
+
+            var resultList = new List<Tuple<string, int>>();
+            while (reader.Read())
+            {
+                string phoneName = (string)reader["PhoneName"];
+                int quantity = 0;
+
+                if (reader["Quantity"].GetType() != typeof(DBNull))
+                {
+                    quantity = (int)reader["Quantity"];
+                }
+                resultList.Add(Tuple.Create(phoneName, quantity));
+            }
+            reader.Close();
+            return resultList;
+        }
     }
 }

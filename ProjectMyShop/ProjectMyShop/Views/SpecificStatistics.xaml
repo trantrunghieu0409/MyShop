@@ -164,7 +164,7 @@
             Margin="25, 20, 25, 0"
             materialDesign:ShadowAssist.ShadowDepth="Depth0">
 
-            <TabControl Name="chartTabControl" SelectedIndex="{Binding tabSelectedIndex}">
+            <TabControl Name="chartTabControl" SelectedIndex="{Binding tabSelectedIndex}" SelectionChanged="chartTabControl_SelectionChanged">
                 <TabItem Header="Bar Graph">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -208,30 +208,15 @@
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
-                        <DockPanel>
-                            <ComboBox Name="piechartCombobox" HorizontalAlignment="Right"
-                                Height="30"
-                                SelectedIndex="{Binding piechartFigureIndex}"
-                                
-                                Width="62">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </DockPanel>
-
-                        <lvc:CartesianChart Name="productPieChart"
+                        <lvc:PieChart Name="productPieChart"
                                         Grid.Row="1">
 
-                            <lvc:CartesianChart.Series>
-                                <lvc:ColumnSeries Title="Maria" Values="3" />
-                                <lvc:ColumnSeries Title="Maria" Values="4" />
-                                <lvc:ColumnSeries Title="Maria" Values="5" />
-                                <lvc:ColumnSeries Title="Maria" Values="6" />
-                            </lvc:CartesianChart.Series>
-                        </lvc:CartesianChart>
+                            <lvc:PieChart.Series>
+                                <lvc:PieSeries Title="Maria" Values="3" />
+                                <lvc:PieSeries Title="Maria" Values="4" />
+                                <lvc:PieSeries Title="Maria" Values="5" />
+                            </lvc:PieChart.Series>
+                        </lvc:PieChart>
                     </Grid>
                 </TabItem>
             </TabControl>

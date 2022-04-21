@@ -94,5 +94,10 @@ namespace ProjectMyShop.BUS
         {
             return _statisticsDAO.getYearlyQuantityOfSpecificProduct(srcPhoneID, srcCategoryID);
         }
+
+        public List<Tuple<string, int>> getPhoneQuantityInCategory(int srcCategoryID)
+        {
+            return _statisticsDAO.getPhoneQuantityInCategory(srcCategoryID);
+        }
     }
 }

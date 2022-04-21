@@ -75,17 +75,17 @@ namespace ProjectMyShop.BUS
             }
         }
 
-        public List<Phone> getWeeklyBestSellingPhones()
+        public List<BestSellingPhone> getWeeklyBestSellingPhones()
         {
             return _phoneDAO.getWeeklyBestSellingPhones();
         }
 
-        public List<Phone> getMonthlyBestSellingPhones()
+        public List<BestSellingPhone> getMonthlyBestSellingPhones()
         {
             return _phoneDAO.getMonthlyBestSellingPhones();
         }
 
-        public List<Phone> getYearlyBestSellingPhones()
+        public List<BestSellingPhone> getYearlyBestSellingPhones()
         {
             return _phoneDAO.getYearlyBestSellingPhones();
         }

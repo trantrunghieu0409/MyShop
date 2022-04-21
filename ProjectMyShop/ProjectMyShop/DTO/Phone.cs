@@ -25,4 +25,9 @@ namespace ProjectMyShop.DTO
             return MemberwiseClone();
         }
     }
+
+    public class BestSellingPhone : Phone
+    {
+        public int Quantity { get; set; }
+    }
 }

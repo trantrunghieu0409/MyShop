@@ -287,15 +287,15 @@ namespace ProjectMyShop.DAO
             }
         }
 
-        public List<Phone> getWeeklyBestSellingPhones()
+        public List<BestSellingPhone> getWeeklyBestSellingPhones()
         {
-            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where OrderDate between DATEADD(DAY, -7, GETDATE()) and DATEADD(DAY, 1, GETDATE()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where OrderDate between DATEADD(DAY, -7, GETDATE()) and DATEADD(DAY, 1, GETDATE()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
 
             var command = new SqlCommand(sql, _connection);
 
             var reader = command.ExecuteReader();
 
-            List<Phone> list = new List<Phone>();
+            List<BestSellingPhone> list = new List<BestSellingPhone>();
             while (reader.Read())
             {
                 var ID = (int)reader["ID"];
@@ -306,8 +306,9 @@ namespace ProjectMyShop.DAO
                 var BoughtPrice = (int)(decimal)reader["BoughtPrice"];
                 var Description = (String)reader["Description"];
                 var Stock = (int)reader["Stock"];
+                var Quantity = (int)reader["Quantity"];
 
-                Phone phone = new Phone()
+                BestSellingPhone phone = new BestSellingPhone()
                 {
                     ID = ID,
                     PhoneName = PhoneName,
@@ -315,7 +316,8 @@ namespace ProjectMyShop.DAO
                     SoldPrice = SoldPrice,
                     Stock = Stock,
                     BoughtPrice = BoughtPrice,
-                    Description = Description
+                    Description = Description,
+                    Quantity = Quantity
                 };
                 if (!reader["Avatar"].Equals(DBNull.Value))
                 {
@@ -340,15 +342,15 @@ namespace ProjectMyShop.DAO
             return list;
         }
 
-        public List<Phone> getMonthlyBestSellingPhones()
+        public List<BestSellingPhone> getMonthlyBestSellingPhones()
         {
-            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) and datepart(month, OrderDate) = datepart(month, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) and datepart(month, OrderDate) = datepart(month, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
 
             var command = new SqlCommand(sql, _connection);
 
             var reader = command.ExecuteReader();
 
-            List<Phone> list = new List<Phone>();
+            List<BestSellingPhone> list = new List<BestSellingPhone>();
 
             while (reader.Read())
             {
@@ -359,8 +361,9 @@ namespace ProjectMyShop.DAO
                 var BoughtPrice = (int)(decimal)reader["BoughtPrice"];
                 var Description = (String)reader["Description"];
                 var Stock = (int)reader["Stock"];
+                var Quantity = (int)reader["Quantity"];
 
-                Phone phone = new Phone()
+                BestSellingPhone phone = new BestSellingPhone()
                 {
                     ID = ID,
                     PhoneName = PhoneName,
@@ -368,7 +371,8 @@ namespace ProjectMyShop.DAO
                     SoldPrice = SoldPrice,
                     Stock = Stock,
                     BoughtPrice = BoughtPrice,
-                    Description = Description
+                    Description = Description,
+                    Quantity = Quantity
                 };
                 if (!reader["Avatar"].Equals(DBNull.Value))
                 {
@@ -393,15 +397,15 @@ namespace ProjectMyShop.DAO
             return list;
         }
 
-        public List<Phone> getYearlyBestSellingPhones()
+        public List<BestSellingPhone> getYearlyBestSellingPhones()
         {
-            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
+            var sql = "select TOP(5) p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar, sum(do.Quantity) as Quantity from Orders o join DetailOrder do on o.ID = do.OrderID join Phone p on p.ID = do.PhoneID where datepart(year, OrderDate) = datepart(year, getdate()) group by p.ID, p.PhoneName, p.Manufacturer, p.Stock, p.Description, p.BoughtPrice, p.SoldPrice, p.CatID, p.UploadDate, p.Avatar order by sum(do.Quantity) desc;";
 
             var command = new SqlCommand(sql, _connection);
 
             var reader = command.ExecuteReader();
 
-            List<Phone> list = new List<Phone>();
+            List<BestSellingPhone> list = new List<BestSellingPhone>();
             while (reader.Read())
             {
                 var ID = (int)reader["ID"];
@@ -411,8 +415,9 @@ namespace ProjectMyShop.DAO
                 var BoughtPrice = (int)(decimal)reader["BoughtPrice"];
                 var Description = (String)reader["Description"];
                 var Stock = (int)reader["Stock"];
+                var Quantity = (int)reader["Quantity"];
 
-                Phone phone = new Phone()
+                BestSellingPhone phone = new BestSellingPhone()
                 {
                     ID = ID,
                     PhoneName = PhoneName,
@@ -420,7 +425,8 @@ namespace ProjectMyShop.DAO
                     SoldPrice = SoldPrice,
                     Stock = Stock,
                     BoughtPrice = BoughtPrice,
-                    Description = Description
+                    Description = Description,
+                    Quantity = Quantity
                 };
                 if (!reader["Avatar"].Equals(DBNull.Value))
                 {

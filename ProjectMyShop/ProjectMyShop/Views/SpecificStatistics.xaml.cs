@@ -53,9 +53,6 @@ namespace ProjectMyShop.Views
             bargraphCombobox.ItemsSource = figureValues;
             bargraphCombobox.SelectedIndex = bargraphFigureIndex;
 
-            piechartCombobox.ItemsSource = figureValues;
-            piechartCombobox.SelectedIndex = bargraphFigureIndex;
-
             statisticsDatePicker.SelectedDate = selectedDate;
 
             chartTabControl.SelectedIndex = tabSelectedIndex;
@@ -73,7 +70,6 @@ namespace ProjectMyShop.Views
         private PhoneBUS _phoneBUS;
         public int statisticsFigureIndex { get; set; } = 1;
         public int bargraphFigureIndex { get; set; } = 0;
-        public int piechartFigureIndex { get; set; } = 0;
         public int tabSelectedIndex { get; set; } = 0;
         public int categoriesFigureIndex { get; set; } = 0;
         public int productFigureIndex { get; set; } = 0;
@@ -257,6 +253,27 @@ namespace ProjectMyShop.Views
             }
         }
 
+        public void configurePieChart()
+        {
+            if (phones.Count() > 0 && categories.Count() > 0)
+            {
+                var phoneResult = _statisticsBUS.getPhoneQuantityInCategory(categories[categoriesFigureIndex].ID);
+
+                var phoneQuantityCollection = new SeriesCollection();
+
+                foreach (var item in phoneResult)
+                {
+                    phoneQuantityCollection.Add(new PieSeries
+                    {
+                        Title = item.Item1.ToString(),
+                        Values = new ChartValues<double> { Convert.ToDouble((int)item.Item2) }
+                    });
+                }
+
+                productPieChart.Series = phoneQuantityCollection;
+            }
+        }
+
         private void categoriesCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             phones = _phoneBUS.getPhonesAccordingToSpecificCategory(categories[categoriesFigureIndex].ID);
@@ -307,6 +324,19 @@ namespace ProjectMyShop.Views
                     statisticsCombobox.SelectedIndex = statisticsFigureIndex;
                     break;
                 default:
+                    break;
+            }
+        }
+
+        private void chartTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (tabSelectedIndex)
+            {
+                case 0:
+                    configureBarGraphs();
+                    break;
+                case 1:
+                    configurePieChart();
                     break;
             }
         }

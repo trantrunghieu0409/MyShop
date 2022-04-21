@@ -57,7 +57,7 @@ namespace ProjectMyShop.Views
         public List<string> figureValues = new List<string>() {"Weekly", "Monthly", "Yearly" };
         public List<string> statisticsFigureValues = new List<string>() { "General", "Specific", "Advanced" };
         public int statisticsFigureIndex { get; set; } = 2;
-        public List<Phone> phones;
+        public List<BestSellingPhone> phones;
         private Statistics _statisticsPage;
         private SpecificStatistics _specificPage;
         PhoneBUS _phoneBUS = new PhoneBUS();
