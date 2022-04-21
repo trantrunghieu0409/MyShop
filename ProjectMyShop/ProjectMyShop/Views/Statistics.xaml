@@ -21,7 +21,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="175"/>
-            <RowDefinition Height="175"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <materialDesign:Card 
@@ -38,7 +38,9 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
 
-                <ComboBox Name="statisticsCombobox" HorizontalAlignment="Right"
+                <ComboBox Name="statisticsCombobox"
+                                Style="{Binding MaterialDesign}"
+                                HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding statisticsFigureIndex}"
                                 VerticalContentAlignment="Center"
@@ -200,7 +202,7 @@
                 <TabItem Header="Revenue">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1.5*"/>
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
@@ -208,9 +210,10 @@
                             <ComboBox Name="revenueCombobox" HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding figureIndex}"
-                                
+                                Style="{Binding MaterialDesign}"
+                                VerticalContentAlignment="Center"
                                 SelectionChanged="revenueCombobox_SelectionChanged"
-                                Width="62">
+                                Width="75">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}"/>

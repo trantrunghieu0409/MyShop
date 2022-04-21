@@ -37,7 +37,9 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
 
-                <ComboBox Name="statisticsCombobox" HorizontalAlignment="Right"
+                <ComboBox Name="statisticsCombobox"
+                                Style="{Binding MaterialDesign}"
+                                HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding statisticsFigureIndex}"
                                 SelectionChanged="statisticsCombobox_SelectionChanged"
@@ -48,6 +50,16 @@
                             <TextBlock Text="{Binding}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="DeepPink" />
+                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Green" />
+                    </ComboBox.Resources>
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
                 </ComboBox>
             </StackPanel>
         </materialDesign:Card>
@@ -161,11 +173,14 @@
                         </Grid.RowDefinitions>
 
                         <DockPanel>
-                            <ComboBox Name="bargraphCombobox" HorizontalAlignment="Right"
+                            <ComboBox Name="bargraphCombobox" 
+                                Style="{Binding MaterialDesign}"
+                                HorizontalAlignment="Right"
                                 Height="30"
+                                VerticalContentAlignment="Center"
                                 SelectedIndex="{Binding bargraphFigureIndex}"
                                 SelectionChanged="bargraphCombobox_SelectionChanged"
-                                Width="62">
+                                Width="75">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}"/>

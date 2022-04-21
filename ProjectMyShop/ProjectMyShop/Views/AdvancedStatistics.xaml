@@ -36,7 +36,9 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
 
-                <ComboBox Name="statisticsCombobox" HorizontalAlignment="Right"
+                <ComboBox Name="statisticsCombobox"
+                                Style="{Binding MaterialDesign}"
+                                HorizontalAlignment="Right"
                                 Height="30"
                                 SelectedIndex="{Binding statisticsFigureIndex}"
                                 SelectionChanged="statisticsCombobox_SelectionChanged"
@@ -93,11 +95,13 @@
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0, 20, 0, 10">
             <DockPanel >
-                <ComboBox DockPanel.Dock="Right" Name="timeCombobox" HorizontalAlignment="Right" Margin="0, 0, 10, 0"
+                <ComboBox DockPanel.Dock="Right" Name="timeCombobox" HorizontalAlignment="Right" Margin="0, 0, 2, 0"
+                                Style="{Binding MaterialDesign}"
+                                VerticalContentAlignment="Center"
                                 Height="30"
                                 SelectedIndex="{Binding figureIndex}"
                                 SelectionChanged="timeCombobox_SelectionChanged"
-                                Width="62">
+                                Width="75">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>

@@ -296,14 +296,14 @@ namespace ProjectMyShop.Views
             {
                 case 0:
                     NavigationService.Navigate(_statisticsPage);
-                    statisticsFigureIndex = 0;
+                    statisticsFigureIndex = 1;
                     statisticsCombobox.SelectedIndex = statisticsFigureIndex;
                     break;
                 case 1:
                     break;
                 case 2:
                     NavigationService.Navigate(_advancedPage);
-                    statisticsFigureIndex = 2;
+                    statisticsFigureIndex = 1;
                     statisticsCombobox.SelectedIndex = statisticsFigureIndex;
                     break;
                 default:
