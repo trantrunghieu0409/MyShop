@@ -92,7 +92,6 @@ namespace ProjectMyShop.Views
                 screen.Owner = this.Parent as Window;
                 var result = screen.ShowDialog();
 
-
                 if (result == true)
                 {
                     _orderBUS.UpdateOrder(_vm.SelectedOrders[index].ID, order);

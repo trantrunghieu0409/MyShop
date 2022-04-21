@@ -100,13 +100,17 @@ namespace ProjectMyShop.Views
 
             if (i != -1)
             {
+
+                detailOrder.Phone = new Phone();
+                detailOrder.Phone = (Phone)order.DetailOrderList[i].Phone.Clone();
+                detailOrder.Quantity = order.DetailOrderList[i].Quantity;
                 var screen = new AddPhoneOrder(detailOrder);
                 if (screen.ShowDialog() == true)
                 {
                     if (order.DetailOrderList == null)
                         order.DetailOrderList = new List<DetailOrder>();
 
-                    _orderBUS.UpdateDetailOrder(screen.detailOrder);
+                    _orderBUS.UpdateDetailOrder(order.DetailOrderList[i].Phone.ID, screen.detailOrder);
                     order.DetailOrderList[i] = (DetailOrder)screen.detailOrder.Clone();
                     Reload();
                 }

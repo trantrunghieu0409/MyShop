@@ -84,11 +84,11 @@ namespace ProjectMyShop.BUS
             _orderDAO.AddDetailOrder(detail);
         }
 
-        public void UpdateDetailOrder(DetailOrder detail)
+        public void UpdateDetailOrder(int oldPhoneID, DetailOrder detail)
         {
             if(detail.Quantity >= 0)
             {
-                _orderDAO.UpdateDetailOrder(detail);
+                _orderDAO.UpdateDetailOrder(oldPhoneID, detail);
             }
             else
             {
