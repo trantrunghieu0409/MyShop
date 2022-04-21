@@ -81,6 +81,7 @@ namespace ProjectMyShop.Views
         private Statistics _statisticsPage;
         private AdvancedStatistics _advancedPage;
 
+        Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
         public void configureBarGraphs()
         {
             switch (bargraphFigureIndex)
@@ -266,7 +267,9 @@ namespace ProjectMyShop.Views
                     phoneQuantityCollection.Add(new PieSeries
                     {
                         Title = item.Item1.ToString(),
-                        Values = new ChartValues<double> { Convert.ToDouble((int)item.Item2) }
+                        Values = new ChartValues<double> { Convert.ToDouble((int)item.Item2) },
+                        DataLabels = true,
+                        //LabelPoint = labelPoint,
                     });
                 }
 
@@ -278,6 +281,8 @@ namespace ProjectMyShop.Views
         {
             phones = _phoneBUS.getPhonesAccordingToSpecificCategory(categories[categoriesFigureIndex].ID);
             productCombobox.ItemsSource = phones;
+
+            configurePieChart();
 
             if (phones.Count > 0)
             {

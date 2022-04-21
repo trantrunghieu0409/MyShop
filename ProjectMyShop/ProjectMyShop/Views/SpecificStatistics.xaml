@@ -167,7 +167,7 @@
             materialDesign:ShadowAssist.ShadowDepth="Depth0">
 
             <TabControl Name="chartTabControl" SelectedIndex="{Binding tabSelectedIndex}" SelectionChanged="chartTabControl_SelectionChanged">
-                <TabItem Header="Bar Graph">
+                <TabItem Header="Phones Sales">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -203,21 +203,14 @@
                         </lvc:CartesianChart>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Pie Chart">
+                <TabItem Header="Sales Volume">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
-                        <lvc:PieChart Name="productPieChart"
-                                        Grid.Row="1">
-
-                            <lvc:PieChart.Series>
-                                <lvc:PieSeries Title="Maria" Values="3" />
-                                <lvc:PieSeries Title="Maria" Values="4" />
-                                <lvc:PieSeries Title="Maria" Values="5" />
-                            </lvc:PieChart.Series>
+                        <lvc:PieChart Name="productPieChart" Grid.Row="1" LegendLocation="Bottom" Series="{Binding phoneQuantityCollection}" Hoverable="True">
                         </lvc:PieChart>
                     </Grid>
                 </TabItem>
