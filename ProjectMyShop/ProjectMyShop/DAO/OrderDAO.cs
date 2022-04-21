@@ -186,10 +186,12 @@ namespace ProjectMyShop.DAO
         }
         public void DeleteDetailOrder(DetailOrder detail)
         {
-            var sql = "delete from DetailOrder where OrderID = @OrderID";
+            var sql = "delete from DetailOrder where OrderID = @OrderID and PhoneID = @PhoneID and Quantity = @Quantity";
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@OrderID", detail.OrderID);
+            sqlCommand.Parameters.AddWithValue("@PhoneID", detail.Phone.ID);
+            sqlCommand.Parameters.AddWithValue("@Quantity", detail.Quantity);
 
             try
             {

@@ -88,8 +88,8 @@ namespace ProjectMyShop.Views
                 if (order.DetailOrderList == null)
                     order.DetailOrderList = new List<DetailOrder>();
 
-                order.DetailOrderList.Add(screen.detailOrder);
                 _orderBUS.AddDetailOrder(screen.detailOrder);
+                order.DetailOrderList.Add(screen.detailOrder);
                 Reload();
             }
         }
@@ -106,8 +106,8 @@ namespace ProjectMyShop.Views
                     if (order.DetailOrderList == null)
                         order.DetailOrderList = new List<DetailOrder>();
 
-                    order.DetailOrderList[i] = (DetailOrder)screen.detailOrder.Clone();
                     _orderBUS.UpdateDetailOrder(screen.detailOrder);
+                    order.DetailOrderList[i] = (DetailOrder)screen.detailOrder.Clone();
                     Reload();
                 }
             }
@@ -122,9 +122,9 @@ namespace ProjectMyShop.Views
                 var res = MessageBox.Show($"Are you sure to discard this phone: {order.DetailOrderList[i].Phone.PhoneName}?", "Delete phone from order", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
                 {
-                    order.DetailOrderList.RemoveAt(i);
                     _orderBUS.DeleteDetailOrder(order.DetailOrderList[i]);
-                   Reload();
+                    order.DetailOrderList.RemoveAt(i);
+                    Reload();
                 }
             }
             else
