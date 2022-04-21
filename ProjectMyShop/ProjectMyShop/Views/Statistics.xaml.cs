@@ -47,8 +47,11 @@ namespace ProjectMyShop.Views
             configureGeneral();
             configureRevenueCharts();
 
-            _specificStatistics = new SpecificStatistics(this, _advancedStatistics);
-            _advancedStatistics = new AdvancedStatistics(this, _specificStatistics);
+            _specificStatistics = new SpecificStatistics(this);
+            _advancedStatistics = new AdvancedStatistics(this);
+
+            _specificStatistics.getAdvancedStatistic(_advancedStatistics);
+            _advancedStatistics.getSpecificStatistic(_specificStatistics);
 
             DataContext = this;
         }

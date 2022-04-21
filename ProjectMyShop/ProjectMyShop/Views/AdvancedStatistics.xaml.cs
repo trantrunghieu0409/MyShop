@@ -22,12 +22,11 @@ namespace ProjectMyShop.Views
     /// </summary>
     public partial class AdvancedStatistics : Page
     {
-        public AdvancedStatistics(Statistics srcPage, SpecificStatistics srcSpecificStatistics)
+        public AdvancedStatistics(Statistics srcPage)
         {
             InitializeComponent();
 
             _statisticsPage = srcPage;
-            _specificPage = srcSpecificStatistics;
 
             statisticsDatePicker.SelectedDate = selectedDate;
 
@@ -49,6 +48,10 @@ namespace ProjectMyShop.Views
             DataContext = this;
         }
 
+        public void getSpecificStatistic(SpecificStatistics srcSpecificStatistics)
+        {
+            _specificPage = srcSpecificStatistics;
+        }
         public DateTime selectedDate { get; set; } = DateTime.Now;
         public int figureIndex { get; set; } = 0;
         public List<string> figureValues = new List<string>() {"Weekly", "Monthly", "Yearly" };

@@ -26,12 +26,12 @@ namespace ProjectMyShop.Views
     /// </summary>
     public partial class SpecificStatistics : Page
     {
-        public SpecificStatistics(Statistics srcPage, AdvancedStatistics srcAdvancedStatistics)
+        public SpecificStatistics(Statistics srcPage)
         {
             InitializeComponent();
 
             _statisticsPage = srcPage;
-            _advancedPage = srcAdvancedStatistics;
+            _advancedPage = new AdvancedStatistics(srcPage);
 
             _statisticsBUS = new StatisticsBUS();
             _categoryBUS = new CategoryBUS();
@@ -61,6 +61,11 @@ namespace ProjectMyShop.Views
             chartTabControl.SelectedIndex = tabSelectedIndex;
 
             DataContext = this;
+        }
+
+        public void getAdvancedStatistic(AdvancedStatistics srcAdvancedStatistics)
+        {
+            _advancedPage = srcAdvancedStatistics;
         }
 
         private StatisticsBUS _statisticsBUS;
