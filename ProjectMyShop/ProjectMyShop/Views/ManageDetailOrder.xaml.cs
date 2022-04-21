@@ -47,6 +47,13 @@ namespace ProjectMyShop.Views
             StatusComboBox.ItemsSource = Order.GetAllStatusValues();
             DataContext = order;
 
+            if (order.ID == 0)
+            {
+                ChoosePhoneButton.IsEnabled = false;
+                UpdateButton.IsEnabled = false;
+                DeleteButton.IsEnabled = false;
+            }
+
             _vm = new DetailOrderViewModel();
             if (order.DetailOrderList != null)
             {
