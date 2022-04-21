@@ -41,7 +41,7 @@ namespace ProjectMyShop.Views
             _orderBUS = new OrderBUS();
 
             FromDate = DateTime.Parse("1/1/1970");
-            ToDate = DateTime.Now;
+            ToDate = DateTime.MaxValue;
             
             Reload();
             OrderDataGrid.ItemsSource = _vm.SelectedOrders;
@@ -223,7 +223,7 @@ namespace ProjectMyShop.Views
             }
             else
             {
-                ToDate= DateTime.Now;
+                ToDate= DateTime.MaxValue;
             }
 
             if (FromDate <= ToDate)

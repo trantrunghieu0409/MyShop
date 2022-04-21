@@ -215,22 +215,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="        #">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <materialDesign:Badged>
-                                            <Button x:Name="SaveButton" Click="SaveButton_Click" 
-                                                Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}">
-                                                <Button.Content>
-                                                    <materialDesign:PackIcon Kind="ContentSave"/>
-                                                </Button.Content>
-                                            </Button>
-                                        </materialDesign:Badged>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                       
                     </DataGrid.Columns>
                     <DataGrid.ColumnHeaderStyle>
                         <Style>

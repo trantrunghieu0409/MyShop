@@ -123,7 +123,7 @@ namespace ProjectMyShop.Views
                 if (res == MessageBoxResult.Yes)
                 {
                     order.DetailOrderList.RemoveAt(i);
-                   _orderBUS.DeleteOrder(order.ID);
+                    _orderBUS.DeleteDetailOrder(order.DetailOrderList[i]);
                    Reload();
                 }
             }
