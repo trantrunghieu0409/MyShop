@@ -103,16 +103,19 @@ namespace ProjectMyShop.DAO
                     sqlCommand.Parameters.AddWithValue("@Avatar", stream.ToArray());
                 }
             }
-
+            
             try
             {
                 sqlCommand.ExecuteNonQuery();
                 System.Diagnostics.Debug.WriteLine($"Inserted {cat.ID} OK");
+                
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Inserted {cat.ID} Fail: " + ex.Message);
             }
+
+            
         }
         public int GetLastestInsertID()
         {
@@ -134,6 +137,7 @@ namespace ProjectMyShop.DAO
             {
                 count = (int)reader["n"];
             }
+            reader.Close();
             if (count > 0) return true;
             return false;
         }
