@@ -47,6 +47,13 @@ namespace ProjectMyShop.Views
             StatusComboBox.ItemsSource = Order.GetAllStatusValues();
             DataContext = order;
 
+            if (order.ID == 0)
+            {
+                ChoosePhoneButton.IsEnabled = false;
+                UpdateButton.IsEnabled = false;
+                DeleteButton.IsEnabled = false;
+            }
+
             _vm = new DetailOrderViewModel();
             if (order.DetailOrderList != null)
             {
@@ -77,6 +84,28 @@ namespace ProjectMyShop.Views
             return DateOnly.Parse(dateTime.Date.ToShortDateString());
         }
 
+        bool isInPhoneList(Phone phone)
+        {
+            bool result = false;
+            if (order.DetailOrderList != null)
+            {
+                foreach (DetailOrder detail in order.DetailOrderList) {
+                    if (detail.Phone.ID == phone.ID)
+                    {
+                        result = true;
+                        break;
+                    }
+                    else
+                    {
+                        // do nothing
+                    }
+                }
+
+            }
+
+            return result;
+        }
+
         private void ChoosePhoneButton_Click(object sender, RoutedEventArgs e)
         {
             detailOrder.Phone = new Phone();
@@ -87,9 +116,15 @@ namespace ProjectMyShop.Views
             {
                 if (order.DetailOrderList == null)
                     order.DetailOrderList = new List<DetailOrder>();
-
-                _orderBUS.AddDetailOrder(screen.detailOrder);
-                order.DetailOrderList.Add(screen.detailOrder);
+                if (!isInPhoneList(screen.detailOrder.Phone))
+                {
+                    _orderBUS.AddDetailOrder(screen.detailOrder);
+                    order.DetailOrderList.Add(screen.detailOrder);
+                }
+                else
+                {
+                    MessageBox.Show($"{screen.detailOrder.Phone.PhoneName}'s already exists in detail order.\nChoose 'Update' instead", "Duplicate phone", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 Reload();
             }
         }
@@ -100,14 +135,24 @@ namespace ProjectMyShop.Views
 
             if (i != -1)
             {
+
+                detailOrder.Phone = new Phone();
+                detailOrder.Phone = (Phone)order.DetailOrderList[i].Phone.Clone();
+                detailOrder.Quantity = order.DetailOrderList[i].Quantity;
                 var screen = new AddPhoneOrder(detailOrder);
                 if (screen.ShowDialog() == true)
                 {
                     if (order.DetailOrderList == null)
                         order.DetailOrderList = new List<DetailOrder>();
-
-                    _orderBUS.UpdateDetailOrder(screen.detailOrder);
-                    order.DetailOrderList[i] = (DetailOrder)screen.detailOrder.Clone();
+                    if (!isInPhoneList(screen.detailOrder.Phone))
+                    {
+                        _orderBUS.UpdateDetailOrder(order.DetailOrderList[i].Phone.ID, screen.detailOrder);
+                        order.DetailOrderList[i] = (DetailOrder)screen.detailOrder.Clone();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{screen.detailOrder.Phone.PhoneName}'s already exists in detail order.\nPlease choose another phone", "Duplicate phone", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                     Reload();
                 }
             }

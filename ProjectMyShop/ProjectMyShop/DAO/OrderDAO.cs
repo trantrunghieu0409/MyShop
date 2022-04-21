@@ -165,13 +165,14 @@ namespace ProjectMyShop.DAO
                 System.Diagnostics.Debug.WriteLine($"Inserted {detail.OrderID} Fail: " + ex.Message);
             }
         }
-        public void UpdateDetailOrder(DetailOrder detail)
+        public void UpdateDetailOrder(int oldPhoneID, DetailOrder detail)
         {
-            var sql = "update DetailOrder set Quantity = @Quantity, PhoneID = @PhoneID where OrderID = @OrderID";
+            var sql = "update DetailOrder set Quantity = @Quantity, PhoneID = @PhoneID where OrderID = @OrderID and PhoneID = @oldPhoneID";
             SqlCommand sqlCommand = new SqlCommand(sql, _connection);
 
             sqlCommand.Parameters.AddWithValue("@OrderID", detail.OrderID);
             sqlCommand.Parameters.AddWithValue("@PhoneID", detail.Phone.ID);
+            sqlCommand.Parameters.AddWithValue("@oldPhoneID", oldPhoneID);
             sqlCommand.Parameters.AddWithValue("@Quantity", detail.Quantity);
 
             try
