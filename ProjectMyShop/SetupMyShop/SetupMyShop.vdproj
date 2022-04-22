@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_1DDB8A72D6CC4017AAD2244F57699632"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BF49EEA1689A410A82CA7BFE59A74A79"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -37,6 +43,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -53,6 +67,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -84,6 +106,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1DDB8A72D6CC4017AAD2244F57699632"
+            {
+            "SourcePath" = "8:C:\\Users\\coppy\\Desktop\\b0eee3256c64db7ce5f687f98af71ffd.ico\\favicon-96x96.ico"
+            "TargetName" = "8:MyShop.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_C3D4889CA6B944B3B69C33BDC2030964"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -272,6 +314,62 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_31241390863E474DB8DD1B26DF545263"
+            {
+            "Name" = "8:MyShop"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_BF49EEA1689A410A82CA7BFE59A74A79"
+            "Folder" = "8:_C3D4889CA6B944B3B69C33BDC2030964"
+            "WorkingFolder" = "8:_C3D4889CA6B944B3B69C33BDC2030964"
+            "Icon" = "8:_1DDB8A72D6CC4017AAD2244F57699632"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_526D7BBFB3964211BD563E63F93697E8"
+            {
+            "Name" = "8:MyShop"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_BF49EEA1689A410A82CA7BFE59A74A79"
+            "Folder" = "8:_99D5D0D66185403BA9769AB8F64E05B2"
+            "WorkingFolder" = "8:_C3D4889CA6B944B3B69C33BDC2030964"
+            "Icon" = "8:_1DDB8A72D6CC4017AAD2244F57699632"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_715B2EAB099A4A1D9A960113001CCD5C"
+            {
+            "Name" = "8:MyShop"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_BF49EEA1689A410A82CA7BFE59A74A79"
+            "Folder" = "8:_DADFD7A783F14C3DB1CAC764DCF8462C"
+            "WorkingFolder" = "8:_C3D4889CA6B944B3B69C33BDC2030964"
+            "Icon" = "8:_1DDB8A72D6CC4017AAD2244F57699632"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7D30B2E3D7854489B7567910D636B1A0"
+            {
+            "Name" = "8:Shortcut to Publish Items from ProjectMyShop (Active)"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_BF49EEA1689A410A82CA7BFE59A74A79"
+            "Folder" = "8:_8EFD0B538144437EAD9EA597AB2D6FFE"
+            "WorkingFolder" = "8:_C3D4889CA6B944B3B69C33BDC2030964"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
