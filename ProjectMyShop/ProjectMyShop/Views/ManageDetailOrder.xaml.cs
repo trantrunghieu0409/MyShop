@@ -144,7 +144,7 @@ namespace ProjectMyShop.Views
                 {
                     if (order.DetailOrderList == null)
                         order.DetailOrderList = new List<DetailOrder>();
-                    if (!isInPhoneList(screen.detailOrder.Phone))
+                    if (order.DetailOrderList[i].Phone.ID == screen.detailOrder.Phone.ID || !isInPhoneList(screen.detailOrder.Phone))
                     {
                         _orderBUS.UpdateDetailOrder(order.DetailOrderList[i].Phone.ID, screen.detailOrder);
                         order.DetailOrderList[i] = (DetailOrder)screen.detailOrder.Clone();

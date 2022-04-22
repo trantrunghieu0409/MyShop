@@ -42,14 +42,9 @@ namespace ProjectMyShop.Views
             if (i != -1)
             {
                 detailOrder.Phone = _selectedPhones[i];
-                detailOrder.Quantity = int.Parse(QuantityTextBox.Text);
-
-                DialogResult = true;
             }
-            else 
-            {
-                DialogResult = false;
-            }
+            detailOrder.Quantity = int.Parse(QuantityTextBox.Text);
+            DialogResult = true;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -90,29 +85,25 @@ namespace ProjectMyShop.Views
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-            int i = PhoneListView.SelectedIndex;
-            if (i != -1)
+            var QuantityTextBox = e.OriginalSource as TextBox;
+
+            if (QuantityTextBox != null)
             {
-                var QuantityTextBox = e.OriginalSource as TextBox;
-
-                if (QuantityTextBox != null)
+                if (QuantityTextBox.Text == "")
                 {
-                    if (QuantityTextBox.Text == "")
-                    {
-                        QuantityTextBox.Text = "0";
-                    }
-                    else if ((int.Parse(QuantityTextBox.Text)
-                        > _selectedPhones[i].Stock))
-                    {
-                        QuantityTextBox.Text = QuantityTextBox.Text.Remove(QuantityTextBox.Text.Length - 1);
-
-                        if (int.Parse(QuantityTextBox.Text)
-                            > _selectedPhones[i].Stock)
-                            QuantityTextBox.Text = _selectedPhones[i].Stock.ToString();
-                    }
+                    QuantityTextBox.Text = "0";
                 }
+                else if ((int.Parse(QuantityTextBox.Text)
+                    > detailOrder.Phone.Stock))
+                {
+                    QuantityTextBox.Text = QuantityTextBox.Text.Remove(QuantityTextBox.Text.Length - 1);
 
+                    if (int.Parse(QuantityTextBox.Text)
+                        > detailOrder.Phone.Stock)
+                        QuantityTextBox.Text = detailOrder.Phone.Stock.ToString();
+                }
             }
+
         }
 
         private new void PreviewTextInput(object sender, TextCompositionEventArgs e)
