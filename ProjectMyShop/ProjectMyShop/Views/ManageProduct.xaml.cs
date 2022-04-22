@@ -38,7 +38,7 @@ namespace ProjectMyShop.Views
         int _totalItems = 0;
         int _currentPage = 1;
         int _totalPages = 0;
-        int _rowsPerPage = 10;
+        int _rowsPerPage = int.Parse(AppConfig.GetValue(AppConfig.NumberProductPerPage));
         int i = 0;
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
