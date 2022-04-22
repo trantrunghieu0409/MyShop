@@ -99,6 +99,7 @@ namespace ProjectMyShop
         private void dashboardButton_Click(object sender, RoutedEventArgs e)
         {
             changeButtonColor(dashboardButton);
+            dashboard = new Dashboard();
             pageNavigation.NavigationService.Navigate(dashboard);
         }
 
