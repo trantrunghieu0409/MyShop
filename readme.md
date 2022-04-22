@@ -65,9 +65,13 @@ Cần đóng gói thành file exe để tự cài chương trình vào hệ th�
 ### Các chức năng nâng cao
 
 Sử dụng một thiết kế tốt lấy từ pinterest (0.5 điểm)
+
 Làm rối mã nguồn (obfuscator) chống dịch ngược (0.5 điểm)
+
 Báo cáo các sản phẩm bán chạy trong tuần, trong tháng, trong năm (1 điểm)
+
 Sử dụng mô hình MVVM (1 điểm)
+
 Tổ chức theo mô hình 3 lớp (1 điểm)
 
 ### Điểm đề nghị
