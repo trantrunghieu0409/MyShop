@@ -9,6 +9,8 @@
 | Lê Quang Tấn Long    | 19127201 |
 | Trần Quốc Tuấn       | 19127650 |
 
+**Link video demo**: https://youtu.be/m3MfL_yKQ5o
+
 ###  Các chức năng đã làm được
 **1. Màn hình đăng nhập (0.5 điểm)**
 
