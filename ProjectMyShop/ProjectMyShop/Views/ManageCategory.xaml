@@ -10,7 +10,8 @@
       Title="MangeCategory"
       Loaded="Page_Loaded">
 
-
+  
+    <materialDesign:Card Background="White" UniformCornerRadius="10" materialDesign:ShadowAssist.ShadowEdges="All" Padding="10 10 0 0">
     <DockPanel>
         <!--  List Button -->
         
@@ -94,6 +95,8 @@
         <!-- End Next, Pre Button-->
         </Grid>
     </DockPanel>
+
+    </materialDesign:Card>
 
 
 </Page>
