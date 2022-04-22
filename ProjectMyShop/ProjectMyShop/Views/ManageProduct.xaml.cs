@@ -169,6 +169,7 @@ namespace ProjectMyShop.Views
                 p.BoughtPrice = info.BoughtPrice;
                 p.Description = info.Description;
                 p.Avatar = info.Avatar;
+                p.Stock = info.Stock;
                 try
                 {
                     _phoneBus.updatePhone(p.ID, p);
