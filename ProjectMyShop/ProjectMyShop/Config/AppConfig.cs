@@ -18,6 +18,7 @@ namespace ProjectMyShop.Config
         public static string Password = "Password";
         public static string Entropy = "Entropy";
         public static string NumberProductPerPage = "NumberProductPerPage";
+        public static string OpenLastWindow = "OpenLastWindow";
 
         public static string LastWindow = "LastWindow";
 

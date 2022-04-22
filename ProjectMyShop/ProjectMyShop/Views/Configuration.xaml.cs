@@ -42,9 +42,21 @@ namespace ProjectMyShop.Views
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
             var item = (ComboBoxItem)nProductComboBox.SelectedValue;
-            var content = (string)item.Content;
-            AppConfig.SetValue(AppConfig.NumberProductPerPage, content);
+
+            var content = "";
+
+            if(item != null)
+            {
+                content = (string)item.Content;
+            }
             
+            if(content != "")
+                AppConfig.SetValue(AppConfig.NumberProductPerPage, content);
+
+            if (lastWindowCheckBox.IsChecked == false)
+                AppConfig.SetValue(AppConfig.OpenLastWindow, "0");
+            else
+                AppConfig.SetValue(AppConfig.OpenLastWindow, "1");
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -64,6 +76,11 @@ namespace ProjectMyShop.Views
                 nProductComboBox.SelectedIndex = 3;
             else if (nProduct == "20")
                 nProductComboBox.SelectedIndex = 4;
+
+            if (AppConfig.GetValue(AppConfig.OpenLastWindow) == "0")
+                lastWindowCheckBox.IsChecked = false;
+            else 
+                lastWindowCheckBox.IsChecked = true;
         }
     }
 }

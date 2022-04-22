@@ -47,24 +47,29 @@ namespace ProjectMyShop
                 _manageOrderPage = new ManageOrder();
                 _manageCategory = new ManageCategory();
 
-                pageNavigation.NavigationService.Navigate(dashboard);
+                if(AppConfig.GetValue(AppConfig.LastWindow) == "0")
+                {
+                    pageNavigation.NavigationService.Navigate(dashboard);
+                }
+                else
+                {
+                    if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageCategory")
+                    {
+                        pageNavigation.NavigationService.Navigate(_manageCategory);
+                    }
+                    else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageOrder")
+                    {
+                        pageNavigation.NavigationService.Navigate(_manageOrderPage);
+                    }
+                    else if (AppConfig.GetValue(AppConfig.LastWindow) == "Statistics")
+                    {
+                        pageNavigation.NavigationService.Navigate(statisticsPage);
+                    }
 
-                if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageCategory")
-                {
-                    pageNavigation.NavigationService.Navigate(_manageCategory);
-                }
-                else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageOrder")
-                {
-                    pageNavigation.NavigationService.Navigate(_manageOrderPage);
-                }
-                else if (AppConfig.GetValue(AppConfig.LastWindow) == "Statistics")
-                {
-                    pageNavigation.NavigationService.Navigate(statisticsPage);
-                }
-
-                else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageProduct")
-                {
-                    pageNavigation.NavigationService.Navigate(manageProductPage);
+                    else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageProduct")
+                    {
+                        pageNavigation.NavigationService.Navigate(manageProductPage);
+                    }
                 }
             }
             else
