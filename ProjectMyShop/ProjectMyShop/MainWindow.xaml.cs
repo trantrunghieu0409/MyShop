@@ -34,6 +34,8 @@ namespace ProjectMyShop
         ManageCategory _manageCategory;
         Configuration _configPage;
         Login login;
+        Button[] buttons;
+        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -47,27 +49,34 @@ namespace ProjectMyShop
                 _manageOrderPage = new ManageOrder();
                 _manageCategory = new ManageCategory();
 
-                if(AppConfig.GetValue(AppConfig.LastWindow) == "0")
+                Button[] buttons1 = new Button[] { dashboardButton, categoriesButton, productButton, orderButton, statButton, configButton };
+                buttons = buttons1;
+                if (AppConfig.GetValue(AppConfig.LastWindow) == "0")
                 {
+                    changeButtonColor(dashboardButton);
                     pageNavigation.NavigationService.Navigate(dashboard);
                 }
                 else
                 {
                     if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageCategory")
                     {
+                        changeButtonColor(categoriesButton);
                         pageNavigation.NavigationService.Navigate(_manageCategory);
                     }
                     else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageOrder")
                     {
+                        changeButtonColor(orderButton);
                         pageNavigation.NavigationService.Navigate(_manageOrderPage);
                     }
                     else if (AppConfig.GetValue(AppConfig.LastWindow) == "Statistics")
                     {
+                        changeButtonColor(statButton);
                         pageNavigation.NavigationService.Navigate(statisticsPage);
                     }
 
                     else if (AppConfig.GetValue(AppConfig.LastWindow) == "ManageProduct")
                     {
+                        changeButtonColor(productButton);
                         pageNavigation.NavigationService.Navigate(manageProductPage);
                     }
                 }
@@ -78,37 +87,51 @@ namespace ProjectMyShop
                 this.Close();
             }
         }
+        private void changeButtonColor(Button b)
+        {
+            foreach (var button in buttons)
+            {
+                button.Background = (Brush)Application.Current.Resources["MyPinkGradient"];
+            }
+            b.Background = (Brush)Application.Current.Resources["MyRedGradient"];
+        }
 
         private void dashboardButton_Click(object sender, RoutedEventArgs e)
         {
+            changeButtonColor(dashboardButton);
             pageNavigation.NavigationService.Navigate(dashboard);
         }
 
         private void productButton_Click(object sender, RoutedEventArgs e)
         {
+            changeButtonColor(productButton);
             manageProductPage = new ManageProduct();
             pageNavigation.NavigationService.Navigate(manageProductPage);
         }
 
         private void orderButton_Click(object sender, RoutedEventArgs e)
         {
+            changeButtonColor(orderButton);
             pageNavigation.NavigationService.Navigate(_manageOrderPage);
         }
 
         private void statButton_Click(object sender, RoutedEventArgs e)
         {
+            changeButtonColor(statButton);
             statisticsPage = new Statistics();
             pageNavigation.NavigationService.Navigate(statisticsPage);
         }
 
         private void configButton_Click(object sender, RoutedEventArgs e)
         {
+            changeButtonColor(configButton);
             _configPage = new Configuration();
             pageNavigation.NavigationService.Navigate(_configPage);
         }
 
         private void categoriesButton_Click(object sender, RoutedEventArgs e)
         {
+            changeButtonColor(categoriesButton);
             pageNavigation.NavigationService.Navigate(_manageCategory);
         }
     }
