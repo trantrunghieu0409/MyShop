@@ -1,0 +1,20 @@
+﻿ProjectMyShop
+1.0.0.0
+
+winexe
+C#
+.cs
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\Source code\ProjectMyShop\obj\Release\net6.0-windows\
+ProjectMyShop
+none
+false
+TRACE;RELEASE;NET;NET6_0;NETCOREAPP
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\Source code\ProjectMyShop\App.xaml
+19-1437812947
+5-1308994392
+47-2129340181
+223412208800
+MainWindow.xaml;Resources\ColorResources.xaml;Resources\ImageResources.xaml;Views\AddCategoryScreen.xaml;Views\AddPhoneOrder.xaml;Views\AddPhoneScreen.xaml;Views\AddStockScreen.xaml;Views\AdvancedStatistics.xaml;Views\Configuration.xaml;Views\Dashboard.xaml;Views\EditCategoryScreen.xaml;Views\EditPhoneScreen.xaml;Views\Login.xaml;Views\ManageCategory.xaml;Views\ManageDetailOrder.xaml;Views\ManageOrder.xaml;Views\ManageProduct.xaml;Views\SpecificStatistics.xaml;Views\Statistics.xaml;
+
+False
+

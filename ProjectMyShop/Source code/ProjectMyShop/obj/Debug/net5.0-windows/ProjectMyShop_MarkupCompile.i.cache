@@ -1,0 +1,20 @@
+﻿ProjectMyShop
+1.0.0.0
+
+winexe
+C#
+.cs
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\obj\Debug\net5.0-windows\
+ProjectMyShop
+none
+false
+TRACE;DEBUG;NET;NET5_0;NETCOREAPP
+D:\2021-2022 Semester II\Windows Programming\MyShop\ProjectMyShop\ProjectMyShop\App.xaml
+8-1016566529
+2-1366022511
+22-968769687
+200-1476070166
+MainWindow.xaml;Pages\AddPhoneScreen.xaml;Pages\Dashboard.xaml;Pages\EditPhoneScreen.xaml;Pages\Login.xaml;Pages\ManageProduct.xaml;Resources\ColorResources.xaml;Resources\ImageResources.xaml;
+
+True
+
