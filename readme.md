@@ -58,7 +58,7 @@ Cho phép hiệu chỉnh số lượng sản phẩm mỗi trang
 
 Cho phép khi chạy chương trình lên thì mở lại màn hình cuối mà lần trước tắt
 
-**7. Đóng gói thành file cài đặt (0.5 điểm) **
+**7. Đóng gói thành file cài đặt (0.5 điểm)**
 
 Cần đóng gói thành file exe để tự cài chương trình vào hệ thống
 
