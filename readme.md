@@ -11,6 +11,17 @@
 
 **Link video demo**: https://youtu.be/m3MfL_yKQ5o
 
+
+### Hướng dẫn cài đặt
+Sử dụng file db.sql trong thư mục data để tạo cấu trúc cơ sở dữ liệu
+
+Chạy file setup.exe trong thư mục Release để cài đặt
+
+Theo đường dẫn đã cài đặt, chạy file ProjectMyShop.exe với quyền admin để khởi động chương trình
+
+Giải nén file Images.zip ở ổ D sau đó sử dụng chức năng import của phần mềm để import dữ liệu từ file excel phonedata
+ 
+
 ###  Các chức năng đã làm được
 **1. Màn hình đăng nhập (0.5 điểm)**
 
