@@ -30,13 +30,12 @@
             <CheckBox  IsChecked="True" Margin="0 0 0 20">Open the last window when application startup</CheckBox>
             <Label Content="Number of product per page"/>
             <ComboBox HorizontalAlignment="Left" BorderThickness="1" BorderBrush="MediumPurple" x:Name="nProductComboBox" Width="50" Height="30" SelectionChanged="nProductComboBox_SelectionChanged" RenderTransformOrigin="-0.994,1.569">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Padding="5" Text="{Binding CatName}"/>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>6</ComboBoxItem>
+                <ComboBoxItem>9</ComboBoxItem>
+                <ComboBoxItem>12</ComboBoxItem>
+                <ComboBoxItem>20</ComboBoxItem>
 
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-                
             </ComboBox>
             
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMyShop.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,9 @@ namespace ProjectMyShop.Views
     /// </summary>
     public partial class Configuration : Page
     {
+
+        private string nProduct = "10";
+
         public Configuration()
         {
             InitializeComponent();
@@ -37,12 +41,16 @@ namespace ProjectMyShop.Views
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            string selected = nProductComboBox.SelectedValue.ToString();
+            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            if (AppConfig.GetValue(AppConfig.NumberProductPerPage) != null)
+            {
+                nProduct = AppConfig.GetValue(AppConfig.NumberProductPerPage);
+            }
         }
     }
 }

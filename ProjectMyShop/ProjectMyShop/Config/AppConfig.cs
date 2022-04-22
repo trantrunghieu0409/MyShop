@@ -17,6 +17,7 @@ namespace ProjectMyShop.Config
         public static string Username = "Username";
         public static string Password = "Password";
         public static string Entropy = "Entropy";
+        public static string NumberProductPerPage = "NumberProductPerPage";
 
         public static string LastWindow = "LastWindow";
 
@@ -50,6 +51,7 @@ namespace ProjectMyShop.Config
             string? username = AppConfig.GetValue(AppConfig.Username);
             string? password = AppConfig.GetValue(AppConfig.Password);
             string? lastWindow = AppConfig.GetValue(AppConfig.LastWindow);
+            string? numProductPerPage = AppConfig.GetValue(AppConfig.NumberProductPerPage);
 
             builder.DataSource = $"{server}\\{instance}";
             builder.InitialCatalog = database;
